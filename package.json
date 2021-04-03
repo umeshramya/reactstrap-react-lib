@@ -3,9 +3,9 @@
   "version": "1.0.0",
   "description": "This is a lib for react and next",
   "main": "lib/index.js",
-  "types" : "lib",
+  "types": "lib",
   "scripts": {
-    "build": "tsc -p"
+    "build": "tsc -p ."
   },
   "repository": {
     "type": "git",
@@ -22,11 +22,14 @@
   },
   "homepage": "https://github.com/umeshramya/react-lib#readme",
   "peerDependencies": {
-    "react" : "^17.0.2"
+    "react": "^17.0.2",
+    "reactstrap": "^8.9.0"
   },
   "devDependencies": {
     "@types/react": "^17.0.3",
+    "@types/reactstrap": "^8.7.2",
     "react": "^17.0.2",
+    "reactstrap": "^8.9.0",
     "typescript": "^4.2.3"
   }
 }
