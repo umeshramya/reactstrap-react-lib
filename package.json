@@ -2,9 +2,10 @@
   "name": "react-lib",
   "version": "1.0.0",
   "description": "This is a lib for react and next",
-  "main": "index.js",
+  "main": "lib/index.js",
+  "types" : "lib",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "tsc -p"
   },
   "repository": {
     "type": "git",
