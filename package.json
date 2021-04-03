@@ -1,0 +1,31 @@
+{
+  "name": "react-lib",
+  "version": "1.0.0",
+  "description": "This is a lib for react and next",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/umeshramya/react-lib.git"
+  },
+  "keywords": [
+    "react-lib",
+    "next-lib"
+  ],
+  "author": "Dr Umesh R Bilagi",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/umeshramya/react-lib/issues"
+  },
+  "homepage": "https://github.com/umeshramya/react-lib#readme",
+  "peerDependencies": {
+    "react" : "^17.0.2"
+  },
+  "devDependencies": {
+    "@types/react": ">=17.0.3",
+    "react": "^17.0.2",
+    "typescript": "^4.2.3"
+  }
+}
