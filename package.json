@@ -18,9 +18,9 @@
   "author": "Dr Umesh R Bilagi",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/umeshramya/react-lib/issues"
+    "url": "https://github.com/umeshramya/reactstrap-react-lib/issues"
   },
-  "homepage": "https://github.com/umeshramya/react-lib#readme",
+  "homepage": "https://github.com/umeshramya/reactstrap-react-lib#readme",
   "peerDependencies": {
     "react": ">=17.0.2",
     "reactstrap": ">=8.9.0",
