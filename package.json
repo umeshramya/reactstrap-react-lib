@@ -1,6 +1,6 @@
 {
   "name": "reactstrap-react-lib",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "This is a lib for react and next",
   "main": "lib/index.js",
   "types": "lib",
@@ -9,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/umeshramya/react-lib.git"
+    "url": "git+https://github.com/umeshramya/reactstrap-react-lib.git"
   },
   "keywords": [
     "react-lib",
