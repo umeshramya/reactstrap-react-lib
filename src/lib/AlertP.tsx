@@ -1,48 +1,95 @@
-import React, { ReactElement, useState, useImperativeHandle  } from 'react'
+import React, { Component } from 'react'
 import {Alert} from "reactstrap"
 
-type AlertPHandle={
-    alertColor : (color:string)=>void;
-    alertText : (text:string)=>void;
-    alertLight : (text:string)=>void;
-    alertSuccess : (text:string)=>void;
-    alertError : (error:any)=>void;
+interface Props {
+    
+}
+interface State {
+    text:string,
+    color:string
 }
 
-const AlertP = React.forwardRef<AlertPHandle>((props, ref): ReactElement =>{
-    const [color, setcolor] = useState<string>("light")
-    const [text, setText] = useState<string>("");
-    useImperativeHandle(ref, ()=>({
-        alertColor : (color:string)=>{
-            setcolor(color)
-        },
-        alertText : (text:string)=>{
-            setText(text)
-        },
-        alertLight : (text:string="")=>{
-            setText(text)
-            setcolor("light")
-        },
-        alertSuccess : (text:string)=>{
-            setText(text)
-            setcolor("success")
-        },
-        alertError : (error:any)=>{
-            setcolor("danger")
+export default class AlertP extends Component<Props, State> {
+    state = {
+        text:"", color:""
+    }
+        /**
+         * This set boostrap color to  Alert
+         * @param color Bootstrap color as string
+         */
+        alertColor = (color:string):void=>{
+            this.setState({
+                ...this.state,
+                color:color
+
+            })
+        }
+        /**
+         * This sets the text to Alert
+         * @param text text dispaly in Alert
+         */
+        alertText = (text:string):void=>{
+            this.setState({
+                ...this.state,
+                text:text
+            })
+
+        }
+        /**
+         *  Along with setting text it converts the color of Alert to boostrap light
+         * @param text text dispaly in Alert
+         */
+        alertLight = (text:string=""):void=>{
+            this.setState({
+                text:text, 
+                color:"light"
+            })
+
+
+        }
+
+        /**
+         * Along with setting text it converts the color of Alert to boostrap success
+         * @param text text dispaly in Alert
+         */
+        alertSuccess = (text:string):void=>{
+    
+            this.setState({
+                text:text, 
+                color:"success"
+            })
+            
+        }
+
+        /**
+         * This sets the color of Alert to boostrap danger
+         * extracts the text from error.response.data if error is not a string
+         * @param error This is https retuirn error response 
+         */
+        alertError = (error:any)=>{
+
             if(typeof error.response !== "undefined" ){
-                setText(error.response.data)
+                this.setState({
+                    text:error.response.data,
+                    color : "danger"
+                })
             }else{
-                
-                setText(error)
+                this.setState({
+                    text:error,
+                    color : "danger"
+                })
             }
         }
-    }))
- 
-    return (
-        <Alert color={color} style={{margin : "10px"}}>
-            {text}
-        </Alert>
-    )
-})
 
-export default AlertP
+         
+    
+
+    render() {
+        return (
+            <Alert color={this.state.color} style={{margin : "10px"}}>
+              {this.state.text}
+            </Alert>
+        )
+    }
+}
+
