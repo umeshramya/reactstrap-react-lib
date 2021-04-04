@@ -1,5 +1,5 @@
 {
-  "name": "reastrap-react-lib",
+  "name": "reactstrap-react-lib",
   "version": "1.0.1",
   "description": "This is a lib for react and next",
   "main": "lib/index.js",
