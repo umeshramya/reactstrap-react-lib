@@ -1,4 +1,4 @@
-import axios from 'axios'
+import axios, { AxiosError, AxiosResponse } from 'axios'
 import React, {useRef, useState, useEffect,useImperativeHandle, ReactFragment} from 'react'
 import {Container, Row, Col, Form, FormGroup, Label, Input, } from "reactstrap"
 import ButtonP from "../ButtonP"
@@ -17,12 +17,12 @@ interface Props{
      * This function is call back on success from server HTTP response 
      * @res This on success response from server
      */
-    onSuccess?: (res:any, ...args:any)=>any
+    onSuccess?: (res:AxiosResponse, ...args:any)=>any
     /**
      * This function is call back on error from server HTTP response 
      * @error error eecived from server
      */
-    onError?: (error:any, ...args:any)=>any
+    onError?: (error:AxiosError, ...args:any)=>any
 }
 
 const  FormSubmit = ({curObj,curUri,Inputs, reset, onSuccess, onError}:Props)=> {

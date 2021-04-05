@@ -1,4 +1,4 @@
-import axios from 'axios'
+import axios, {AxiosError, AxiosResponse} from 'axios'
 import React, {useRef} from 'react'
 import {Row, Col, Form} from "reactstrap"
 import ButtonP from "../ButtonP"
@@ -10,18 +10,24 @@ interface Props{
     uri:string;
     /**id is value by which the record has to be deleted  */
     id:any
+    onSuccess?: (res:AxiosResponse, ...args:any)=>any
+    /**
+     * This function is call back on error from server HTTP response 
+     * @error error eecived from server
+     */
+    onError?: (error:AxiosError, ...args:any)=>any
 }
 
-function Delete({uri, id}:Props) {
-    const butRef            = useRef<any>()
-    const modRef            = useRef<any>()
-    const alerRef           = useRef<any>()
+function Delete({uri, id, onSuccess, onError}:Props) {
+    const butRef            = useRef<ButtonP>(null)
+    const modRef            = useRef<ModelP>(null)
+    const alerRef           = useRef<AlertP>(null)
 
-    const submitHandle = async():Promise<void>=>{
+    const submitHandle = async(onSuccess:any, onError:any):Promise<void>=>{
         try {
-            modRef.current.close();
-            butRef.current.showSpin();
-            alerRef.current.alertLight();
+            modRef.current?.close();
+            butRef.current?.showSpin();
+            alerRef.current?.alertLight();
 
             let curObj = {
                 id : id,
@@ -30,14 +36,16 @@ function Delete({uri, id}:Props) {
             let res = await axios.post(uri, curObj).then(res=>res);
 
 
-            butRef.current.hideSpin();
-            alerRef.current.alertSuccess(res.data.mes);
+            butRef.current?.hideSpin();
+            alerRef.current?.alertSuccess(res.data.mes);
 
+            onSuccess(res, )
             
         } catch (error) {
-            console.log(error)
-            butRef.current.hideSpin();
-            alerRef.current.alertError(error);
+
+            butRef.current?.hideSpin();
+            alerRef.current?.alertError(error);
+            onError(error, )
         }
     }
 
@@ -48,13 +56,13 @@ function Delete({uri, id}:Props) {
                     <ModelP 
                         ref = {modRef}
                         Ok ={(e)=>{
-                            submitHandle()
-                            modRef.current.close();
+                            submitHandle(onSuccess, onError)
+                            modRef.current?.close();
                         }}
                     />
                     <Form onSubmit={(e)=>{
                         e.preventDefault()
-                        modRef.current.show();
+                        modRef.current?.show();
                     }}>
 
                     <ButtonP 
