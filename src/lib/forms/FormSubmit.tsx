@@ -32,7 +32,7 @@ const  FormSubmit = ({curObj,curUri,Inputs, reset, onSuccess, onError}:Props)=> 
 
 
   
-       const  submitHandle =  async(curUri:string, curObj:{}, onSuccess:any, onError:any)=>{
+       const  submitHandle =  async(curUri:string, curObj:{}, onSuccess=(res:AxiosResponse)=>{}, onError=(res:AxiosError)=>{})=>{
             try {
                 modRef.current?.close();
                 butRef.current?.showSpin();
