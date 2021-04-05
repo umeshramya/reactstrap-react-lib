@@ -13,16 +13,18 @@ interface Props{
     Inputs:ReactFragment
     /** pass function with reseting the values i.e. curObj and etc */
     reset:()=>void
+    onSuccess: (res:any, ...args:any)=>any
+    onError: (error:any, ...args:any)=>any
 }
 
-const  FormSubmit = ({curObj,curUri,Inputs, reset}:Props)=> {
+const  FormSubmit = ({curObj,curUri,Inputs, reset, onSuccess, onError}:Props)=> {
     const butRef            = useRef<ButtonP>(null)
     const modRef            = useRef<ModelP>(null)
     const alerRef           = useRef<AlertP>(null)
 
 
   
-       const  submitHandle =  async(curUri:string, curObj:{})=>{
+       const  submitHandle =  async(curUri:string, curObj:{}, onSuccess:(res:any, ...args:any)=>any, onError:(error:any, ...args:any)=>any)=>{
             try {
                 modRef.current?.close();
                 butRef.current?.showSpin();
@@ -33,11 +35,16 @@ const  FormSubmit = ({curObj,curUri,Inputs, reset}:Props)=> {
     
                 butRef.current?.hideSpin();
                 alerRef.current?.alertSuccess(res.data.mes);
-    
+
+                
+                onSuccess(res, )
                 
             } catch (error) {
                 butRef.current?.hideSpin();
                 alerRef.current?.alertError(error);
+                onError(error, );
+    
+                
             }
         }
 
@@ -50,7 +57,7 @@ const  FormSubmit = ({curObj,curUri,Inputs, reset}:Props)=> {
                 <ModelP 
                     ref = {modRef}
                     Ok ={(e)=>{
-                        submitHandle(curUri, curObj)
+                        submitHandle(curUri, curObj, onSuccess, onError)
                         modRef.current?.close();
                     }}
                 />
