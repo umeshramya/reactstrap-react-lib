@@ -56,7 +56,7 @@ function Delete({uri, id, onSuccess, onError}:Props) {
                     <ModelP 
                         ref = {modRef}
                         Ok ={(e)=>{
-                            submitHandle(onSuccess, onError)
+                            submitHandle(onSuccess=(res:AxiosResponse)=>{}, onError=(res:AxiosError)=>{})
                             modRef.current?.close();
                         }}
                     />
