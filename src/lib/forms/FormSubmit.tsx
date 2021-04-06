@@ -38,7 +38,7 @@ const  FormSubmit = ({curObj,curUri,Inputs, reset, onSuccess, onError, successMe
 
 
   
-       const  submitHandle =  async(curUri:string, curObj:{}, onSuccess=(res:AxiosResponse)=>{}, onError=(res:AxiosError  )=>{})=>{
+       const  submitHandle =  async(curUri:string, curObj:{}, onSuccess=async(res:AxiosResponse)=>{}, onError=async(res:AxiosError  )=>{})=>{
         let _successMessage:string = "Form submission was successfull";
           
             try {

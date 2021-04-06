@@ -27,7 +27,7 @@ function Delete({uri, id, onSuccess, onError, successMessage, errorMessage}:Prop
     const modRef            = useRef<ModelP>(null)
     const alerRef           = useRef<AlertP>(null)
 
-    const submitHandle = async(onSuccess=(res:AxiosResponse)=>{}, onError=(res:AxiosError  )=>{}):Promise<void>=>{
+    const submitHandle = async( onSuccess=async(res:AxiosResponse)=>{}, onError=async(res:AxiosError  )=>{}):Promise<void>=>{
         let _successMessage:string = "Successfully deleted the record";
         try {
             modRef.current?.close();
