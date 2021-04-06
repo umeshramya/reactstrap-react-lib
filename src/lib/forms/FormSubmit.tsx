@@ -11,15 +11,19 @@ interface Props{
     curUri:string;
     /**This is Form input elements. do not add Form elemet thise get rendered inside the form itself */
     Inputs:ReactFragment
-    /** pass function with reseting the values i.e. curObj and etc */
+    /**This prop is message to be set on Suucess api call */
+    successMessage?:string;
+   
+    /**This prop is message to be displayed on alert on  API call error */
+    errorMessage?:string
+     /** pass function with reseting the values i.e. curObj and etc */
     reset:()=>void
     /**
      * This function is call back on success from server HTTP response 
      * @res This on success response from server
      */
     onSuccess?: (res:AxiosResponse, ...args:any)=>any
-    /**This prop is message to be set on Suucess api call */
-    successMessage?:string;
+
 
     /**
      * This function is call back on error from server HTTP response 
@@ -27,11 +31,10 @@ interface Props{
      */
     onError?: (error:AxiosError, ...args:any)=>any 
 
-    /**This prop is message to be displayed on alert on  API call error */
-    errorMessage?:string
+
 }
 
-const  FormSubmit = ({curObj,curUri,Inputs, reset, onSuccess, onError, successMessage, errorMessage}:Props)=> {
+const  FormSubmit = ({curObj,curUri,Inputs,  successMessage, errorMessage, reset, onSuccess, onError}:Props)=> {
     const butRef            = useRef<ButtonP>(null)
     const modRef            = useRef<ModelP>(null)
     const alerRef           = useRef<AlertP>(null)
@@ -130,7 +133,4 @@ const  FormSubmit = ({curObj,curUri,Inputs, reset, onSuccess, onError, successMe
 }
 
 export default FormSubmit
-function successMessage(res: AxiosResponse<any>, successMessage: any) {
-    throw new Error('Function not implemented.')
-}
 
