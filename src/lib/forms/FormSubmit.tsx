@@ -16,41 +16,65 @@ interface Props{
     /**
      * This function is call back on success from server HTTP response 
      * @res This on success response from server
+     * @successMessage This is the custom message to display on the alert on success
      */
     onSuccess?: (res:AxiosResponse, ...args:any)=>any
+    /**This prop is message to be set on Suucess api call */
+    successMessage?:string;
+
     /**
      * This function is call back on error from server HTTP response 
      * @error error eecived from server
      */
-    onError?: (error:AxiosError, ...args:any)=>any
+    onError?: (error:AxiosError, ...args:any)=>any 
+
+    /**This prop is message to be displayed on alert on  API call error */
+    errorMessage?:string
 }
 
-const  FormSubmit = ({curObj,curUri,Inputs, reset, onSuccess, onError}:Props)=> {
+const  FormSubmit = ({curObj,curUri,Inputs, reset, onSuccess, onError, successMessage, errorMessage}:Props)=> {
     const butRef            = useRef<ButtonP>(null)
     const modRef            = useRef<ModelP>(null)
     const alerRef           = useRef<AlertP>(null)
 
 
   
-       const  submitHandle =  async(curUri:string, curObj:{}, onSuccess=(res:AxiosResponse)=>{}, onError=(res:AxiosError)=>{})=>{
+       const  submitHandle =  async(curUri:string, curObj:{}, onSuccess=(res:AxiosResponse)=>{}, onError=(res:AxiosError  )=>{})=>{
+        let _successMessage:string = "Form submission was successfull";
+          
             try {
                 modRef.current?.close();
                 butRef.current?.showSpin();
                 alerRef.current?.alertLight();
                 
                 let res = await axios.post(curUri, curObj).then(res=>res);
+
+                if(res.data.mes === undefined ){
+                    if(successMessage !== undefined && successMessage !== ""){
+                        _successMessage = successMessage;
+                    }
+                    onSuccess(res, )
+                }else{
+                    _successMessage=res.data.mes;
+                }
     
-    
+                
                 butRef.current?.hideSpin();
-                alerRef.current?.alertSuccess(res.data.mes);
+                alerRef.current?.alertSuccess(_successMessage);
 
                 
-                onSuccess(res, )
+                
                 
             } catch (error) {
-                butRef.current?.hideSpin();
-                alerRef.current?.alertError(error);
+                if(errorMessage ===undefined){
+                    alerRef.current?.alertError(errorMessage);
+                }else{
+                    alerRef.current?.alertError(error);
+                }
                 onError(error, );
+                butRef.current?.hideSpin();
+                
+                
     
                 
             }
@@ -105,3 +129,7 @@ const  FormSubmit = ({curObj,curUri,Inputs, reset, onSuccess, onError}:Props)=> 
 }
 
 export default FormSubmit
+function successMessage(res: AxiosResponse<any>, successMessage: any) {
+    throw new Error('Function not implemented.')
+}
+
