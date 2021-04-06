@@ -14,12 +14,16 @@ interface Props {
      * @res This on success response from server
      */
     onSuccess?: (res: AxiosResponse, ...args: any) => any;
+    /**This prop is message to be set on Suucess api call */
+    successMessage?: string;
     /**
      * This function is call back on error from server HTTP response
      * @error error eecived from server
      */
     onError?: (error: AxiosError, ...args: any) => any;
+    /**This prop is message to be displayed on alert on  API call error */
+    errorMessage?: string;
 }
-declare const FormSubmit: ({ curObj, curUri, Inputs, reset, onSuccess, onError }: Props) => JSX.Element;
+declare const FormSubmit: ({ curObj, curUri, Inputs, reset, onSuccess, onError, successMessage, errorMessage }: Props) => JSX.Element;
 export default FormSubmit;
 //# sourceMappingURL=FormSubmit.d.ts.map

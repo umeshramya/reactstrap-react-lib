@@ -16,7 +16,6 @@ interface Props{
     /**
      * This function is call back on success from server HTTP response 
      * @res This on success response from server
-     * @successMessage This is the custom message to display on the alert on success
      */
     onSuccess?: (res:AxiosResponse, ...args:any)=>any
     /**This prop is message to be set on Suucess api call */
@@ -48,12 +47,13 @@ const  FormSubmit = ({curObj,curUri,Inputs, reset, onSuccess, onError, successMe
                 alerRef.current?.alertLight();
                 
                 let res = await axios.post(curUri, curObj).then(res=>res);
+                await onSuccess(res, )
 
                 if(res.data.mes === undefined ){
                     if(successMessage !== undefined && successMessage !== ""){
                         _successMessage = successMessage;
                     }
-                    onSuccess(res, )
+                    
                 }else{
                     _successMessage=res.data.mes;
                 }
@@ -66,12 +66,13 @@ const  FormSubmit = ({curObj,curUri,Inputs, reset, onSuccess, onError, successMe
                 
                 
             } catch (error) {
+                await onError(error, );
                 if(errorMessage ===undefined){
                     alerRef.current?.alertError(errorMessage);
                 }else{
                     alerRef.current?.alertError(error);
                 }
-                onError(error, );
+                
                 butRef.current?.hideSpin();
                 
                 
