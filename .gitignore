@@ -105,6 +105,6 @@ dist
 
 #yalc file
 .yalc/
-next-app/.yalc
+next-app/.yalc/
 yalclock
 next-app/yalclock
