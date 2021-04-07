@@ -1,0 +1,30 @@
+{
+  "name": "reactstrap-react-lib",
+  "version": "1.0.8+c8146fb9",
+  "description": "This is a lib for react and next",
+  "main": "lib/index.js",
+  "types": "lib",
+  "scripts": {
+    "build": "tsc -p ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/umeshramya/reactstrap-react-lib.git"
+  },
+  "keywords": [
+    "react-lib",
+    "next-lib"
+  ],
+  "author": "Dr Umesh R Bilagi",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/umeshramya/reactstrap-react-lib/issues"
+  },
+  "homepage": "https://github.com/umeshramya/reactstrap-react-lib#readme",
+  "peerDependencies": {
+    "axios": ">=0.21.1",
+    "react": ">=17.0.2",
+    "reactstrap": ">=8.9.0"
+  },
+  "yalcSig": "c8146fb95eb61d7447fcd725848b833f"
+}

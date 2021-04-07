@@ -1,0 +1,9 @@
+{
+  "version": "v1",
+  "packages": {
+    "reactstrap-react-lib": {
+      "signature": "89cd8881735ab8e75a251e3c7d5ea81f",
+      "file": true
+    }
+  }
+}
