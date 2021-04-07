@@ -2,7 +2,9 @@
 
 export default (req, res) => {
   try {
-    throw "intentional error"
+    let e = new Error();
+    throw e.message="intenettional error"
+    e.
     res.status(200).json({ name: 'John Doe' })
   } catch (error) {
     console.log(error)

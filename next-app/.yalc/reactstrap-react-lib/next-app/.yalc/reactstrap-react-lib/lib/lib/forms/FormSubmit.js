@@ -42,35 +42,28 @@ const FormSubmit = ({ curObj, curUri, Inputs, successMessage, errorMessage, rese
     const modRef = react_1.useRef(null);
     const alerRef = react_1.useRef(null);
     const submitHandle = (curUri, curObj, onSuccess = (res) => __awaiter(void 0, void 0, void 0, function* () { }), onError = (res) => __awaiter(void 0, void 0, void 0, function* () { })) => __awaiter(void 0, void 0, void 0, function* () {
-        var _a, _b, _c, _d, _e, _f, _g, _h;
+        var _a, _b, _c, _d, _e, _f, _g;
         let _successMessage = "Form submission was successfull";
+        let _errorMessage = "An unexpected error has happened";
         try {
             (_a = modRef.current) === null || _a === void 0 ? void 0 : _a.close();
             (_b = butRef.current) === null || _b === void 0 ? void 0 : _b.showSpin();
             (_c = alerRef.current) === null || _c === void 0 ? void 0 : _c.alertLight();
             let res = yield axios_1.default.post(curUri, curObj).then(res => res);
             yield onSuccess(res);
-            if (res.data.mes === undefined) {
-                if (successMessage !== undefined && successMessage !== "") {
-                    _successMessage = successMessage;
-                }
-            }
-            else {
-                _successMessage = res.data.mes;
+            if (typeof successMessage !== "undefined") {
+                _successMessage = successMessage;
             }
             (_d = butRef.current) === null || _d === void 0 ? void 0 : _d.hideSpin();
             (_e = alerRef.current) === null || _e === void 0 ? void 0 : _e.alertSuccess(_successMessage);
         }
         catch (error) {
-            console.log(error);
             yield onError(error);
-            if (errorMessage === undefined) {
-                (_f = alerRef.current) === null || _f === void 0 ? void 0 : _f.alertError(errorMessage);
+            if (typeof errorMessage !== "undefined") {
+                _errorMessage = errorMessage;
             }
-            else {
-                (_g = alerRef.current) === null || _g === void 0 ? void 0 : _g.alertError(error);
-            }
-            (_h = butRef.current) === null || _h === void 0 ? void 0 : _h.hideSpin();
+            (_f = alerRef.current) === null || _f === void 0 ? void 0 : _f.alertError(errorMessage);
+            (_g = butRef.current) === null || _g === void 0 ? void 0 : _g.hideSpin();
         }
     });
     return (react_1.default.createElement(reactstrap_1.Container, null,

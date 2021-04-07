@@ -8,9 +8,9 @@ interface Props {
     /**This is Form input elements. do not add Form elemet thise get rendered inside the form itself */
     Inputs: ReactFragment;
     /**This prop is message to be set on Suucess api call */
-    successMessage?: string;
+    successMessage: string;
     /**This prop is message to be displayed on alert on  API call error */
-    errorMessage?: string;
+    errorMessage: string;
     /** pass function with reseting the values i.e. curObj and etc */
     reset: () => void;
     /**

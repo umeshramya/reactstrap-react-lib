@@ -1,6 +1,6 @@
 {
   "name": "reactstrap-react-lib",
-  "version": "1.0.8+7c02adb7",
+  "version": "1.0.8+e8a242c3",
   "description": "This is a lib for react and next",
   "main": "lib/index.js",
   "types": "lib",
@@ -26,5 +26,5 @@
     "react": ">=17.0.2",
     "reactstrap": ">=8.9.0"
   },
-  "yalcSig": "7c02adb745a60552b3b1de5a08b59e75"
+  "yalcSig": "e8a242c39af41a965bdd513237208c74"
 }

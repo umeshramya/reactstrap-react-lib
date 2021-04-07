@@ -37,40 +37,24 @@ const reactstrap_1 = require("reactstrap");
 const ButtonP_1 = __importDefault(require("../ButtonP"));
 const AlertP_1 = __importDefault(require("../AlertP"));
 const ModelP_1 = __importDefault(require("../ModelP"));
-const FormSubmit = ({ curObj, curUri, Inputs, successMessage = "", errorMessage = "", reset, onSuccess, onError }) => {
+const FormSubmit = ({ curObj, curUri, Inputs, reset, onSuccess, onError }) => {
     const butRef = react_1.useRef(null);
     const modRef = react_1.useRef(null);
     const alerRef = react_1.useRef(null);
-    const submitHandle = (curUri, curObj, onSuccess = (res) => __awaiter(void 0, void 0, void 0, function* () { }), onError = (res) => __awaiter(void 0, void 0, void 0, function* () { })) => __awaiter(void 0, void 0, void 0, function* () {
+    const submitHandle = (_curUri, _curObj, _onSuccess, _onError) => __awaiter(void 0, void 0, void 0, function* () {
         var _a, _b, _c, _d, _e, _f, _g;
-        let _successMessage = "Form submission was successfull";
-        let _errorMessage = "An unexpected error has happened";
         try {
             (_a = modRef.current) === null || _a === void 0 ? void 0 : _a.close();
             (_b = butRef.current) === null || _b === void 0 ? void 0 : _b.showSpin();
             (_c = alerRef.current) === null || _c === void 0 ? void 0 : _c.alertLight();
-            let res = yield axios_1.default.post(curUri, curObj).then(res => res);
-            yield onSuccess(res);
-            if (res.data.mes === undefined) {
-                if (successMessage !== "") {
-                    _successMessage = successMessage;
-                }
-            }
-            else {
-                _successMessage = res.data.mes;
-            }
+            let res = yield axios_1.default.post(_curUri, _curObj).then(res => res);
+            let _successMessage = _onSuccess(res);
             (_d = butRef.current) === null || _d === void 0 ? void 0 : _d.hideSpin();
             (_e = alerRef.current) === null || _e === void 0 ? void 0 : _e.alertSuccess(_successMessage);
         }
         catch (error) {
-            yield onError(error);
-            if (errorMessage !== "") {
-                _errorMessage = errorMessage;
-            }
-            else {
-                _errorMessage = error.toString();
-            }
-            (_f = alerRef.current) === null || _f === void 0 ? void 0 : _f.alertError(errorMessage);
+            let _errorMessage = _onError(error);
+            (_f = alerRef.current) === null || _f === void 0 ? void 0 : _f.alertError(_errorMessage);
             (_g = butRef.current) === null || _g === void 0 ? void 0 : _g.hideSpin();
         }
     });

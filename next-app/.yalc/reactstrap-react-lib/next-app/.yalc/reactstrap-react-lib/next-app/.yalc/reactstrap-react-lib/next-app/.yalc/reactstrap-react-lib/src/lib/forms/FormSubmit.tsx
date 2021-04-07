@@ -12,12 +12,12 @@ interface Props{
     /**This is Form input elements. do not add Form elemet thise get rendered inside the form itself */
     Inputs:ReactFragment
     /**This prop is message to be set on Suucess api call */
-    successMessage?:string;
+    successMessage:string;
    
     /**This prop is message to be displayed on alert on  API call error */
-    errorMessage?:string
+    errorMessage:string;
      /** pass function with reseting the values i.e. curObj and etc */
-    reset:()=>void
+    reset:()=>void;
     /**
      * This function is call back on success from server HTTP response 
      * @res This on success response from server
@@ -43,6 +43,7 @@ const  FormSubmit = ({curObj,curUri,Inputs,  successMessage, errorMessage, reset
   
        const  submitHandle =  async(curUri:string, curObj:{}, onSuccess=async(res:AxiosResponse)=>{}, onError=async(res:AxiosError  )=>{})=>{
         let _successMessage:string = "Form submission was successfull";
+        let _errorMessage:string = "An unexpected error has happened"
           
             try {
                 modRef.current?.close();
@@ -52,30 +53,25 @@ const  FormSubmit = ({curObj,curUri,Inputs,  successMessage, errorMessage, reset
                 let res = await axios.post(curUri, curObj).then(res=>res);
                 await onSuccess(res, )
 
-                if(res.data.mes === undefined ){
-                    if(successMessage !== undefined && successMessage !== ""){
-                        _successMessage = successMessage;
-                    }
-                    
-                }else{
-                    _successMessage=res.data.mes;
+
+                if(successMessage !== undefined){
+                    _successMessage = successMessage;
                 }
-    
+
                 
                 butRef.current?.hideSpin();
                 alerRef.current?.alertSuccess(_successMessage);
 
                 
                 
-                
+
             } catch (error) {
+           
                 await onError(error, );
-                if(errorMessage ===undefined){
-                    alerRef.current?.alertError(errorMessage);
-                }else{
-                    alerRef.current?.alertError(error);
+                if(errorMessage !== undefined ){
+                    _errorMessage = errorMessage
                 }
-                
+                alerRef.current?.alertError(_errorMessage);
                 butRef.current?.hideSpin();
                 
                 

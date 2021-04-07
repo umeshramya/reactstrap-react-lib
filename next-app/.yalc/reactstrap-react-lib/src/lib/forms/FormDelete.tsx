@@ -60,7 +60,7 @@ function Delete({uri, id, onSuccess, onError, successMessage="", errorMessage=""
                 
                 
             } catch (error) {
-           
+
                 await onError(error, );
                 if(errorMessage !== ""){
                     _errorMessage = errorMessage

@@ -64,21 +64,13 @@ class AlertP extends react_1.Component {
         /**
          * This sets the color of Alert to boostrap danger
          * extracts the text from error.response.data if error is not a string
-         * @param error This is https retuirn error response
+         * @param error display error dange rw ith message as string
          */
         this.alertError = (error) => {
-            if (error.response !== "undefined") {
-                this.setState({
-                    text: error.response.data,
-                    color: "danger"
-                });
-            }
-            else {
-                this.setState({
-                    text: error,
-                    color: "danger"
-                });
-            }
+            this.setState({
+                text: error,
+                color: "danger"
+            });
         };
     }
     render() {

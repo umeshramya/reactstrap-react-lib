@@ -23,13 +23,14 @@ interface Props{
 
 }
 
-function Delete({uri, id, onSuccess, onError, successMessage, errorMessage}:Props) {
+function Delete({uri, id, onSuccess, onError, successMessage="", errorMessage=""}:Props) {
     const butRef            = useRef<ButtonP>(null)
     const modRef            = useRef<ModelP>(null)
     const alerRef           = useRef<AlertP>(null)
 
     const submitHandle = async( onSuccess=async(res:AxiosResponse)=>{}, onError=async(res:AxiosError  )=>{}):Promise<void>=>{
-        let _successMessage:string = "Successfully deleted the record";
+        let _successMessage:string = "Record Deletation was successfull";
+        let _errorMessage:string = "An unexpected error has happened"
         try {
             modRef.current?.close();
             butRef.current?.showSpin();
@@ -43,7 +44,7 @@ function Delete({uri, id, onSuccess, onError, successMessage, errorMessage}:Prop
             await onSuccess(res, )
 
                 if(res.data.mes === undefined ){
-                    if(successMessage !== undefined && successMessage !== ""){
+                    if(successMessage !== ""){
                         _successMessage = successMessage;
                     }
                     
@@ -59,14 +60,17 @@ function Delete({uri, id, onSuccess, onError, successMessage, errorMessage}:Prop
                 
                 
             } catch (error) {
+
                 await onError(error, );
-                if(errorMessage ===undefined){
-                    alerRef.current?.alertError(errorMessage);
+                if(errorMessage !== ""){
+                    _errorMessage = errorMessage
+                    
                 }else{
-                    alerRef.current?.alertError(error);
+                    _errorMessage = error.toString();
                 }
-                
+                alerRef.current?.alertError(errorMessage);
                 butRef.current?.hideSpin();
+                
                 
         }
     }

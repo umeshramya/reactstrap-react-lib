@@ -7,6 +7,7 @@ import {Container, Row, Col, FormGroup, Input, Label} from "reactstrap"
 function submitForm() {
     const iObj = {firstName:"", lastName : ""}
     const [obj, setObj] = useState(iObj)
+
     return (
         <Container>
             <Row>
@@ -30,8 +31,15 @@ function submitForm() {
 
                     curObj = {obj}
                     curUri = "api/submit-form"
-                    onError={(err)=>console.log(err.message)}
-                    // errorMessage ="error occured"
+
+                    onSuccess = {(res)=>{
+                        return res.data.mes;
+                    }}
+
+                    onError={(err)=>{
+                        return err.response.data;
+                    }
+                    }
                 
                 />
 

@@ -37,13 +37,14 @@ const reactstrap_1 = require("reactstrap");
 const ButtonP_1 = __importDefault(require("../ButtonP"));
 const AlertP_1 = __importDefault(require("../AlertP"));
 const ModelP_1 = __importDefault(require("../ModelP"));
-function Delete({ uri, id, onSuccess, onError, successMessage, errorMessage }) {
+function Delete({ uri, id, onSuccess, onError, successMessage = "", errorMessage = "" }) {
     const butRef = react_1.useRef(null);
     const modRef = react_1.useRef(null);
     const alerRef = react_1.useRef(null);
     const submitHandle = (onSuccess = (res) => __awaiter(this, void 0, void 0, function* () { }), onError = (res) => __awaiter(this, void 0, void 0, function* () { })) => __awaiter(this, void 0, void 0, function* () {
-        var _a, _b, _c, _d, _e, _f, _g, _h;
-        let _successMessage = "Successfully deleted the record";
+        var _a, _b, _c, _d, _e, _f, _g;
+        let _successMessage = "Record Deletation was successfull";
+        let _errorMessage = "An unexpected error has happened";
         try {
             (_a = modRef.current) === null || _a === void 0 ? void 0 : _a.close();
             (_b = butRef.current) === null || _b === void 0 ? void 0 : _b.showSpin();
@@ -54,7 +55,7 @@ function Delete({ uri, id, onSuccess, onError, successMessage, errorMessage }) {
             let res = yield axios_1.default.post(uri, curObj).then(res => res);
             yield onSuccess(res);
             if (res.data.mes === undefined) {
-                if (successMessage !== undefined && successMessage !== "") {
+                if (successMessage !== "") {
                     _successMessage = successMessage;
                 }
             }
@@ -66,13 +67,14 @@ function Delete({ uri, id, onSuccess, onError, successMessage, errorMessage }) {
         }
         catch (error) {
             yield onError(error);
-            if (errorMessage === undefined) {
-                (_f = alerRef.current) === null || _f === void 0 ? void 0 : _f.alertError(errorMessage);
+            if (errorMessage !== "") {
+                _errorMessage = errorMessage;
             }
             else {
-                (_g = alerRef.current) === null || _g === void 0 ? void 0 : _g.alertError(error);
+                _errorMessage = error.toString();
             }
-            (_h = butRef.current) === null || _h === void 0 ? void 0 : _h.hideSpin();
+            (_f = alerRef.current) === null || _f === void 0 ? void 0 : _f.alertError(errorMessage);
+            (_g = butRef.current) === null || _g === void 0 ? void 0 : _g.hideSpin();
         }
     });
     return (react_1.default.createElement(react_1.default.Fragment, null,
