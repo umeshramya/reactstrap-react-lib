@@ -14,23 +14,29 @@ interface Props{
     
      /** pass function with reseting the values i.e. curObj and etc */
     reset:()=>void;
+
     /**
      * This function is call back on success from server HTTP response 
      * @res This on success response from server
      */
-    onSuccess: (res:AxiosResponse, callback?:any)=>string
+    onSuccess: (res:AxiosResponse, successCallBack?:(...arg: any)=>any)=>string
+
+    successCallBack?:(...arg: any)=>any
 
 
     /**
      * This function is call back on error from server HTTP response 
      * @error error eecived from server
      */
-    onError: (error:AxiosError, callback?:any)=>string
+    onError: (error:AxiosError, errorCallback?:(...arg:any)=>any)=>string
 
+    errorCallback?:(...arg: any)=>any
+
+    
 
 }
 
-const  FormSubmit = ({curObj,curUri,Inputs, reset, onSuccess, onError}:Props)=> {
+const  FormSubmit = ({curObj,curUri,Inputs, reset, onSuccess, onError, successCallBack, errorCallback}:Props)=> {
     const butRef            = useRef<ButtonP>(null)
     const modRef            = useRef<ModelP>(null)
     const alerRef           = useRef<AlertP>(null)
@@ -46,7 +52,7 @@ const  FormSubmit = ({curObj,curUri,Inputs, reset, onSuccess, onError}:Props)=> 
                 alerRef.current?.alertLight();
                 
                 let res = await axios.post(_curUri, _curObj).then(res=>res);
-                let _successMessage =  _onSuccess(res, )
+                let _successMessage =  _onSuccess(res, successCallBack)
                 
                 butRef.current?.hideSpin();
                 alerRef.current?.alertSuccess(_successMessage);
@@ -56,7 +62,7 @@ const  FormSubmit = ({curObj,curUri,Inputs, reset, onSuccess, onError}:Props)=> 
 
             } catch (error) {
            
-                let _errorMessage =  _onError(error, );
+                let _errorMessage =  _onError(error, errorCallback);
                
                 alerRef.current?.alertError(_errorMessage);
                 butRef.current?.hideSpin();

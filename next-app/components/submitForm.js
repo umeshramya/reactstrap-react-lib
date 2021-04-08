@@ -8,6 +8,8 @@ function submitForm() {
     const iObj = {firstName:"", lastName : ""}
     const [obj, setObj] = useState(iObj)
 
+
+
     return (
         <Container>
             <Row>
@@ -32,12 +34,16 @@ function submitForm() {
                     curObj = {obj}
                     curUri = "api/submit-form"
 
-                    onSuccess = {(res)=>{
-                        return res.data.mes;
+                    successCallBack = {(res)=>res.data.mes}
+
+                    onSuccess = {(res, successCallBack)=>{
+                        
+                        return successCallBack(res);
                     }}
 
                     onError={(err)=>{
-                        return err.response.data;
+                        console.log(err)
+                        return "error ocuu"
                     }
                     }
                 
