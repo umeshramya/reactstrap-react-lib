@@ -77,7 +77,7 @@ function Delete({curUri, id, onSuccess, onError, successCallBack, errorCallback}
                             submitHandle(curUri, id, onSuccess, onError)
                             modRef.current?.close();
                         }}
-                        modelTitle ="Do you want delete data ?"
+                        modelTitle ="Do you want to delete data ?"
                         modelText = "Press Ok to delete data from server \n Press cancel to exit"
                     />
                     <Form onSubmit={(e)=>{

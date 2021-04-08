@@ -104,7 +104,7 @@ const  FormSubmit = ({curObj,curUri,Inputs, reset, onSuccess, onError, successCa
                         modRef.current?.close();
                     }}
                     modelText="Press Ok to Submit data to server \n Press cancel to exit"
-                    modelTitle = "Do you wan t submit Data ?"
+                    modelTitle = "Do you want to submit Data ?"
                 />
                 <Form onSubmit={(e)=>{
                     e.preventDefault()
