@@ -5,7 +5,8 @@
   "main": "lib/index.js",
   "types": "lib",
   "scripts": {
-    "build": "tsc -p ."
+    "build": "tsc -p .",
+    "dev"  : "npm run build && echo Built the lib \\n && yalc publish && echo  Published  to local repo \\n && cd next-app && echo Now inside next-app \\n && yalc update && echo Update from local repo \\n && npm run dev"
   },
   "repository": {
     "type": "git",
