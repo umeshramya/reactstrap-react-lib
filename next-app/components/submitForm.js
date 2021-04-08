@@ -1,4 +1,4 @@
-import{ButtonP, FormSubmit} from "reactstrap-react-lib"
+import{ButtonP, FormSubmit, FormDelete} from "reactstrap-react-lib"
 import React,{useState} from 'react'
 import {Container, Row, Col, FormGroup, Input, Label} from "reactstrap"
 
@@ -12,11 +12,12 @@ function submitForm() {
 
     return (
         <Container>
+            {/* FormSubmit */}
             <Row>
                 <Col>
                 
                 <FormSubmit
-                Inputs={
+                    Inputs={
                         <>
                             <FormGroup>
                                 <Label>Firtname</Label>
@@ -51,7 +52,25 @@ function submitForm() {
 
                 </Col>
             </Row>
-
+            {/* Form Delete */}
+            <Row>
+                <Col>
+                
+                    <FormDelete
+                        id="1"
+                        curUri="api/form-delete"
+                        onSuccess={(res)=>{
+                            
+                            return res.data.mes
+                        }}
+                        onError={(err)=>{
+                            console.log(err.response)
+                            return err.response.data
+                        }}
+                    
+                    />
+                </Col>
+            </Row>
         </Container>
 
         
