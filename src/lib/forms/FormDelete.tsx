@@ -7,73 +7,65 @@ import ModelP from "../ModelP"
 
 interface Props{
     /**This API uri for deleteing Post request */
-    uri:string;
+    curUri:string;
     /**id is value by which the record has to be deleted  */
     id:any
-    /**This prop is message to be set on Suucess api call */
-    successMessage?:string;
-    /**This prop is message to be displayed on alert on  API call error */
-    errorMessage?:string
-    onSuccess?: (res:AxiosResponse, ...args:any)=>any
-    /**
-     * This function is call back on error from server HTTP response 
-     * @error error eecived from server
+     /**
+     * This function is call back on success from server HTTP response 
+     * @res This on success response from server
      */
-    onError?: (error:AxiosError, ...args:any)=>any
+      onSuccess: (res:AxiosResponse, successCallBack?:(...arg: any)=>any)=>string
+      /**
+       * This is props as callback  function to passesed inside onSuccess function
+       */
+      successCallBack?:(...arg: any)=>any
+  
+  
+      /**
+       * This function is call back on error from server HTTP response 
+       * @error error eecived from server
+       */
+      onError: (error:AxiosError, errorCallback?:(...arg:any)=>any)=>string
+      /**
+       * This is props as a callback  function to passesed inside onError function
+       */
+      errorCallback?:(...arg: any)=>any
 
 }
 
-function Delete({uri, id, onSuccess, onError, successMessage="", errorMessage=""}:Props) {
+function Delete({curUri, id, onSuccess, onError, successCallBack, errorCallback}:Props) {
     const butRef            = useRef<ButtonP>(null)
     const modRef            = useRef<ModelP>(null)
     const alerRef           = useRef<AlertP>(null)
 
-    const submitHandle = async( onSuccess=async(res:AxiosResponse)=>{}, onError=async(res:AxiosError  )=>{}):Promise<void>=>{
-        let _successMessage:string = "Record Deletation was successfull";
-        let _errorMessage:string = "An unexpected error has happened"
+    const  submitHandle =  async(_curUri:string, _id:any, _onSuccess:typeof onSuccess, _onError:typeof onError)=>{
+
+          
         try {
             modRef.current?.close();
             butRef.current?.showSpin();
             alerRef.current?.alertLight();
+            
+            let res = await axios.post(_curUri, {id: _id}).then(res=>res);
+            let _successMessage =  _onSuccess(res, successCallBack)
+            
+            butRef.current?.hideSpin();
+            alerRef.current?.alertSuccess(_successMessage);
 
-            let curObj = {
-                id : id,
-            }
+            
+            
 
-            let res = await axios.post(uri, curObj).then(res=>res);
-            await onSuccess(res, )
-
-                if(res.data.mes === undefined ){
-                    if(successMessage !== ""){
-                        _successMessage = successMessage;
-                    }
-                    
-                }else{
-                    _successMessage=res.data.mes;
-                }
-    
-                
-                butRef.current?.hideSpin();
-                alerRef.current?.alertSuccess(_successMessage);
-
-                
-                
-                
-            } catch (error) {
-
-                await onError(error, );
-                if(errorMessage !== ""){
-                    _errorMessage = errorMessage
-                    
-                }else{
-                    _errorMessage = error.toString();
-                }
-                alerRef.current?.alertError(errorMessage);
-                butRef.current?.hideSpin();
-                
-                
+        } catch (error) {
+       
+            let _errorMessage =  _onError(error, errorCallback);
+           
+            alerRef.current?.alertError(_errorMessage);
+            butRef.current?.hideSpin();
+            
+            
         }
     }
+
 
     return (
         <>
@@ -82,7 +74,7 @@ function Delete({uri, id, onSuccess, onError, successMessage="", errorMessage=""
                     <ModelP 
                         ref = {modRef}
                         Ok ={(e)=>{
-                            submitHandle(onSuccess, onError)
+                            submitHandle(curUri, id, onSuccess, onError)
                             modRef.current?.close();
                         }}
                     />

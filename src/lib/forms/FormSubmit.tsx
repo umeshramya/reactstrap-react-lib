@@ -20,7 +20,9 @@ interface Props{
      * @res This on success response from server
      */
     onSuccess: (res:AxiosResponse, successCallBack?:(...arg: any)=>any)=>string
-
+    /**
+     * This is props as callback  function to passesed inside onSuccess function
+     */
     successCallBack?:(...arg: any)=>any
 
 
@@ -29,7 +31,9 @@ interface Props{
      * @error error eecived from server
      */
     onError: (error:AxiosError, errorCallback?:(...arg:any)=>any)=>string
-
+    /**
+     * This is props as a callback  function to passesed inside onError function
+     */
     errorCallback?:(...arg: any)=>any
 
     

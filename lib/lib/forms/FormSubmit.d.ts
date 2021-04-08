@@ -14,12 +14,18 @@ interface Props {
      * @res This on success response from server
      */
     onSuccess: (res: AxiosResponse, successCallBack?: (...arg: any) => any) => string;
+    /**
+     * This is props as callback  function to passesed inside onSuccess function
+     */
     successCallBack?: (...arg: any) => any;
     /**
      * This function is call back on error from server HTTP response
      * @error error eecived from server
      */
     onError: (error: AxiosError, errorCallback?: (...arg: any) => any) => string;
+    /**
+     * This is props as a callback  function to passesed inside onError function
+     */
     errorCallback?: (...arg: any) => any;
 }
 declare const FormSubmit: ({ curObj, curUri, Inputs, reset, onSuccess, onError, successCallBack, errorCallback }: Props) => JSX.Element;
