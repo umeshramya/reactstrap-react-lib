@@ -35,25 +35,39 @@ interface Props{
      * This is props as a callback  function to passesed inside onError function
      */
     errorCallback?:(...arg: any)=>any
-
+    /**
+     * This function is for validation before submitting  inthe front end itself
+     * in case of failed validadtion return string 
+     * If validation did succeed return ""
+     */
+    validation?:()=>string
     
 
 }
 
-const  FormSubmit = ({curObj,curUri,Inputs, reset, onSuccess, onError, successCallBack, errorCallback}:Props)=> {
+const  FormSubmit = ({curObj,curUri,Inputs, reset, onSuccess, onError, successCallBack, errorCallback, validation=()=>""}:Props)=> {
     const butRef            = useRef<ButtonP>(null)
     const modRef            = useRef<ModelP>(null)
     const alerRef           = useRef<AlertP>(null)
 
 
   
-       const  submitHandle =  async(_curUri:string, _curObj:{}, _onSuccess:typeof onSuccess, _onError:typeof onError)=>{
+       const  submitHandle =  async(_curUri:string, _curObj:{}, _onSuccess:typeof onSuccess, _onError:typeof onError, _validation:typeof validation)=>{
+           let validationErrorMessage:string = "";
 
           
             try {
                 modRef.current?.close();
                 butRef.current?.showSpin();
                 alerRef.current?.alertLight();
+
+                validationErrorMessage =_validation();
+                if(validationErrorMessage !== ""){
+                    alerRef.current?.alertError(validationErrorMessage);
+                    butRef.current?.hideSpin();
+                    return;
+                }
+
                 
                 let res = await axios.post(_curUri, _curObj).then(res=>res);
                 let _successMessage =  _onSuccess(res, successCallBack)
@@ -86,9 +100,11 @@ const  FormSubmit = ({curObj,curUri,Inputs, reset, onSuccess, onError, successCa
                 <ModelP 
                     ref = {modRef}
                     Ok ={(e)=>{
-                        submitHandle(curUri, curObj, onSuccess, onError)
+                        submitHandle(curUri, curObj, onSuccess, onError,validation)
                         modRef.current?.close();
                     }}
+                    modelText="Press Ok to Submit data to server \n Press cancel to exit"
+                    modelTitle = "Do you wan t submit Data ?"
                 />
                 <Form onSubmit={(e)=>{
                     e.preventDefault()

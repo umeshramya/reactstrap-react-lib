@@ -2,9 +2,21 @@ import React, { Component } from 'react'
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 
 interface Props {
+  /**
+   * e is event 
+   */
   Ok:(e:any)=>void;
+  /**
+   * text to bedisplayes in body of modal
+   */
+  modelText:string;
+  /**
+   * title of model
+   */
+  modelTitle:string;
 
 }
+
 interface State {
   modal:boolean;
   text:string;
@@ -19,6 +31,7 @@ export default class ModelP extends Component<Props, State> {
     title:""
 
   }
+  
   /**This function toggels the the show hide of Modal */
   toggle = () => this.setState({...this.state, modal:!this.state.modal})
   
@@ -27,7 +40,7 @@ export default class ModelP extends Component<Props, State> {
    * @param curText Text to be displayed in body of Modal
    * @param curTitle Title of The modal
    */
-  show = (curText="Do you want Submit this data", curTitle="Data Submission"):void=>{
+  show = (curText= this.props.modelText , curTitle=this.props.modelTitle):void=>{
     this.setState({
       ...this.state,
       modal:true,
@@ -61,6 +74,8 @@ close = ():boolean=>{
     )
   }
 }
+
+
 
 
 

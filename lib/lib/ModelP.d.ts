@@ -1,6 +1,17 @@
 import { Component } from 'react';
 interface Props {
+    /**
+     * e is event
+     */
     Ok: (e: any) => void;
+    /**
+     * text to bedisplayes in body of modal
+     */
+    modelText: string;
+    /**
+     * title of model
+     */
+    modelTitle: string;
 }
 interface State {
     modal: boolean;

@@ -27,7 +27,13 @@ interface Props {
      * This is props as a callback  function to passesed inside onError function
      */
     errorCallback?: (...arg: any) => any;
+    /**
+     * This function is for validation before submitting  inthe front end itself
+     * in case of failed validadtion return string
+     * If validation did succeed return ""
+     */
+    validation?: () => string;
 }
-declare const FormSubmit: ({ curObj, curUri, Inputs, reset, onSuccess, onError, successCallBack, errorCallback }: Props) => JSX.Element;
+declare const FormSubmit: ({ curObj, curUri, Inputs, reset, onSuccess, onError, successCallBack, errorCallback, validation }: Props) => JSX.Element;
 export default FormSubmit;
 //# sourceMappingURL=FormSubmit.d.ts.map
