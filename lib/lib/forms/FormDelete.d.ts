@@ -24,6 +24,6 @@ interface Props {
      */
     errorCallback?: (...arg: any) => any;
 }
-declare function Delete({ curUri: uri, id, onSuccess, onError, successCallBack, errorCallback }: Props): JSX.Element;
+declare function Delete({ curUri, id, onSuccess, onError, successCallBack, errorCallback }: Props): JSX.Element;
 export default Delete;
 //# sourceMappingURL=FormDelete.d.ts.map
