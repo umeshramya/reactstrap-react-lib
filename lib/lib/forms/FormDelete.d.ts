@@ -2,20 +2,28 @@
 import { AxiosError, AxiosResponse } from 'axios';
 interface Props {
     /**This API uri for deleteing Post request */
-    uri: string;
+    curUri: string;
     /**id is value by which the record has to be deleted  */
     id: any;
-    /**This prop is message to be set on Suucess api call */
-    successMessage?: string;
-    /**This prop is message to be displayed on alert on  API call error */
-    errorMessage?: string;
-    onSuccess?: (res: AxiosResponse, ...args: any) => any;
+    /**
+    * This function is call back on success from server HTTP response
+    * @res This on success response from server
+    */
+    onSuccess: (res: AxiosResponse, successCallBack?: (...arg: any) => any) => string;
+    /**
+     * This is props as callback  function to passesed inside onSuccess function
+     */
+    successCallBack?: (...arg: any) => any;
     /**
      * This function is call back on error from server HTTP response
      * @error error eecived from server
      */
-    onError?: (error: AxiosError, ...args: any) => any;
+    onError: (error: AxiosError, errorCallback?: (...arg: any) => any) => string;
+    /**
+     * This is props as a callback  function to passesed inside onError function
+     */
+    errorCallback?: (...arg: any) => any;
 }
-declare function Delete({ uri, id, onSuccess, onError, successMessage, errorMessage }: Props): JSX.Element;
+declare function Delete({ curUri, id, onSuccess, onError, successCallBack, errorCallback }: Props): JSX.Element;
 export default Delete;
 //# sourceMappingURL=FormDelete.d.ts.map

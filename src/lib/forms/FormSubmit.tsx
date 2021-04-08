@@ -11,71 +11,64 @@ interface Props{
     curUri:string;
     /**This is Form input elements. do not add Form elemet thise get rendered inside the form itself */
     Inputs:ReactFragment
-    /**This prop is message to be set on Suucess api call */
-    successMessage?:string;
-   
-    /**This prop is message to be displayed on alert on  API call error */
-    errorMessage?:string
+    
      /** pass function with reseting the values i.e. curObj and etc */
-    reset:()=>void
+    reset:()=>void;
+
     /**
      * This function is call back on success from server HTTP response 
      * @res This on success response from server
      */
-    onSuccess?: (res:AxiosResponse, ...args:any)=>any
+    onSuccess: (res:AxiosResponse, successCallBack?:(...arg: any)=>any)=>string
+    /**
+     * This is props as callback  function to passesed inside onSuccess function
+     */
+    successCallBack?:(...arg: any)=>any
 
 
     /**
      * This function is call back on error from server HTTP response 
      * @error error eecived from server
      */
-    onError?: (error:AxiosError, ...args:any)=>any 
+    onError: (error:AxiosError, errorCallback?:(...arg:any)=>any)=>string
+    /**
+     * This is props as a callback  function to passesed inside onError function
+     */
+    errorCallback?:(...arg: any)=>any
 
+    
 
 }
 
-const  FormSubmit = ({curObj,curUri,Inputs,  successMessage, errorMessage, reset, onSuccess, onError}:Props)=> {
+const  FormSubmit = ({curObj,curUri,Inputs, reset, onSuccess, onError, successCallBack, errorCallback}:Props)=> {
     const butRef            = useRef<ButtonP>(null)
     const modRef            = useRef<ModelP>(null)
     const alerRef           = useRef<AlertP>(null)
 
 
   
-       const  submitHandle =  async(curUri:string, curObj:{}, onSuccess=async(res:AxiosResponse)=>{}, onError=async(res:AxiosError  )=>{})=>{
-        let _successMessage:string = "Form submission was successfull";
+       const  submitHandle =  async(_curUri:string, _curObj:{}, _onSuccess:typeof onSuccess, _onError:typeof onError)=>{
+
           
             try {
                 modRef.current?.close();
                 butRef.current?.showSpin();
                 alerRef.current?.alertLight();
                 
-                let res = await axios.post(curUri, curObj).then(res=>res);
-                await onSuccess(res, )
-
-                if(res.data.mes === undefined ){
-                    if(successMessage !== undefined && successMessage !== ""){
-                        _successMessage = successMessage;
-                    }
-                    
-                }else{
-                    _successMessage=res.data.mes;
-                }
-    
+                let res = await axios.post(_curUri, _curObj).then(res=>res);
+                let _successMessage =  _onSuccess(res, successCallBack)
                 
                 butRef.current?.hideSpin();
                 alerRef.current?.alertSuccess(_successMessage);
 
                 
                 
-                
+
             } catch (error) {
-                await onError(error, );
-                if(errorMessage ===undefined){
-                    alerRef.current?.alertError(errorMessage);
-                }else{
-                    alerRef.current?.alertError(error);
-                }
-                
+           
+                let _errorMessage =  _onError(error, errorCallback);
+               
+                alerRef.current?.alertError(_errorMessage);
                 butRef.current?.hideSpin();
                 
                 

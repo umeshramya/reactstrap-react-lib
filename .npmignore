@@ -108,3 +108,6 @@ dist
 next-app/.yalc/
 yalc.lock
 next-app/yalc.lock
+
+#npm ingnore specifics
+next-app/
