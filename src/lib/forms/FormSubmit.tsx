@@ -1,9 +1,10 @@
-import axios, { AxiosError, AxiosResponse } from 'axios'
+import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios'
 import React, {useRef, useState, useEffect,useImperativeHandle, ReactFragment} from 'react'
 import {Container, Row, Col, Form, FormGroup, Label, Input, } from "reactstrap"
 import ButtonP from "../ButtonP"
 import AlertP from "../AlertP"
 import ModelP from "../ModelP"
+import {RequestMethods} from "./types"
 interface Props{
     /** req.body for post request */
     curObj:{};
@@ -36,16 +37,26 @@ interface Props{
      */
     errorCallback?:(...arg: any)=>any
     /**
-     * This function is for validation before submitting  inthe front end itself
-     * in case of failed validadtion return string 
-     * If validation did succeed return ""
+     * This function is for validation before submitting  in the form
+     * In case of failed validadtion return string which is not equal to ""
+     * If validation did succeed then return ""
      */
     validation?:()=>string
-    
+    /**
+     * THis is form submit method
+     * value could be "GET" | "POST" | "PUT" | "DELETE"
+     */
+    method?:RequestMethods
 
+    /**
+     * AxiosRequestConfig optional config to be passed in the api call
+     */
+    AxiosRequestConfig?:AxiosRequestConfig
+    
+    
 }
 
-const  FormSubmit = ({curObj,curUri,Inputs, reset, onSuccess, onError, successCallBack, errorCallback, validation=()=>""}:Props)=> {
+const  FormSubmit = ({curObj,curUri,Inputs, reset, onSuccess, onError, successCallBack, errorCallback, validation=()=>"", method="POST", AxiosRequestConfig={}}:Props)=> {
     const butRef            = useRef<ButtonP>(null)
     const modRef            = useRef<ModelP>(null)
     const alerRef           = useRef<AlertP>(null)
@@ -69,7 +80,20 @@ const  FormSubmit = ({curObj,curUri,Inputs, reset, onSuccess, onError, successCa
                 }
 
                 
-                let res = await axios.post(_curUri, _curObj).then(res=>res);
+                let res:AxiosResponse;
+                 if( method === "GET"){
+                    res = await axios.get(_curUri,AxiosRequestConfig).then(res=>res)
+                }else if(method === "DELETE"){
+                    res = await axios.delete(_curUri, AxiosRequestConfig).then(res=>res);
+                }else if(method === "PUT"){
+                    res= await axios.put(_curUri, _curObj, AxiosRequestConfig).then(res=>res);
+                }else{
+                    // default method
+                    res = await axios.post(_curUri, _curObj, AxiosRequestConfig).then(res=>res);
+                }
+                
+
+
                 let _successMessage =  _onSuccess(res, successCallBack)
                 
                 butRef.current?.hideSpin();

@@ -2,8 +2,7 @@
 
 export default (req, res) => {
     try {
-      let e = new Error();
-      throw e.message="intenettional error"
+     console.log(req.method)
       
       res.status(200).json({ mes: 'Deleted John Doe' })
     } catch (error) {

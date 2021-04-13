@@ -1,5 +1,6 @@
-import { AxiosError, AxiosResponse } from 'axios';
+import { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios';
 import { ReactFragment } from 'react';
+import { RequestMethods } from "./types";
 interface Props {
     /** req.body for post request */
     curObj: {};
@@ -28,12 +29,21 @@ interface Props {
      */
     errorCallback?: (...arg: any) => any;
     /**
-     * This function is for validation before submitting  inthe front end itself
-     * in case of failed validadtion return string
-     * If validation did succeed return ""
+     * This function is for validation before submitting  in the form
+     * In case of failed validadtion return string which is not equal to ""
+     * If validation did succeed then return ""
      */
     validation?: () => string;
+    /**
+     * THis is form submit method
+     * value could be "GET" | "POST" | "PUT" | "DELETE"
+     */
+    method?: RequestMethods;
+    /**
+     * AxiosRequestConfig optional config to be passed in the api call
+     */
+    AxiosRequestConfig?: AxiosRequestConfig;
 }
-declare const FormSubmit: ({ curObj, curUri, Inputs, reset, onSuccess, onError, successCallBack, errorCallback, validation }: Props) => JSX.Element;
+declare const FormSubmit: ({ curObj, curUri, Inputs, reset, onSuccess, onError, successCallBack, errorCallback, validation, method, AxiosRequestConfig }: Props) => JSX.Element;
 export default FormSubmit;
 //# sourceMappingURL=FormSubmit.d.ts.map

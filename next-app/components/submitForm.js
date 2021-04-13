@@ -52,6 +52,9 @@ function submitForm() {
                         // return "validation error"
                         return ""
                     }}
+
+                    method={"PUT"}
+                    AxiosRequestConfig={{}}
                 
                 />
 
@@ -72,6 +75,8 @@ function submitForm() {
                             console.log(err.response)
                             return err.response.data
                         }}
+
+                        method={"DELETE"}
                     
                     />
                 </Col>

@@ -1,9 +1,10 @@
-import axios, {AxiosError, AxiosResponse} from 'axios'
+import axios, {AxiosError, AxiosResponse, AxiosRequestConfig} from 'axios'
 import React, {useRef} from 'react'
 import {Row, Col, Form} from "reactstrap"
 import ButtonP from "../ButtonP"
 import AlertP from "../AlertP"
 import ModelP from "../ModelP"
+import {RequestMethods} from "./types"
 
 interface Props{
     /**This API uri for deleteing Post request */
@@ -30,23 +31,62 @@ interface Props{
        * This is props as a callback  function to passesed inside onError function
        */
       errorCallback?:(...arg: any)=>any
+      /**
+     * This function is for validation before submitting  in the form
+     * In case of failed validadtion return string which is not equal to ""
+     * If validation did succeed then return ""
+     */
+    validation?:()=>string
+    /**
+     * THis is form submit method
+     * value could be "GET" | "POST" | "PUT" | "DELETE"
+     */
+    method?:RequestMethods
+
+    /**
+     * AxiosRequestConfig optional config to be passed in the api call
+     */
+    AxiosRequestConfig?:AxiosRequestConfig
+
 
 }
 
-function Delete({curUri, id, onSuccess, onError, successCallBack, errorCallback}:Props) {
+function Delete({curUri, id, onSuccess, onError, successCallBack, errorCallback,validation=()=>"" ,method="POST", AxiosRequestConfig={}}:Props) {
     const butRef            = useRef<ButtonP>(null)
     const modRef            = useRef<ModelP>(null)
     const alerRef           = useRef<AlertP>(null)
 
-    const  submitHandle =  async(_curUri:string, _id:any, _onSuccess:typeof onSuccess, _onError:typeof onError)=>{
-
+    const  submitHandle =  async(_curUri:string, _id:any, _onSuccess:typeof onSuccess, _onError:typeof onError, _validation:typeof validation)=>{
+        let validationErrorMessage:string = "";
           
         try {
             modRef.current?.close();
             butRef.current?.showSpin();
             alerRef.current?.alertLight();
+
+            let _curObj = {id: _id};
+
+            validationErrorMessage =_validation();
+                if(validationErrorMessage !== ""){
+                    alerRef.current?.alertError(validationErrorMessage);
+                    butRef.current?.hideSpin();
+                    return;
+                }
+``
+                
+                let res:AxiosResponse;
+                 if( method === "GET"){
+                    res = await axios.get(_curUri,AxiosRequestConfig).then(res=>res)
+                }else if(method === "DELETE"){
+                    res = await axios.delete(_curUri, AxiosRequestConfig).then(res=>res);
+                }else if(method === "PUT"){
+                    res= await axios.put(_curUri, _curObj, AxiosRequestConfig).then(res=>res);
+                }else{
+                    // default method
+                    res = await axios.post(_curUri, _curObj, AxiosRequestConfig).then(res=>res);
+                }
+                
             
-            let res = await axios.post(_curUri, {id: _id}).then(res=>res);
             let _successMessage =  _onSuccess(res, successCallBack)
             
             butRef.current?.hideSpin();
@@ -74,7 +114,7 @@ function Delete({curUri, id, onSuccess, onError, successCallBack, errorCallback}
                     <ModelP 
                         ref = {modRef}
                         Ok ={(e)=>{
-                            submitHandle(curUri, id, onSuccess, onError)
+                            submitHandle(curUri, id, onSuccess, onError,validation)
                             modRef.current?.close();
                         }}
                         modelTitle ="Do you want to delete data ?"
