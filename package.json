@@ -23,7 +23,6 @@
   },
   "homepage": "https://github.com/umeshramya/reactstrap-react-lib#readme",
   "peerDependencies": {
-    "axios": ">=0.21.1",
     "react": ">=17.0.2",
     "react-table": "^7.6.3",
     "reactstrap": ">=8.9.0"
@@ -37,5 +36,8 @@
     "reactstrap": "^8.9.0",
     "typescript": "^4.2.3",
     "yalc": "*"
+  },
+  "dependencies": {
+    "axios": "^0.21.1"
   }
 }
