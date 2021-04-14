@@ -2,7 +2,7 @@
 
 export default (req, res) => {
     try {
-     console.log(req.method)
+     console.log(req.method, req.body)
       
       res.status(200).json({ mes: 'Deleted John Doe' })
     } catch (error) {

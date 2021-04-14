@@ -66,8 +66,9 @@ function submitForm() {
                 <Col>
                 
                     <FormDelete
-                        id="1"
+            
                         curUri="api/form-delete"
+                        curObj = {["POST", {id : 1}]}
                         onSuccess={(res)=>{
                             
                             return res.data.mes
