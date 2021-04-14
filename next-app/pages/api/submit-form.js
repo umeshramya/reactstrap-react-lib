@@ -4,6 +4,7 @@ export default (req, res) => {
   try {
     // let e = new Error();
     // throw e.message="intenettional error"
+    console.log(req.method, req.body)
     
     res.status(200).json({ mes: 'submitted John Doe' })
   } catch (error) {

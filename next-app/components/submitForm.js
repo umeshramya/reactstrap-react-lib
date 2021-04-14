@@ -26,13 +26,13 @@ function submitForm() {
                             
                             <FormGroup>
                                 <Label>lastName</Label>
-                                <Input type="text" value={obj.lasttName} onChange={(e)=>setObj({...obj, lasttName : e.target.value})} required={true}/>
+                                <Input type="text" value={obj.lastName} onChange={(e)=>setObj({...obj, lastName : e.target.value})} required={true}/>
                             </FormGroup>
 
                         </>
                     }
 
-                    curObj = {obj}
+                    curObj = {["PUT", obj]}
                     curUri = "api/submit-form"
 
                     successCallBack = {(res)=>res.data.mes}
@@ -50,6 +50,7 @@ function submitForm() {
 
                     validation ={()=>{
                         // return "validation error"
+                        console.log(obj)
                         return ""
                     }}
 
