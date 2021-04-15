@@ -1,6 +1,6 @@
-import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios'
-import React, {useRef, useState, useEffect,useImperativeHandle, ReactFragment} from 'react'
-import {Container, Row, Col, Form, FormGroup, Label, Input, } from "reactstrap"
+import axios, { AxiosResponse } from 'axios'
+import React, {useRef, useEffect, ReactFragment} from 'react'
+import {Container, Row, Col, Form } from "reactstrap"
 import ButtonP from "../ButtonP"
 import AlertP from "../AlertP"
 import ModelP from "../ModelP"
@@ -59,10 +59,18 @@ interface Props extends propMaster{
   Inputs:ReactFragment
 }
 
-const  FormSubmit = ({curObj,curUri,Inputs, reset, onSuccess, onError, successCallBack, errorCallback, validation=()=>"", AxiosRequestConfig={}}:Props)=> {
+const  FormSubmit = ({curObj,curUri,Inputs, reset=()=>{} , onSuccess, onError, successCallBack, errorCallback, validation=()=>"", AxiosRequestConfig={}}:Props)=> {
     const butRef            = useRef<ButtonP>(null)
     const modRef            = useRef<ModelP>(null)
     const alerRef           = useRef<AlertP>(null)
+
+
+    useEffect(() => {
+        alerRef.current?.alertLight();
+        return () => {
+        
+        }
+    }, [curObj])
 
 
   

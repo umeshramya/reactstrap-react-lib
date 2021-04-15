@@ -1,5 +1,5 @@
-import axios, {AxiosError, AxiosResponse, AxiosRequestConfig} from 'axios'
-import React, {useRef} from 'react'
+import axios, {AxiosResponse} from 'axios'
+import React, {useRef, useEffect} from 'react'
 import {Row, Col, Form} from "reactstrap"
 import ButtonP from "../ButtonP"
 import AlertP from "../AlertP"
@@ -60,6 +60,13 @@ function Delete({curUri, curObj, onSuccess, onError, successCallBack, errorCallb
     const butRef            = useRef<ButtonP>(null)
     const modRef            = useRef<ModelP>(null)
     const alerRef           = useRef<AlertP>(null)
+
+        useEffect(() => {
+        alerRef.current?.alertLight();
+        return () => {
+        
+        }
+    }, [curObj])
 
     const  submitHandle =  async(_curUri:string, _curObj:typeof curObj, _onSuccess:typeof onSuccess, _onError:typeof onError, _validation:typeof validation)=>{
         let validationErrorMessage:string = "";

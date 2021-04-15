@@ -5,7 +5,7 @@ import {Container, Row, Col, FormGroup, Input, Label} from "reactstrap"
 
 
 function submitForm() {
-    const iObj = {firstName:"", lastName : ""}
+    const iObj = {firstName:"", lastName : "", email : ""}
     const [obj, setObj] = useState(iObj)
 
 
@@ -27,6 +27,10 @@ function submitForm() {
                             <FormGroup>
                                 <Label>lastName</Label>
                                 <Input type="text" value={obj.lastName} onChange={(e)=>setObj({...obj, lastName : e.target.value})} required={true}/>
+                            </FormGroup>
+                            <FormGroup>
+                                <Label>email</Label>
+                                <Input type="email" value={obj.email} onChange={(e)=>setObj({...obj, email : e.target.value})} required={true}/>
                             </FormGroup>
 
                         </>
@@ -54,7 +58,7 @@ function submitForm() {
                         return ""
                     }}
 
-                    method={"PUT"}
+                    reset={()=>setObj(iObj)}
                     AxiosRequestConfig={{}}
                 
                 />
@@ -78,7 +82,8 @@ function submitForm() {
                             return err.response.data
                         }}
 
-                        method={"DELETE"}
+                        
+                     
                     
                     />
                 </Col>
