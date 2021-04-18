@@ -1,15 +1,20 @@
 import { Component } from "react";
-interface sectionElements {
+export interface sectionElements {
     /**name o each elements */
     name: string;
     /**link to go after clicking */
     link: string;
 }
-interface sectionEach {
+export interface sectionEach {
     /**title of section */
     title: string;
     /** elements arracy each section contains */
-    sectionElements: sectionElements[];
+    sectionElements: {
+        /**name o each elements */
+        name: string;
+        /**link to go after clicking */
+        link: string;
+    }[];
 }
 interface Props {
     /** Title is panel title*/
@@ -28,7 +33,9 @@ export default class SectionPanel extends Component<Props, State> {
     state: {
         isOpen: boolean;
     };
-    toggel: () => void;
+    panelToggel: () => void;
+    panelClose: () => void;
+    panelOpen: () => void;
     render(): JSX.Element;
 }
 export {};
