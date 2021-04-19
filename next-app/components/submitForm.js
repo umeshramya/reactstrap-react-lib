@@ -1,4 +1,4 @@
-import{ButtonP, FormSubmit, FormDelete, SectioPanel} from "reactstrap-react-lib"
+import{ButtonP, FormSubmit, FormDelete, SectioPanel,Sidebar} from "reactstrap-react-lib"
 import React,{useState} from 'react'
 import {Container, Row, Col, FormGroup, Input, Label} from "reactstrap"
 
@@ -116,7 +116,7 @@ function submitForm() {
                 <Col>
             
  
-                <SectioPanel
+                {/* <SectioPanel
                     panelTitle={"Employee"}
                     section = {[
                         {title : "Employee",sectionElements : Employee},
@@ -124,9 +124,20 @@ function submitForm() {
                         {title : "Roster", sectionElements : Roster},
                         {title : "Onboarding", sectionElements : Onboarding}
                     ]}
-                    
+                /> */}
 
-                />
+                    <Sidebar
+                        Main ={<h3>Umesh </h3>}
+                        panelTitle={"Employee"}
+                        section ={[
+                            {title : "Employee",sectionElements : Employee},
+                            {title : "Shifts", sectionElements : Shifts},
+                            {title : "Roster", sectionElements : Roster},
+                            {title : "Onboarding", sectionElements : Onboarding}
+                        ]}
+
+                    />
+                
 
                 </Col>
             </Row>

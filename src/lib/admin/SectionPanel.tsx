@@ -23,7 +23,7 @@ export interface sectionEach {
   }[];
 }
 
- interface Props {
+ export interface PanelProps {
   /** Title is panel title*/
   panelTitle: string;
   /*
@@ -43,7 +43,7 @@ interface State {
  * @Section  This props is array of section elements each  section eleemnts is array of name and link property. name is name to dispolyed over the link
  * 
  */
-export default class SectionPanel extends Component<Props, State> {
+export default class SectionPanel extends Component<PanelProps, State> {
   state = {
     isOpen: true,
   };
