@@ -1,19 +1,36 @@
 import React, { Component } from 'react'
-import SectionPanel,{PanelProps, sectionEach, sectionElements} from "./SectionPanel"
+import SectionPanel,{PanelProps, sectionEach} from "./SectionPanel"
 import {Row, Col } from "reactstrap"
-import { StyleHTMLAttributes } from 'react'
-
+/** These are the items which will displayed insde side bar */
+interface sidebarLink {
+    /**name diplayed in the sidebar */
+    name : string;
+     /**react-icons as component */
+    icon : Component;
+    /**sectionpanel or link to be shown on click */
+    path  :SectionPanel | string
+}
 
 interface Props extends PanelProps {
+    /** Main compone nt to be displayed */
     Main:Component;
+    /**orgnization name to be displayed above in sidebar */
+    orgName ?: string;
+    userName ?:string;
     
 }
 interface State {
-    
+    /**Title of panel toi be displayed */
+    panelTitle : string,
+    /** array of section ine the panel */
+    section    :sectionEach[] | null;
 }
 
 export default class Sidebar extends Component<Props, State> {
-    state = {}
+    state = {
+        panelTitle : "",
+        section    : null,
+    }
 
     render() {
         return (
@@ -21,7 +38,12 @@ export default class Sidebar extends Component<Props, State> {
             <Row>
             {/* side bar */}
             <Col sm={12} lg={3} style={Styles.sidebar} >
+                {/* display icon + name with link / panel */}
+                <>
+                    <h4>{this.props.orgName}</h4>
+                    <h5>{this.props.userName}</h5>
 
+                </>
             </Col>
             {/* /Area for horizontal bar and main */}
             <Col sm={12} lg={9}>
@@ -34,7 +56,11 @@ export default class Sidebar extends Component<Props, State> {
                 <Row>
                     {/* Main area */}
                     <Col sm={12}>
-                        <SectionPanel {...this.props}/>
+                        <SectionPanel 
+                            panelTitle ={this.state.panelTitle}
+                            section ={this.state.section}
+
+                        />
                         {this.props.Main}
                     </Col>
                 </Row>
