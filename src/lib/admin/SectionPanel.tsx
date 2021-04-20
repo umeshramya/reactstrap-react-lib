@@ -64,7 +64,7 @@ export default class SectionPanel extends Component<PanelProps, State> {
               <h4> {`${this.props.panelTitle} Panal`}</h4>
               <Row>
                 {
-                  this.props.section.map((eachSection,i)=>{
+                  this.props.section?.map((eachSection,i)=>{
                     return(
                     
                       <Col sm={12} md={6} lg={3} key={i}>

@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import SectionPanel,{PanelProps, sectionEach} from "./SectionPanel"
 import {Row, Col } from "reactstrap"
+import Link from 'next/link'
 /** These are the items which will displayed insde side bar */
 interface sidebarLink {
     /**name diplayed in the sidebar */
@@ -8,7 +9,8 @@ interface sidebarLink {
      /**react-icons as component */
     icon : Component;
     /**sectionpanel or link to be shown on click */
-    path  :SectionPanel | string
+    panel  ?: PanelProps
+    link  ?: string;
 }
 
 interface Props extends PanelProps {
@@ -17,13 +19,16 @@ interface Props extends PanelProps {
     /**orgnization name to be displayed above in sidebar */
     orgName ?: string;
     userName ?:string;
+
+    siderBarLinks : sidebarLink[];
     
 }
 interface State {
     /**Title of panel toi be displayed */
-    panelTitle : string,
+    panelTitle :PanelProps["panelTitle"],
     /** array of section ine the panel */
-    section    :sectionEach[] | null;
+    section    :PanelProps["section"];
+
 }
 
 export default class Sidebar extends Component<Props, State> {
@@ -31,6 +36,26 @@ export default class Sidebar extends Component<Props, State> {
         panelTitle : "",
         section    : null,
     }
+
+
+    private dispalyEachLink(eachLink:sidebarLink, index:number ):any{
+        if(eachLink.panel !== undefined){
+            this.setState({
+                ...this.state,
+                panelTitle : "",
+                // section : 
+            })
+        }else{
+            return(
+                <Link href={eachLink.link === undefined ? "" : eachLink.link} >
+                <Col sm={12} key={index}  style={Styles.sidebarLi}>
+                    {eachLink.icon}{eachLink.name}
+                </Col>
+                </Link>
+            )
+        }
+    }
+
 
     render() {
         return (
@@ -42,6 +67,18 @@ export default class Sidebar extends Component<Props, State> {
                 <>
                     <h4>{this.props.orgName}</h4>
                     <h5>{this.props.userName}</h5>
+                    <Row>
+
+                    {
+                        this.props.siderBarLinks !== undefined ?
+                        this.props.siderBarLinks.map((eachLink, index)=>{
+                            return(
+                                    this.dispalyEachLink(eachLink, index)
+                            )
+                        }): ""
+                    }
+
+                    </Row>
 
                 </>
             </Col>
@@ -56,11 +93,14 @@ export default class Sidebar extends Component<Props, State> {
                 <Row>
                     {/* Main area */}
                     <Col sm={12}>
-                        <SectionPanel 
-                            panelTitle ={this.state.panelTitle}
-                            section ={this.state.section}
+                        {
+                            this.props.section === null ? "" :
+                            <SectionPanel 
+                                panelTitle ={this.state.panelTitle}
+                                section ={this.state.section}
+                            />
+                        }
 
-                        />
                         {this.props.Main}
                     </Col>
                 </Row>
