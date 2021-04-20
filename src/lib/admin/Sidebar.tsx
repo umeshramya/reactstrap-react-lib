@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import SectionPanel,{PanelProps, sectionEach} from "./SectionPanel"
 import {Row, Col } from "reactstrap"
 import Link from 'next/link'
+
 /** These are the items which will displayed insde side bar */
 interface sidebarLink {
     /**name diplayed in the sidebar */
@@ -40,36 +41,93 @@ export default class Sidebar extends Component<Props, State> {
 
 
     private dispalyEachLink(eachLink:sidebarLink, index:number ):any{
-
             return(
-                <span style={Styles.sidebarLi} key={index}>
-                        {eachLink.name}
-                </span>
+                <Col onClick={()=>{
 
+                }} sm={12} className={`sidebarLi`} key={index}>
+                        {eachLink.name}
+                </Col>
             )
-        
     }
 
 
     render() {
         return (
-            <>
             <Row>
+            <style>{
+    `.menubar{
+        background-color: #060b26;
+        color: #f5f5f5;
+        height: 60px;
+        margin-bottom: 10px;
+        padding:8px;
+    }
+    
+    
+    .sidebar{
+        background-color: #060b26;
+        color: #f5f5f5;
+        height: 100vh;
+        display: flex;
+        justify-content:flex-start;
+        align-items: flex-start;
+        flex-direction: column;
+    }
+    
+    .sidebarUl{
+        /* padding-top: 50px; */
+        padding-left: 0px;
+        width: 100%;
+    
+    }
+    
+    .sidebarLi {
+        height:  40px;
+        width: 100%;
+        padding-left: 10px;
+        padding-top: 10px;
+    }
+    
+    .sidebarLink{
+        width: 100%;
+    }
+    
+    .sidebarLi:hover {
+        background-color: #1a83ff;
+        cursor: pointer;
+    }
+    
+    .logout{
+        text-align: center;
+    }
+    .logout:hover {
+        cursor: pointer;
+    }
+    
+    .PanalClose:hover{
+        cursor: pointer;
+    }
+    `
+
+}
+
+</style>
+
             {/* side bar */}
-            <Col sm={12} lg={3} style={Styles.sidebar} >
+            <Col sm={12} lg={3} className={`sidebar`} >
                 {/* display icon + name with link / panel */}
                 <>
                     <h4>{this.props.orgName}</h4>
                     <h5>{this.props.userName}</h5>
-                    <Row>
+                    <Row className = {`sidebarUl`}>
 
-                    {
+                    {   
                         this.props.siderBarLinks !== undefined ?
                         this.props.siderBarLinks.map((eachLink, index)=>{
                             return(
-                                    this.dispalyEachLink(eachLink, index)
+                                this.dispalyEachLink(eachLink, index)
                             )
-                        }): ""
+                        }) : ""
                     }
 
                     </Row>
@@ -80,7 +138,7 @@ export default class Sidebar extends Component<Props, State> {
             <Col sm={12} lg={9}>
                 <Row>
                     {/* Horizontal bar */}
-                    <Col sm={12} style={Styles.menubar}>
+                    <Col sm={12} className={`menubar`}>
                     
                     </Col>
                 </Row>
@@ -102,60 +160,7 @@ export default class Sidebar extends Component<Props, State> {
             </Col>
                 
             </Row>
-
-            </>
         )
     }
 }
-
-let  Styles = {
-     menubar : {
-        backgroundColor:"#060b26",
-        color:  "#f5f5f5",
-        height: "60px",
-        marginBottom: "10px",
-        padding:"8px",
-    },
-    
-    
-    sidebar : {
-        backgroundColor: "#060b26",
-        color: "#f5f5f5",
-        height: "100vh",
-    },
-    
-    sidebarUl :{
-        /* padding-top: 50px; */
-        paddingLeft: "0px",
-        width: "100%"
-    
-    },
-    
-    sidebarLi : {
-        height:  "40px",
-        width: "100%",
-        paddingLeft: "20px",
-        paddingTop: "10px",
-        "&:hover" : {
-                backgroundColor: "#1a83ff",
-                cursor: "pointer",
-            }
-    },
-    
-    sidebarLink :{
-        width: "100%",
-    },
-    
-
-    
-    // .logout{
-    //     text-align: center;
-    // }
-    // .logout:hover {
-    //     cursor: pointer;
-    // }
-    
-
-}
-
 
