@@ -18,8 +18,9 @@ interface Props extends PanelProps {
     Main:Component;
     /**orgnization name to be displayed above in sidebar */
     orgName ?: string;
+    /**user name as string */
     userName ?:string;
-
+    /**siderBarLinks*/
     siderBarLinks : sidebarLink[];
     
 }
@@ -39,21 +40,14 @@ export default class Sidebar extends Component<Props, State> {
 
 
     private dispalyEachLink(eachLink:sidebarLink, index:number ):any{
-        if(eachLink.panel !== undefined){
-            // this.setState({
-            //     ...this.state,
-            //     panelTitle : "",
-            //     // section : 
-            // })
-        }else{
+
             return(
-                <Col sm={12} key={index}  style={Styles.sidebarLi} >
-                <Link href={eachLink.link === undefined ? "" : eachLink.link} key={index}>
-                    {eachLink.name}
-                </Link>
-                </Col>
+                <span style={Styles.sidebarLi} key={index}>
+                        {eachLink.name}
+                </span>
+
             )
-        }
+        
     }
 
 
@@ -138,10 +132,9 @@ let  Styles = {
     },
     
     sidebarLi : {
-        listStyle :"none",
         height:  "40px",
         width: "100%",
-        paddingLeft: "10px",
+        paddingLeft: "20px",
         paddingTop: "10px",
         "&:hover" : {
                 backgroundColor: "#1a83ff",

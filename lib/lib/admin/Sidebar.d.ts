@@ -15,7 +15,9 @@ interface Props extends PanelProps {
     Main: Component;
     /**orgnization name to be displayed above in sidebar */
     orgName?: string;
+    /**user name as string */
     userName?: string;
+    /**siderBarLinks*/
     siderBarLinks: sidebarLink[];
 }
 interface State {
