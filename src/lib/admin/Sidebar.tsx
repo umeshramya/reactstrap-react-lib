@@ -40,18 +40,18 @@ export default class Sidebar extends Component<Props, State> {
 
     private dispalyEachLink(eachLink:sidebarLink, index:number ):any{
         if(eachLink.panel !== undefined){
-            this.setState({
-                ...this.state,
-                panelTitle : "",
-                // section : 
-            })
+            // this.setState({
+            //     ...this.state,
+            //     panelTitle : "",
+            //     // section : 
+            // })
         }else{
             return(
-                <Link href={eachLink.link === undefined ? "" : eachLink.link} >
-                <Col sm={12} key={index}  style={Styles.sidebarLi}>
-                    {eachLink.icon}{eachLink.name}
-                </Col>
+                <Col sm={12} key={index}  style={Styles.sidebarLi} >
+                <Link href={eachLink.link === undefined ? "" : eachLink.link} key={index}>
+                    {eachLink.name}
                 </Link>
+                </Col>
             )
         }
     }

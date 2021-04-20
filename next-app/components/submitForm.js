@@ -128,13 +128,12 @@ function submitForm() {
 
                     <Sidebar
                         Main ={<h3>Umesh </h3>}
-                        panelTitle={"Employee"}
-                        section ={[
-                            {title : "Employee",sectionElements : Employee},
-                            {title : "Shifts", sectionElements : Shifts},
-                            {title : "Roster", sectionElements : Roster},
-                            {title : "Onboarding", sectionElements : Onboarding}
+                        orgName = "JJH Hubli"
+                        userName = "umesh"
+                        siderBarLinks ={[
+                            {name : "Zoho", link : "/admin/Zoho"}
                         ]}
+
 
                     />
                 
