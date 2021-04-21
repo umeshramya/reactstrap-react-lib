@@ -95,7 +95,7 @@ const Sidebar = (props: Props) => {
         .sidebarLi {
             height:  40px;
             width: 100%;
-            padding-left: 10px;
+            padding-left: 30px;
             padding-top: 10px;
         }
         
