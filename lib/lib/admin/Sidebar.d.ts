@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import SectionPanel, { PanelProps } from "./SectionPanel";
+import { Component } from 'react';
+import { PanelProps } from "./SectionPanel";
 /** These are the items which will displayed insde side bar */
 interface sidebarLink {
     /**name diplayed in the sidebar */
@@ -20,22 +20,6 @@ interface Props extends PanelProps {
     /**siderBarLinks*/
     siderBarLinks: sidebarLink[];
 }
-interface State {
-    /**Title of panel toi be displayed */
-    panelTitle: PanelProps["panelTitle"];
-    /** array of section ine the panel */
-    section: PanelProps["section"];
-}
-export default class Sidebar extends Component<Props, State> {
-    curSectionPanel: React.RefObject<SectionPanel>;
-    router: import("next/router").NextRouter;
-    constructor(props: Props);
-    state: {
-        panelTitle: string;
-        section: null;
-    };
-    private dispalyEachLink;
-    render(): JSX.Element;
-}
-export {};
-//# sourceMappingURL=Sidebar.d.ts.map
+declare const Sidebar: (props: Props) => JSX.Element;
+export default Sidebar;
+//# sourceMappingURL=SideBar.d.ts.map

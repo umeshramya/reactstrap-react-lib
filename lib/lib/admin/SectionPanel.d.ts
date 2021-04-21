@@ -19,7 +19,7 @@ export interface sectionEach {
 export interface PanelProps {
     /** Title is panel title*/
     panelTitle: string;
-    section: sectionEach[] | null;
+    section: sectionEach[];
 }
 interface State {
     isOpen: boolean;

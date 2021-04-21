@@ -33,6 +33,15 @@ function submitForm() {
         {name : "delete", link : "/shifts/delete"},
     ]
 
+
+   const  section: = [
+        {title : "Employee",sectionElements : Employee},
+        {title : "Shifts", sectionElements : Shifts},
+        {title : "Roster", sectionElements : Roster},
+        {title : "Onboarding", sectionElements : Onboarding}
+
+    ]
+
     return (
         <Container>
             {/* FormSubmit */}
@@ -131,7 +140,8 @@ function submitForm() {
                         orgName = "JJH Hubli"
                         userName = "umesh"
                         siderBarLinks ={[
-                            {name : "Zoho", link : "/admin/Zoho"}
+                            {name : "Zoho", link : "/admin/Zoho"},
+                            {name : "Employee", panel: {"panelTitle": "Employee" , "section" :  section }}
                         ]}
 
 

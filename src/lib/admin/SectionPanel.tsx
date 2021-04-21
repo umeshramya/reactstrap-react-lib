@@ -31,7 +31,7 @@ export interface sectionEach {
     * Each section elememt is array of name and element
     * 
   */
-  section: sectionEach[] | null;
+  section: sectionEach[];
   
 }
 

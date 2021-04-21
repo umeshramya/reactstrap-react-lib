@@ -1,7 +1,8 @@
-import React, { Component } from 'react'
+import React, {Component,useState, useRef}  from 'react'
 import SectionPanel, { PanelProps, sectionEach } from "./SectionPanel"
 import { Row, Col } from "reactstrap"
 import { useRouter } from 'next/router'
+
 
 /** These are the items which will displayed insde side bar */
 interface sidebarLink {
@@ -14,6 +15,7 @@ interface sidebarLink {
     link?: string;
 }
 
+
 interface Props extends PanelProps {
     /** Main compone nt to be displayed */
     Main: Component;
@@ -25,46 +27,31 @@ interface Props extends PanelProps {
     siderBarLinks: sidebarLink[];
 
 }
-interface State {
-    /**Title of panel toi be displayed */
-    panelTitle: PanelProps["panelTitle"],
-    /** array of section ine the panel */
-    section: PanelProps["section"];
 
-}
+const Sidebar = (props: Props) => {
+    const   router = useRouter();
+    const curSectionPanel:any= useRef()
 
-export default class Sidebar extends Component<Props, State> {
-    curSectionPanel: React.RefObject<SectionPanel>;
-    router = useRouter()
-    
-    constructor(props:Props) {
-        super(props);
-        this.curSectionPanel = React.createRef()
-      }
+    let initPanelTitle:PanelProps["panelTitle"]="";
+    let initSection:PanelProps["section"] = [];
 
-    
-    state = {
-        panelTitle: "",
-        section: null,
-    }
-   
+    const [panelTitle, setpanelTitle] = useState(initPanelTitle);
+    const [section, setSection] = useState(initSection);
 
 
-    private dispalyEachLink(eachLink: sidebarLink, index: number): any {
+    const dispalyEachLink: any = (eachLink: sidebarLink, index: number): any => {
         return (
             <Col onClick={() => {
                 if(eachLink.panel){
                     // change the states of panel
-                    this.setState({
-                        ...this.state,
-                        panelTitle : eachLink.panel.panelTitle,
-                        section : eachLink.panel.section
-                    })
-                        this.curSectionPanel.current?.panelOpen();
+                    setpanelTitle(eachLink.panel.panelTitle);
+                    setSection(eachLink.panel.section)
+
+                    curSectionPanel.current?.panelOpen();
                     
                 }else if(eachLink.link !== undefined){
                     // use router to push to new link
-                        this.router.push(eachLink.link);
+                    router.push(eachLink.link);
                     
                 }
                 
@@ -75,8 +62,7 @@ export default class Sidebar extends Component<Props, State> {
     }
 
 
-    render() {
-        return (
+    return (
             <Row>
                 <style>
                     {
@@ -140,15 +126,15 @@ export default class Sidebar extends Component<Props, State> {
                 <Col sm={12} lg={3} className={`sidebar`} >
                     {/* display icon + name with link / panel */}
                     <>
-                        <h4>{this.props.orgName}</h4>
-                        <h5>{this.props.userName}</h5>
+                        <h4>{props.orgName}</h4>
+                        <h5>{props.userName}</h5>
                         <Row className={`sidebarUl`}>
 
                             {
-                                this.props.siderBarLinks !== undefined ?
-                                    this.props.siderBarLinks.map((eachLink, index) => {
+                                props.siderBarLinks !== undefined ?
+                                    props.siderBarLinks.map((eachLink, index) => {
                                         return (
-                                            this.dispalyEachLink(eachLink, index)
+                                            dispalyEachLink(eachLink, index)
                                         )
                                     }) : ""
                             }
@@ -169,23 +155,25 @@ export default class Sidebar extends Component<Props, State> {
                         {/* Main area */}
                         <Col sm={12}>
                             {
-                                this.props.section === null ? "" :
+                                props.section === null ? "" :
                                     <SectionPanel
-                                        panelTitle={this.state.panelTitle}
-                                        section={this.state.section}
-                                        ref = {this.curSectionPanel}
+                                        panelTitle={panelTitle}
+                                        section={section}
+                                        ref={curSectionPanel}
                                         
                                     />
                             }
 
-                            {this.props.Main}
+                            {props.Main}
                         </Col>
                     </Row>
 
                 </Col>
 
             </Row>
-        )
-    }
+        
+    )
 }
 
+
+export default Sidebar
