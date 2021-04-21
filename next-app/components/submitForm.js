@@ -1,14 +1,46 @@
-import{ButtonP, FormSubmit, FormDelete} from "reactstrap-react-lib"
+import{ButtonP, FormSubmit, FormDelete, SectioPanel,Sidebar} from "reactstrap-react-lib"
 import React,{useState} from 'react'
 import {Container, Row, Col, FormGroup, Input, Label} from "reactstrap"
 
 
 
+
 function submitForm() {
-    const iObj = {firstName:"", lastName : ""}
+    const iObj = {firstName:"", lastName : "", email : ""}
     const [obj, setObj] = useState(iObj)
 
+    const Employee =[
 
+        {name : "create", link : "/employee/create"},
+        {name : "edit", link : "/employee/edit"},
+        {name : "delete", link : "/employee/delete"},
+                    ]
+    const Shifts = [
+        {name : "create", link : "/shifts/create"},
+        {name : "edit", link : "/shifts/edit"},
+        {name : "delete", link : "/shifts/delete"},
+    ]
+
+    const Roster = [
+        {name : "create", link : "/shifts/create"},
+        {name : "edit", link : "/shifts/edit"},
+        {name : "delete", link : "/shifts/delete"},
+    ]
+
+    const Onboarding = [
+        {name : "create", link : "/shifts/create"},
+        {name : "edit", link : "/shifts/edit"},
+        {name : "delete", link : "/shifts/delete"},
+    ]
+
+
+   const  section: = [
+        {title : "Employee",sectionElements : Employee},
+        {title : "Shifts", sectionElements : Shifts},
+        {title : "Roster", sectionElements : Roster},
+        {title : "Onboarding", sectionElements : Onboarding}
+
+    ]
 
     return (
         <Container>
@@ -27,6 +59,10 @@ function submitForm() {
                             <FormGroup>
                                 <Label>lastName</Label>
                                 <Input type="text" value={obj.lastName} onChange={(e)=>setObj({...obj, lastName : e.target.value})} required={true}/>
+                            </FormGroup>
+                            <FormGroup>
+                                <Label>email</Label>
+                                <Input type="email" value={obj.email} onChange={(e)=>setObj({...obj, email : e.target.value})} required={true}/>
                             </FormGroup>
 
                         </>
@@ -54,7 +90,7 @@ function submitForm() {
                         return ""
                     }}
 
-                    method={"PUT"}
+                    reset={()=>setObj(iObj)}
                     AxiosRequestConfig={{}}
                 
                 />
@@ -78,11 +114,43 @@ function submitForm() {
                             return err.response.data
                         }}
 
-                        method={"DELETE"}
+                        
+                     
                     
                     />
                 </Col>
             </Row>
+                          {/* Section Panel */}
+            <Row>
+                <Col>
+            
+ 
+                {/* <SectioPanel
+                    panelTitle={"Employee"}
+                    section = {[
+                        {title : "Employee",sectionElements : Employee},
+                        {title : "Shifts", sectionElements : Shifts},
+                        {title : "Roster", sectionElements : Roster},
+                        {title : "Onboarding", sectionElements : Onboarding}
+                    ]}
+                /> */}
+
+                    <Sidebar
+                        Main ={<h3>Umesh </h3>}
+                        orgName = "JJH Hubli"
+                        userName = "umesh"
+                        siderBarLinks ={[
+                            {name : "Zoho", link : "/admin/Zoho"},
+                            {name : "Employee", panel: {"panelTitle": "Employee" , "section" :  section }}
+                        ]}
+
+
+                    />
+                
+
+                </Col>
+            </Row>
+        
         </Container>
 
         
