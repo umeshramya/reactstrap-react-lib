@@ -32,6 +32,7 @@ export interface sectionEach {
     * 
   */
   section: sectionEach[] | null;
+  
 }
 
 interface State {
@@ -45,7 +46,7 @@ interface State {
  */
 export default class SectionPanel extends Component<PanelProps, State> {
   state = {
-    isOpen: true,
+    isOpen: false,
   };
 
  panelToggel = (): void =>this.setState({ ...this.state, isOpen: !this.state.isOpen });
