@@ -1,4 +1,4 @@
-import React, {Component,useState, useRef}  from 'react'
+import React, {Component,useState, useRef, ReactElement}  from 'react'
 import SectionPanel, { PanelProps, sectionEach } from "./SectionPanel"
 import { Row, Col } from "reactstrap"
 import { useRouter } from 'next/router'
@@ -9,16 +9,16 @@ interface sidebarLink {
     /**name diplayed in the sidebar */
     name: string;
     /**react-icons as component */
-    icon: Component;
+    icon?: any;
     /**sectionpanel or link to be shown on click */
     panel?: PanelProps
     link?: string;
 }
 
 
-interface Props extends PanelProps {
+interface Props{
     /** Main compone nt to be displayed */
-    Main: Component;
+    Main: ReactElement;
     /**orgnization name to be displayed above in sidebar */
     orgName?: string;
     /**user name as string */
@@ -155,13 +155,13 @@ const Sidebar = (props: Props) => {
                         {/* Main area */}
                         <Col sm={12}>
                             {
-                                props.section === null ? "" :
-                                    <SectionPanel
-                                        panelTitle={panelTitle}
-                                        section={section}
-                                        ref={curSectionPanel}
-                                        
-                                    />
+
+                                <SectionPanel
+                                    panelTitle={panelTitle}
+                                    section={section}
+                                    ref={curSectionPanel}
+                                    
+                                />
                             }
 
                             {props.Main}

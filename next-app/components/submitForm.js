@@ -34,7 +34,7 @@ function submitForm() {
     ]
 
 
-   const  section: = [
+   const  section  = [
         {title : "Employee",sectionElements : Employee},
         {title : "Shifts", sectionElements : Shifts},
         {title : "Roster", sectionElements : Roster},
