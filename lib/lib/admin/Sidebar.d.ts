@@ -1,5 +1,5 @@
-import { Component } from 'react';
-import { PanelProps } from "./SectionPanel";
+import React, { Component } from 'react';
+import SectionPanel, { PanelProps } from "./SectionPanel";
 /** These are the items which will displayed insde side bar */
 interface sidebarLink {
     /**name diplayed in the sidebar */
@@ -27,6 +27,9 @@ interface State {
     section: PanelProps["section"];
 }
 export default class Sidebar extends Component<Props, State> {
+    curSectionPanel: React.RefObject<SectionPanel>;
+    router: import("next/router").NextRouter;
+    constructor(props: Props);
     state: {
         panelTitle: string;
         section: null;
