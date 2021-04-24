@@ -68,8 +68,8 @@ function submitForm() {
                         </>
                     }
 
-                    curObj = {["PUT", obj]}
-                    curUri = "api/submit-form"
+                    curObj = {["ACTION", obj]}
+                    curUri = "api/submit-form/"
 
                     successCallBack = {(res)=>res.data.mes}
 
