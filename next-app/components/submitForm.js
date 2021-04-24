@@ -8,6 +8,7 @@ import {Container, Row, Col, FormGroup, Input, Label} from "reactstrap"
 function submitForm() {
     const iObj = {firstName:"", lastName : "", email : ""}
     const [obj, setObj] = useState(iObj)
+    const [submitTrigger, setSubmitTrigger] = useState(false)
 
     const Employee =[
 
@@ -90,10 +91,14 @@ function submitForm() {
                         return ""
                     }}
 
+                    triggerSubmit={submitTrigger}
+                    
                     reset={()=>setObj(iObj)}
                     AxiosRequestConfig={{}}
                 
                 />
+
+                <ButtonP text="Submit Trigger" onClick={()=>setSubmitTrigger(!submitTrigger)}/>
 
                 </Col>
             </Row>

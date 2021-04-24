@@ -50,6 +50,14 @@ export interface propMaster {
      * AxiosRequestConfig optional config to be passed in the api call
      */
     AxiosRequestConfig?:AxiosRequestConfig
+    /**
+     * This iis used as toggle, whenever this prop chnages it calls the submit form function
+     */
+    triggerSubmit ?:boolean
+    /**
+     * This iis used as toggle, whenever this prop chenges it triggeers reset form fucntoins
+     */
+    triggerReset ?:boolean
     
     
 

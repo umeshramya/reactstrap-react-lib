@@ -1,5 +1,5 @@
 import axios, { AxiosResponse } from 'axios'
-import React, {useRef, useEffect, ReactFragment} from 'react'
+import React, {useRef, useEffect, ReactFragment, useState} from 'react'
 import {Container, Row, Col, Form } from "reactstrap"
 import ButtonP from "../ButtonP"
 import AlertP from "../AlertP"
@@ -13,10 +13,12 @@ interface Props extends propMaster{
   Inputs:ReactFragment
 }
 
-const  FormSubmit = ({curObj,curUri,Inputs, reset=()=>{} , onSuccess, onError, successCallBack, errorCallback, validation=()=>"", AxiosRequestConfig={}}:Props)=> {
+const  FormSubmit = ({curObj,curUri,Inputs, reset=()=>{} , onSuccess, onError, successCallBack, errorCallback, validation=()=>"", AxiosRequestConfig={}, triggerSubmit, triggerReset}:Props)=> {
     const butRef            = useRef<ButtonP>(null)
     const modRef            = useRef<ModelP>(null)
     const alerRef           = useRef<AlertP>(null)
+    const [triggerSubmitCount, setTriggerSubmitCount] = useState(0)
+    const [triggerResetCount, setTriggerResetCount] = useState(0)
 
 
     useEffect(() => {
@@ -26,9 +28,24 @@ const  FormSubmit = ({curObj,curUri,Inputs, reset=()=>{} , onSuccess, onError, s
         }
     }, [curObj])
 
+    useEffect(() => {
+        if(triggerSubmitCount > 0){
+            submitHandle(curUri, curObj, onSuccess, onError,validation);
+        }
+        setTriggerSubmitCount(triggerSubmitCount + 1)
+        return () => { }
+    }, [triggerSubmit])
 
+    useEffect(() => {
+        if(triggerResetCount > 0){
+            reset();
+        }
+
+        setTriggerResetCount(triggerResetCount + 1)
+        return () => {}
+    }, [triggerReset])
   
-       const  submitHandle =  async(_curUri:string, _curObj:typeof curObj, _onSuccess:typeof onSuccess, _onError:typeof onError, _validation:typeof validation)=>{
+    const  submitHandle =  async(_curUri:string, _curObj:typeof curObj, _onSuccess:typeof onSuccess, _onError:typeof onError, _validation:typeof validation)=>{
            let validationErrorMessage:string = "";
 
          
@@ -79,9 +96,6 @@ const  FormSubmit = ({curObj,curUri,Inputs, reset=()=>{} , onSuccess, onError, s
                 
             }
         }
-
-
-
     return (
         <Container>
             <Row>

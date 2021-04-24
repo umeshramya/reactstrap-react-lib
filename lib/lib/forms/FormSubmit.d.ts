@@ -4,6 +4,6 @@ interface Props extends propMaster {
     /**This is Form input elements. do not add Form elemet thise get rendered inside the form itself */
     Inputs: ReactFragment;
 }
-declare const FormSubmit: ({ curObj, curUri, Inputs, reset, onSuccess, onError, successCallBack, errorCallback, validation, AxiosRequestConfig }: Props) => JSX.Element;
+declare const FormSubmit: ({ curObj, curUri, Inputs, reset, onSuccess, onError, successCallBack, errorCallback, validation, AxiosRequestConfig, triggerSubmit, triggerReset }: Props) => JSX.Element;
 export default FormSubmit;
 //# sourceMappingURL=FormSubmit.d.ts.map
