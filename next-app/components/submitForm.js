@@ -5,7 +5,8 @@ import {Container, Row, Col, FormGroup, Input, Label} from "reactstrap"
 
 
 
-function submitForm() {
+function submitForm(props) {
+
     const iObj = {firstName:"", lastName : "", email : ""}
     const [obj, setObj] = useState(iObj)
     const [submitTrigger, setSubmitTrigger] = useState(false)
@@ -70,7 +71,7 @@ function submitForm() {
                     }
 
                     curObj = {["ACTION", obj]}
-                    curUri = "api/submit-form/"
+                    curUri = ""
 
                     successCallBack = {(res)=>res.data.mes}
 
@@ -80,14 +81,14 @@ function submitForm() {
                     }}
 
                     onError={(err)=>{
-                        console.log(err)
+
                         return "error ocuu"
                     }
                     }
 
                     validation ={()=>{
                         // return "validation error"
-                        console.log(obj)
+                       
                         return ""
                     }}
 

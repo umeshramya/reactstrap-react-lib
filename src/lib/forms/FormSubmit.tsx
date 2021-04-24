@@ -75,6 +75,8 @@ const  FormSubmit = ({curObj,curUri,Inputs, reset=()=>{} , onSuccess, onError, s
                 }else if(curObj[0] === "ACTION"){
                     // code to use router to push the page said
                     router.push(`${_curUri}/?${queryString.stringify(_curObj[1])}`);
+                    butRef.current?.hideSpin();
+                    alerRef.current?.alertSuccess("Successfully completed action");
                     return;
                 }else{
                     // default method POST
