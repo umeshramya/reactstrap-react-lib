@@ -1,10 +1,12 @@
 import axios, { AxiosResponse } from 'axios'
 import React, {useRef, useEffect, ReactFragment, useState} from 'react'
 import {Container, Row, Col, Form } from "reactstrap"
+import {useRouter} from "next/router"
 import ButtonP from "../ButtonP"
 import AlertP from "../AlertP"
 import ModelP from "../ModelP"
 import {propMaster} from "../Interfaces/interfaces"
+import queryString from "querystring"
 
 
 
@@ -20,6 +22,7 @@ const  FormSubmit = ({curObj,curUri,Inputs, reset=()=>{} , onSuccess, onError, s
     const [triggerSubmitCount, setTriggerSubmitCount] = useState(0)
     const [triggerResetCount, setTriggerResetCount] = useState(0)
 
+    const router            = useRouter();
 
     useEffect(() => {
         alerRef.current?.alertLight();
@@ -69,6 +72,10 @@ const  FormSubmit = ({curObj,curUri,Inputs, reset=()=>{} , onSuccess, onError, s
                     res = await axios.delete(_curUri, AxiosRequestConfig).then(res=>res);
                 }else if(_curObj[0] === "PUT"){
                     res= await axios.put(_curUri, _curObj[1], AxiosRequestConfig).then(res=>res);
+                }else if(curObj[0] === "ACTION"){
+                    // code to use router to push the page said
+                    router.push(`${_curUri}/?${queryString.stringify(_curObj[1])}`);
+                    return;
                 }else{
                     // default method POST
                     res = await axios.post(_curUri, _curObj[1], AxiosRequestConfig).then(res=>res);
