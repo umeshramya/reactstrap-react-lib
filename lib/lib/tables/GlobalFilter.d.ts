@@ -1,8 +1,6 @@
-/// <reference types="react" />
+import React from 'react';
 interface Props {
-    filter: any;
-    setFilter: Function;
 }
-export declare const GlobalFilter: ({ filter, setFilter }: Props) => JSX.Element;
-export {};
+declare const _default: React.ForwardRefExoticComponent<Props & React.RefAttributes<unknown>>;
+export default _default;
 //# sourceMappingURL=GlobalFilter.d.ts.map

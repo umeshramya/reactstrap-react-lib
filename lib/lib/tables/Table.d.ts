@@ -1,13 +1,4 @@
 import { ReactElement } from 'react';
-interface column {
-    Header: string;
-    accessor: string;
-    Cell?: ({}: {}) => ReactElement;
-}
-interface Props {
-    columns: column[];
-    data: [];
-}
+import { Props } from "./index";
 export default function TableCompenent({ columns, data }: Props): ReactElement;
-export {};
 //# sourceMappingURL=Table.d.ts.map
