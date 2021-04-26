@@ -106,7 +106,21 @@ const  FormSubmit = ({curObj,curUri,Inputs, reset=()=>{} , onSuccess, onError, s
             }
         }
     return (
-        <Container>
+        <>
+            <style>
+                {
+                    `
+                        .required{
+                        color :brown;
+                        }
+                        .required::after{
+                        content: " #";
+                        }
+                            
+                    `
+                }
+            </style>
+
             <Row>
                 <Col>
                 <ModelP 
@@ -149,7 +163,9 @@ const  FormSubmit = ({curObj,curUri,Inputs, reset=()=>{} , onSuccess, onError, s
                 </Col>
             </Row>
 
-        </Container>
+        </>
+
+ 
     )
 }
 

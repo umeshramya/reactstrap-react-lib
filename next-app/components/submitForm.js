@@ -54,7 +54,7 @@ function submitForm(props) {
                     Inputs={
                         <>
                             <FormGroup>
-                                <Label>Firtname</Label>
+                                <Label className="required">Firtname</Label>
                                 <Input type="text" value={obj.firstName} onChange={(e)=>setObj({...obj, firstName : e.target.value})} required={true}/>
                             </FormGroup>
                             
