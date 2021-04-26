@@ -1,10 +1,10 @@
-import React, { ReactElement } from 'react'
+import React, { Children, ReactElement } from 'react'
 import {Table} from "reactstrap"
 
-
 interface column{
-    header:string;
-    accassor:string;
+    Header:string;
+    accessor:string;
+    Cell ?:({})=>ReactElement;
 }
 
 interface Props {
@@ -12,18 +12,34 @@ interface Props {
     data:[]
 }
 
-export default function TableCompenent({columns, data}: Props): ReactElement {
+
+
+export default function TableCompenent({columns, data}: Props):ReactElement{
+
+const TD = (row:any, col:column)=>{
+        let ret:any;
+        let value = row[col.accessor];
+        if(col.Cell){
+            ret=col.Cell({value})
+        }else{
+         ret = value
+        }
+        return ret
+        
+}
+
+
     return (
 
         <>
-            <Table>
+            <Table hover responsive bordered>
                 <thead>
                     <tr>
                         {
                            columns.map((col, index)=>{
                                return(
                                    <th key={index}>
-                                        <strong>{col.header}</strong>
+                                        <strong>{col.Header}</strong>
                                    </th>
                                )
                            })
@@ -39,9 +55,13 @@ export default function TableCompenent({columns, data}: Props): ReactElement {
                                         columns.map((col, rindex)=>{
                                             return(
                                                 <td key={rindex}>
-                                                    {
-                                                        row[col.accassor]
+                                                   
+                                                    {   
+                                                        TD(row,col)
+                                                       
                                                     }
+                                                    
+
                                                 </td>
                                             )
                                         })

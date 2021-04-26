@@ -2,7 +2,6 @@ import { ReactElement } from 'react';
 interface column {
     Header: string;
     accessor: string;
-    Cell?: ({}: {}) => ReactElement;
 }
 interface Props {
     columns: column[];
