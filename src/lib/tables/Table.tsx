@@ -1,6 +1,7 @@
 import React from 'react'
 
-import { Column, useTable, } from 'react-table'
+import { useTable} from 'react-table'
+
 import {Table} from "reactstrap"
 
 interface Props{
@@ -17,10 +18,14 @@ function TableCompenent({ columns, data }:Props) {
     headerGroups,
     rows,
     prepareRow,
+
+    
   } = useTable({
     columns,
     data,
-  })
+  }, )
+
+
 
   // Render the UI for your table
   return (
