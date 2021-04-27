@@ -1,6 +1,5 @@
 import React, { ReactElement, useState } from 'react'
 import {Row, Col, FormGroup, Input} from "reactstrap"
-import GlobalFilter from "./GlobalFilter"
 import TableCompenent from "./Table"
 
 /**
@@ -57,10 +56,12 @@ export default function index({columns, data}: Props): ReactElement {
     return (
         <>
             <Row>
-                <Col>
+                <Col sm={12} md={6}>
                     <FormGroup>
                         <Input type="text" value={search} onChange={(e)=>SerachHandle(e)} placeholder="Search" />
                     </FormGroup>
+                </Col>
+                <Col sm={12} md={6}>
                 </Col>
             </Row>
             <TableCompenent
