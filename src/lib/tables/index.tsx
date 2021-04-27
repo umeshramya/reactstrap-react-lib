@@ -37,15 +37,18 @@ export default function index({columns, data}: Props): ReactElement {
         let keys = columns.map(col=>col.accessor);
 
 
-        let tempData = data.filter(o=>{
-            let oString = `${Object.values(o).toString()}`;
-
-
-          if(oString.toLowerCase().search(value.trim().toString().toLowerCase()) >= 0){
-             return o;
-          }
-
-        }) as typeof data
+        let tempData =data.filter(o=>{
+            let oString="";
+            for (const key of keys){
+                oString = `${oString},${o[key]}`  
+            }
+            if(oString.toLowerCase().search(value.trim().toString().toLowerCase()) >= 0){
+                return o;
+             }
+        
+        
+        }) as []
+         
    
 
         setstData(tempData)

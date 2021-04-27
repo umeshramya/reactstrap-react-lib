@@ -6,8 +6,22 @@ const data  = [
     { id : 5, name : "Nischita", age : 11},
 ]
 
+let keys = ["id", "name"];
 
-let keys = Object.keys(data[0])
+let obj={};
+let value = "pr"
+let temp = data.filter(o=>{
+    let oString="";
+    for (const key of keys){
+        oString = `${oString},${o[key]}`  
+    }
+    if(oString.toLowerCase().search(value.trim().toString().toLowerCase()) >= 0){
+        return o;
+     }
 
-let f = data.filter(d=>d[keys[0]]==2)
-console.log(f)
+
+})
+
+console.log(temp)
+
+
