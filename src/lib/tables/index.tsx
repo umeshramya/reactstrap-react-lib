@@ -39,9 +39,9 @@ export default function index({columns, data}: Props): ReactElement {
 
         // console.log(Object.values(data))
         let tempData = data.filter(o=>{
-            let oString = Object.values(o).toString();
+            let oString =`${Object.values(o).toString()}`;
             // console.log(oString)
-          if(oString.toLowerCase().search(value.toString().toLowerCase())>=0){
+          if(oString.toLowerCase().search(value.toString().toLowerCase()) >= 0){
              return o;
           }
 
