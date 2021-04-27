@@ -39,14 +39,16 @@ export default function index({columns, data}: Props): ReactElement {
 
         // console.log(Object.values(data))
         let tempData = data.filter(o=>{
-            let curVArray = Object.values(o);
-            if(curVArray.includes(o)){
-                return o;
-            }
-        }) 
-        console.log(tempData)
+            let oString = Object.values(o).toString();
+            // console.log(oString)
+          if(oString.toLowerCase().search(value.toString().toLowerCase())>=0){
+             return o;
+          }
 
-        // setstData(tempData)
+        }) as typeof data
+   
+
+        setstData(tempData)
 
 
     }
