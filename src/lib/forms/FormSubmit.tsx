@@ -2,9 +2,9 @@ import axios, { AxiosResponse } from 'axios'
 import React, {useRef, useEffect, ReactFragment, useState} from 'react'
 import {Container, Row, Col, Form } from "reactstrap"
 import {useRouter} from "next/router"
-import ButtonP from "../ButtonP"
-import AlertP from "../AlertP"
-import ModelP from "../ModelP"
+import ButtonP from "../units/ButtonP"
+import AlertP from "../units/AlertP"
+import ModelP from "../units/ModelP"
 import {propMaster} from "../Interfaces/interfaces"
 import queryString from "querystring"
 

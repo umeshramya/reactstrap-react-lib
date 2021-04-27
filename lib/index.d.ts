@@ -1,12 +1,20 @@
-import AlertP from "./lib/AlertP";
-import ButtonP from "./lib/ButtonP";
-import ModelP from "./lib/ModelP";
+import AlertP from "./lib/units/AlertP";
+import ButtonP from "./lib/units/ButtonP";
+import ModelP from "./lib/units/ModelP";
+import LinkP from "./lib/units/LinkP";
 import FormSubmit from "./lib/forms/FormSubmit";
 import FormDelete from "./lib/forms/FormDelete";
-import Table from "./lib/tables/";
+import Table, { column } from "./lib/tables/";
 import SectioPanel from "./lib/admin/SectionPanel";
 import Sidebar from "./lib/admin/Sidebar";
-import { sectionEach, sectionElements, PanelProps } from "./lib/admin/SectionPanel";
-export { AlertP, ButtonP, ModelP, FormDelete, FormSubmit, Table, SectioPanel, Sidebar };
-export type { sectionEach, sectionElements, PanelProps };
+import { sectionEach, sectionElements, panelProps } from "./lib/admin/SectionPanel";
+export { AlertP, ButtonP, ModelP, LinkP };
+export { FormSubmit };
+export { FormDelete };
+export { Sidebar, SectioPanel };
+export { Table };
+/**
+ * interfaces
+ */
+export type { sectionEach, sectionElements, panelProps, column };
 //# sourceMappingURL=index.d.ts.map

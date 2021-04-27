@@ -1,9 +1,9 @@
 import axios, {AxiosResponse} from 'axios'
 import React, {useRef, useEffect} from 'react'
 import {Row, Col, Form} from "reactstrap"
-import ButtonP from "../ButtonP"
-import AlertP from "../AlertP"
-import ModelP from "../ModelP"
+import ButtonP from "../units/ButtonP"
+import AlertP from "../units/AlertP"
+import ModelP from "../units/ModelP"
 import {propMaster} from "../Interfaces/interfaces"
 
 

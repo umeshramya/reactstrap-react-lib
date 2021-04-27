@@ -1,5 +1,5 @@
 import React, {Component,useState, useRef, ReactElement}  from 'react'
-import SectionPanel, { PanelProps, sectionEach } from "./SectionPanel"
+import SectionPanel, { panelProps, sectionEach } from "./SectionPanel"
 import { Row, Col } from "reactstrap"
 import { useRouter } from 'next/router'
 
@@ -11,7 +11,7 @@ interface sidebarLink {
     /**react-icons as component */
     icon?: any;
     /**sectionpanel or link to be shown on click */
-    panel?: PanelProps
+    panel?: panelProps
     link?: string;
 }
 
@@ -32,8 +32,8 @@ const Sidebar = (props: Props) => {
     const   router = useRouter();
     const curSectionPanel:any= useRef()
 
-    let initPanelTitle:PanelProps["panelTitle"]="";
-    let initSection:PanelProps["section"] = [];
+    let initPanelTitle:panelProps["panelTitle"]="";
+    let initSection:panelProps["section"] = [];
 
     const [panelTitle, setpanelTitle] = useState(initPanelTitle);
     const [section, setSection] = useState(initSection);

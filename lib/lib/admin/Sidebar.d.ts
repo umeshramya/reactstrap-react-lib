@@ -1,5 +1,5 @@
 import { ReactElement } from 'react';
-import { PanelProps } from "./SectionPanel";
+import { panelProps } from "./SectionPanel";
 /** These are the items which will displayed insde side bar */
 interface sidebarLink {
     /**name diplayed in the sidebar */
@@ -7,7 +7,7 @@ interface sidebarLink {
     /**react-icons as component */
     icon?: any;
     /**sectionpanel or link to be shown on click */
-    panel?: PanelProps;
+    panel?: panelProps;
     link?: string;
 }
 interface Props {

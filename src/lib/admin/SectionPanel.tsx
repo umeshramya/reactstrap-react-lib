@@ -2,8 +2,11 @@ import React, { Component } from "react";
 import { Row, Col, Jumbotron, Collapse } from "reactstrap";
 import * as IoIcons from "react-icons/io"
 import Link from "next/link";
-import ButtonP from "../ButtonP";
+import ButtonP from "../units/ButtonP"
 
+/**
+ * section element in each ectionEach of sectionPanel of sidebar or admin
+ */
 export interface sectionElements {
   /**name o each elements */
   name: string;
@@ -11,6 +14,9 @@ export interface sectionElements {
   link: string;
 }
 
+/**
+ * Each section of section panel of sidebar or admin 
+ */
 export interface sectionEach {
   /**title of section */
   title: string;
@@ -22,8 +28,10 @@ export interface sectionEach {
     link: string;
   }[];
 }
-
- export interface PanelProps {
+/**
+ * props in section panel of sidebar or admin 
+ */
+ export interface panelProps {
   /** Title is panel title*/
   panelTitle: string;
   /*
@@ -44,7 +52,7 @@ interface State {
  * @Section  This props is array of section elements each  section eleemnts is array of name and link property. name is name to dispolyed over the link
  * 
  */
-export default class SectionPanel extends Component<PanelProps, State> {
+export default class SectionPanel extends Component<panelProps, State> {
   state = {
     isOpen: false,
   };
