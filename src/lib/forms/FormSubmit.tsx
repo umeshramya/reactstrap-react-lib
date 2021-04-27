@@ -107,7 +107,7 @@ const  FormSubmit = ({curObj,curUri,Inputs, reset=()=>{} , onSuccess, onError, s
         }
     return (
         <>
-            <style>
+            {/* <style>
                 {
                     `
                         .required{
@@ -119,7 +119,7 @@ const  FormSubmit = ({curObj,curUri,Inputs, reset=()=>{} , onSuccess, onError, s
                             
                     `
                 }
-            </style>
+            </style> */}
 
             <Row>
                 <Col>
