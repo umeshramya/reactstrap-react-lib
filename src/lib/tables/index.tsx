@@ -41,6 +41,7 @@ export default function index({columns, data}: Props): ReactElement {
         let tempData = data.filter(o=>{
             let oString = `${Object.values(o).toString()}`;
 
+
           if(oString.toLowerCase().search(value.trim().toString().toLowerCase()) >= 0){
              return o;
           }
