@@ -32,16 +32,16 @@ export default function index({columns, data}: Props): ReactElement {
     const [stData, setstData] = useState(data)
 
     const SerachHandle = (e:any)=>{
-        let value = e.target.value
+        let value = e.target.value;
         setSearch(value);
         //code here for filter
         let keys = columns.map(col=>col.accessor);
 
-        // console.log(Object.values(data))
+
         let tempData = data.filter(o=>{
-            let oString =`${Object.values(o).toString()}`;
-            // console.log(oString)
-          if(oString.toLowerCase().search(value.toString().toLowerCase()) >= 0){
+            let oString = `${Object.values(o).toString()}`;
+
+          if(oString.toLowerCase().search(value.trim().toString().toLowerCase()) >= 0){
              return o;
           }
 
@@ -58,7 +58,7 @@ export default function index({columns, data}: Props): ReactElement {
             <Row>
                 <Col>
                     <FormGroup>
-                        <Input type="search" value={search} onChange={(e)=>SerachHandle(e)} placeholder="Search" />
+                        <Input type="text" value={search} onChange={(e)=>SerachHandle(e)} placeholder="Search" />
                     </FormGroup>
                 </Col>
             </Row>
