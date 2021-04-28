@@ -13,14 +13,18 @@ export default function table() {
                return(
                   <span onClick={()=>router.push(`/auth/${value}`)}>{value}</span>
                )
-            }
+            },
+    
         },
         {
             Header : "Name",
-            accessor : "name"
+            accessor : "name",
+
+            
         },{
             Header : "Age",
-            accessor : "age"
+            accessor : "age",
+
         }
     ]
 
@@ -39,6 +43,9 @@ export default function table() {
                             <Table
                                 columns={columns}
                                 data={data}
+                                filter= "Both"
+                                sort = {false}
+                                
 
                             />
                         </Col>

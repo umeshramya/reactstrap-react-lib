@@ -6,22 +6,15 @@ const data  = [
     { id : 5, name : "Nischita", age : 11},
 ]
 
-let keys = ["id", "name"];
+let keys = ["id", "name", "age"];
 
 let obj={};
-let value = "pr"
-let temp = data.filter(o=>{
-    let oString="";
-    for (const key of keys){
-        oString = `${oString},${o[key]}`  
-    }
-    if(oString.toLowerCase().search(value.trim().toString().toLowerCase()) >= 0){
-        return o;
-     }
 
 
+keys.forEach(key =>{
+    obj[key]= ""
 })
 
-console.log(temp)
+console.log(obj)
 
 

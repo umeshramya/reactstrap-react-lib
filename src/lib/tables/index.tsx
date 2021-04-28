@@ -1,4 +1,4 @@
-import React, { ReactElement, useState } from 'react'
+import React, { ReactElement, useState, useEffect } from 'react'
 import {Row, Col, FormGroup, Input} from "reactstrap"
 import TableCompenent from "./Table"
 import {FaSort} from "react-icons/fa"
@@ -20,20 +20,25 @@ import {FaSort} from "react-icons/fa"
      */
     Cell ?:(value:any)=>ReactElement;
     /** sort thr column */
-    sort ?: boolean;
-    /**filer by column */
-    filter ?:ReactElement
+
 }
 
 export interface Props {
-    columns:column[]
-    data:[]
+    columns:column[];
+    data:[];
+    filter : "Global" | "Column" | "Both" | "None"
+    sort :boolean;
 }
 
 
-export default function index({columns, data}: Props): ReactElement {
+export default function index({columns, data, filter, sort=false}: Props): ReactElement {
     const [search, setSearch] = useState("")
-    const [stData, setstData] = useState(data)
+    const [stData, setstData] = useState<typeof data>([])
+
+    useEffect(() => {
+        setstData(data)
+        return () => {}
+    }, [data])
 
     const SerachHandle = (e:any)=>{
         let value = e.target.value;
@@ -62,19 +67,26 @@ export default function index({columns, data}: Props): ReactElement {
     }
 
     return (
-        <>
+        <>  
             <Row>
                 <Col sm={12} md={6}>
-                    <FormGroup>
-                        <Input type="text" value={search} onChange={(e)=>SerachHandle(e)} placeholder="Search" />
-                    </FormGroup>
+                    {
+                        filter == "Global"  ||  filter == "Both" ? 
+                        <FormGroup>
+                            <Input type="text" value={search} onChange={(e)=>SerachHandle(e)} placeholder="Search" />
+                        </FormGroup> : ""
+                    }
                 </Col>
                 <Col sm={12} md={6}>
+                    {/* Pagination code here */}
                 </Col>
             </Row>
+            
             <TableCompenent
                 data = {stData}
                 columns= {columns}
+                filter = {filter}
+                sort = {sort}
             />
         </>
     )

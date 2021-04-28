@@ -15,14 +15,12 @@ export interface column {
      * function component to be passed for display in the cell
      */
     Cell?: (value: any) => ReactElement;
-    /** sort thr column */
-    sort?: boolean;
-    /**filer by column */
-    filter?: ReactElement;
 }
 export interface Props {
     columns: column[];
     data: [];
+    filter: "Global" | "Column" | "Both" | "None";
+    sort: boolean;
 }
-export default function index({ columns, data }: Props): ReactElement;
+export default function index({ columns, data, filter, sort }: Props): ReactElement;
 //# sourceMappingURL=index.d.ts.map
