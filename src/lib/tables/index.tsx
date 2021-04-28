@@ -1,6 +1,7 @@
 import React, { ReactElement, useState } from 'react'
 import {Row, Col, FormGroup, Input} from "reactstrap"
 import TableCompenent from "./Table"
+import {FaSort} from "react-icons/fa"
 
 /**
  * This column of table whoose array has to be passed as defination of table by user
@@ -18,6 +19,10 @@ import TableCompenent from "./Table"
      * function component to be passed for display in the cell 
      */
     Cell ?:(value:any)=>ReactElement;
+    /** sort thr column */
+    sort ?: boolean;
+    /**filer by column */
+    filter ?:ReactElement
 }
 
 export interface Props {

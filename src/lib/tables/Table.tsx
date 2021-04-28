@@ -1,5 +1,5 @@
-import React, {  ReactElement} from 'react'
-import {Table} from "reactstrap"
+import React, {  ReactElement, useEffect, useState} from 'react'
+import {Table, Row, Col, Input} from "reactstrap"
 import {Props, column} from "./index"
 
 
@@ -7,6 +7,13 @@ import {Props, column} from "./index"
 
 
 export default function TableCompenent({columns, data}: Props):ReactElement{
+
+
+    const [stData, setstData] = useState([])
+    useEffect(() => {
+        setstData(data);
+        return () => {}
+    }, [data])
 
 
     const TD = (row:any, col:column)=>{
@@ -22,6 +29,13 @@ export default function TableCompenent({columns, data}: Props):ReactElement{
     }
 
 
+    const filterHandle =(e:any, accessor:string)=>{
+            let tempData = stData.filter(o=>{
+                
+            })
+    }
+
+
     return (
         <>  
 
@@ -32,7 +46,20 @@ export default function TableCompenent({columns, data}: Props):ReactElement{
                            columns.map((col, index)=>{
                                return(
                                    <th key={index}>
-                                        <strong>{col.Header}</strong>
+                                       <Row>
+                                           <Col>
+                                           <strong>{col.Header}</strong>
+                                           </Col>
+                                       </Row>
+                                       {
+                                           col.filter ? 
+                                           <Row>
+                                               <Col>
+                                                 <Input type="text" onChange={(e)=>filterHandle(e, col.accessor)} />
+                                               </Col>
+                                           </Row> : ""
+                                       }
+                                        
                                    </th>
                                )
                            })
@@ -41,7 +68,7 @@ export default function TableCompenent({columns, data}: Props):ReactElement{
                 </thead>
                 <tbody>
                     {
-                        data.map((row, index)=>{
+                        stData.map((row, index)=>{
                             return(
                                 <tr key={index}>
                                     {

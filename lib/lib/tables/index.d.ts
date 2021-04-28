@@ -15,6 +15,10 @@ export interface column {
      * function component to be passed for display in the cell
      */
     Cell?: (value: any) => ReactElement;
+    /** sort thr column */
+    sort?: boolean;
+    /**filer by column */
+    filter?: ReactElement;
 }
 export interface Props {
     columns: column[];
