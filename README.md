@@ -78,6 +78,9 @@ function submitForm(props) {
                     AxiosRequestConfig={{//axios config setting}}
                 
                 />
+                </Col>
+            </Row>
+         </Container>
       }
 
 
