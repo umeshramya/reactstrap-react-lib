@@ -1,8 +1,20 @@
+#Table
+
+```javascript
+// sampla data
 import React from 'react'
 import {Row, Col, Container} from "reactstrap"
 import {LinkP, Table} from "reactstrap-react-lib"
 
 export default function table() {
+
+        const data  = [
+        { id : 1, name : "umesh", age : 53},
+        { id : 2, name : "Ramya", age : 38},
+        { id : 3, name : "Pradyumna", age : 21},
+        { id : 4, name : "Prajnya", age : 21},
+        { id : 5, name : "Nischita", age : 11},
+    ]
 
     const columns = [
         {
@@ -23,13 +35,7 @@ export default function table() {
         }
     ]
 
-    const data  = [
-        { id : 1, name : "umesh", age : 53},
-        { id : 2, name : "Ramya", age : 38},
-        { id : 3, name : "Pradyumna", age : 21},
-        { id : 4, name : "Prajnya", age : 21},
-        { id : 5, name : "Nischita", age : 11},
-    ]
+
     return (
         <>
             <Container>
@@ -53,3 +59,5 @@ export default function table() {
 }
 
 
+
+```
