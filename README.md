@@ -19,7 +19,8 @@ This is for submiting data to server. it has inbuilt submit button and also rese
 6. errorCalback is prop which has to passed in onError function
 
 
-## Rreact-Table
+## React-Table
+This is react-table following code shows the implimentation
 
 ```javascript
 import React from 'react'
