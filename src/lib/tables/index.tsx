@@ -20,7 +20,7 @@ import {FaSort} from "react-icons/fa"
      */
     Cell ?:(value:any)=>ReactElement;
     /** sort thr column */
-    dataType : "number" | "string" | "Date" | "boolean" | undefined 
+    dataType ?: "number" | "string" | "Date" | "boolean" | undefined 
 
 }
 /**

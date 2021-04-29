@@ -2,6 +2,8 @@ import React from 'react'
 import {Row, Col, Container} from "reactstrap"
 import {LinkP, Table} from "reactstrap-react-lib"
 
+
+
 export default function table() {
 
     const columns = [
@@ -23,7 +25,9 @@ export default function table() {
         }
         ,{
             Header : "Date",
-            accessor : "date"
+            accessor : "date",
+            Cell : ({value})=> new Date(value).toDateString()
+
         }
     ]
 
@@ -32,7 +36,7 @@ export default function table() {
         { id : 2, name : "Ramya", age : 38,     date : "1983-08-11"},
         { id : 3, name : "Pradyumna", age : 21, date : "1999-12-03"},
         { id : 4, name : "Prajnya", age : 21,   date : "1999-12-03"},
-        { id : 5, name : "Nischita", age : 11,  date : "1999-09-02"},
+        { id : 5, name : "Nischita", age : 11,  date : "1999-01-02"},
     ]
     return (
         <>
@@ -42,7 +46,7 @@ export default function table() {
                             <Table
                                 columns={columns}
                                 data={data}
-                                // filter= "Both"
+                                filter= "Both"
                                 // sort = {false}
                                 
 
