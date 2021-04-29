@@ -19,5 +19,5 @@ This is for submiting data to server. it has inbuilt submit button and also rese
 6. errorCalback is prop which has to passed in onError function
 
 
-[this react-table][./lib/tables/README.md]
+[this react-table][./src/lib/tables/README.md]
 
