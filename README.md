@@ -18,9 +18,77 @@ This is for submiting data to server. it has inbuilt submit button and also rese
 5. successCalback is prop which has to passed in onSuccess function
 6. errorCalback is prop which has to passed in onError function
 
+```javascript
+import{ButtonP, FormSubmit, FormDelete, SectioPanel,Sidebar} from "reactstrap-react-lib"
+import React,{useState} from 'react'
+import {Container, Row, Col, FormGroup, Input, Label} from "reactstrap"
+
+function submitForm(props) {
+
+    const initObj = {firstName:"", lastName : "", email : ""}//intial value sof inputs
+    const [obj, setObj] = useState(initObj)
+    return (
+        <Container>
+            {/* FormSubmit */}
+            <Row>
+                <Col>
+                
+                <FormSubmit
+                    Inputs={
+                        <>
+                            <FormGroup>
+                                <Label className="required">Firtname</Label>
+                                <Input type="text" value={obj.firstName} onChange={(e)=>setObj({...obj, firstName : e.target.value})} required={true}/>
+                            </FormGroup>
+                            
+                            <FormGroup>
+                                <Label>lastName</Label>
+                                <Input type="text" value={obj.lastName} onChange={(e)=>setObj({...obj, lastName : e.target.value})} required={true}/>
+                            </FormGroup>
+                            <FormGroup>
+                                <Label>email</Label>
+                                <Input type="email" value={obj.email} onChange={(e)=>setObj({...obj, email : e.target.value})} required={true}/>
+                            </FormGroup>
+
+                        </>
+                    }
+
+                    curObj = {["POST", obj]} //"POST , "GET", "PUT", "DELETE", "ACTON"
+                    curUri = "/api/auth/login" //login
+
+
+                    onSuccess = {(res)=>{
+                        return res.data.mes // mes is key of json sent from api
+                    }}
+
+                    onError={(err)=>{
+                        return err.response.data
+                    }
+                    }
+                    
+
+                    validation ={()=>{
+                        // return "validation error"
+                        //if no wrror return ""
+                       
+                        return ""
+                    }}
+
+  
+                    
+                    reset={()=>setObj(initObj)}// this resets the inputs to intialstate
+                    AxiosRequestConfig={{//axios config setting}}
+                
+                />
+      }
+
+
+```
+
 
 ## React-Table
-This is react-table following code shows the implimentation
+This is react-table following code shows the implimentation.
+
 
 ```javascript
 import React from 'react'
