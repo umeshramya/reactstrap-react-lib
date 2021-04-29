@@ -87,8 +87,12 @@ function submitForm(props) {
 ```
 
 
-## React-Table
-This is react-table following code shows the implimentation.
+## React-Table 
+### This is react-table following code shows the implimentation.
+1. columns prop has to be assigned the way shown in code below
+2. Filter props accepts  one othe follwign strings `Filter : "Global" | "Column" | "Both" | "None"`
+3. sort prop is boolean by defualt it is true
+
 
 
 ```javascript
@@ -161,5 +165,100 @@ export default function table() {
 
 
 
+```
+## AdminPanel / Sidebar
+### This is for admin panel
+
+```javascript
+import{SectioPanel,Sidebar} from "reactstrap-react-lib"
+import React,{useState} from 'react'
+
+
+function AdminPanel(props) {
+    const Employee =[
+
+        {name : "create", link : "/employee/create"},
+        {name : "edit", link : "/employee/edit"},
+        {name : "delete", link : "/employee/delete"},
+                    ]
+    const Shifts = [
+        {name : "create", link : "/shifts/create"},
+        {name : "edit", link : "/shifts/edit"},
+        {name : "delete", link : "/shifts/delete"},
+    ]
+
+    const Roster = [
+        {name : "create", link : "/shifts/create"},
+        {name : "edit", link : "/shifts/edit"},
+        {name : "delete", link : "/shifts/delete"},
+    ]
+
+    const Onboarding = [
+        {name : "create", link : "/shifts/create"},
+        {name : "edit", link : "/shifts/edit"},
+        {name : "delete", link : "/shifts/delete"},
+    ]
+
+
+   const  section  = [
+        {title : "Employee",sectionElements : Employee},
+        {title : "Shifts", sectionElements : Shifts},
+        {title : "Roster", sectionElements : Roster},
+        {title : "Onboarding", sectionElements : Onboarding}
+
+    ]
+
+        return(
+                <Sidebar
+                    Main ={<h3>Component to rendered here </h3>}
+                    orgName = "JJH Hubli"
+                    userName = "umesh"
+                    siderBarLinks ={[
+                        {name : "Zoho", link : "/admin/Zoho"},
+                        {name : "Employee", panel: {"panelTitle": "Employee" , "section" :  section }}
+                    ]}
+
+
+                />
+            
+
+            </Col>
+        </Row>
+    )
+
+
+}
+```
+
+
+##FormDelete
+
+```javascript
+import{FormDelete} from "reactstrap-react-lib"
+import React,{useState} from 'react'
+import {Container, Row, Col, FormGroup, Input, Label} from "reactstrap"
+
+function deleteForm(props) {
+    return(
+        {/* Form Delete */}
+            <Row>
+                <Col>
+                
+                    <FormDelete
+            
+                        curUri="api/form-delete"
+                        curObj = {["POST", {id : 1}]}
+                        onSuccess={(res)=>{
+                            return res.data.mes
+                        }}
+                        onError={(err)=>{
+                            console.log(err.response)
+                            return err.response.data
+                        }}
+                    />
+                </Col>
+            </Row>
+    )
+     
 ```
 
