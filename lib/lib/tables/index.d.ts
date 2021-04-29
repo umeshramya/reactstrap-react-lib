@@ -15,8 +15,11 @@ export interface column {
      * function component to be passed for display in the cell
      */
     Cell?: (value: any) => ReactElement;
-    /** sort thr column */
-    dataType?: "number" | "string" | "Date" | "boolean";
+    /** sort thr column
+     * any and string treated as string
+     * thids is function useful for sorting
+    */
+    dataType: "number" | "string" | "Date" | "boolean" | "any";
 }
 /**
  * type of request method

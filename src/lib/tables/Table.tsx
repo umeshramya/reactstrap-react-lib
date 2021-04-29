@@ -6,7 +6,11 @@ import  {FaSort} from "react-icons/fa"
 
 
 export default function TableCompenent({ columns, data,filter, sort }: Props): ReactElement {
-
+    
+    /**
+     * This is state for all column filterobject to manege input value and onChange event
+     */
+     const [fillterObj, setfillterObj] = useState({}) as any;
     /**
      * This is state forn data prop
      */
@@ -23,15 +27,20 @@ export default function TableCompenent({ columns, data,filter, sort }: Props): R
             let bValue:any;
             
             if(dataType === "Date" ){
-                aValue = new Date(a);
-                bValue = new Date(b);
+                
+                aValue = new Date(a[accessor]);
+                bValue = new Date(b[accessor]);
 
             }else if(dataType === "number"){
-                aValue = a;
-                bValue = b;
+                
+                aValue = a[accessor];
+                bValue = b[accessor];
+
             }else{//means string or undefined
+              
                 aValue = `${a[accessor]}`.toLocaleLowerCase()
                 bValue = `${b[accessor]}`.toLocaleLowerCase()
+
             }
             
             if(stSort){
@@ -49,10 +58,6 @@ export default function TableCompenent({ columns, data,filter, sort }: Props): R
     
     }
 
-    /**
-     * This is state for all column filterobject to manege input value and onChange event
-     */
-    const [fillterObj, setfillterObj] = useState({}) as any;
     /**
      * creats the filterObject state 
      * dervide from accessor 
@@ -141,7 +146,7 @@ export default function TableCompenent({ columns, data,filter, sort }: Props): R
 
                                         <strong>{col.Header}</strong>
                                         {
-                                            sort == true ? <FaSort 
+                                            sort == true ? <FaSort style= {{cursor : "pointer"}}
                                                 onClick = {
                                                     ()=>sortHandle(col.accessor, col.dataType)
                                                 }

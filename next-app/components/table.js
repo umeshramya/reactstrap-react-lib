@@ -10,23 +10,28 @@ export default function table() {
         {
             Header : "Id",
             accessor : "id",
-            Cell : ({value})=> <LinkP link = {`/edit/${value}`} value = {value} />
+            Cell : ({value})=> <LinkP link = {`/edit/${value}`} value = {value} />,
+            dataType : "number"
+            
     
         },
         {
             Header : "Name",
             accessor : "name",
+            dataType : "string"
 
             
         },{
             Header : "Age",
             accessor : "age",
+            dataType : "number"
 
         }
         ,{
             Header : "Date",
             accessor : "date",
-            Cell : ({value})=> new Date(value).toDateString()
+            Cell : ({value})=> new Date(value).toDateString(),
+            dataType : "Date"
 
         }
     ]
