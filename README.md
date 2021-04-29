@@ -5,6 +5,7 @@ This is build with typescript for using  with react and reactstrap
 This contains forloowing lib modules
 1. FormSubmit
 2. React-Table
+3. AdminPanel/Sidebar
 3. DeleteForm
 
 ## FormSubmit
@@ -166,6 +167,7 @@ export default function table() {
 
 
 ```
+
 ## AdminPanel / Sidebar
 ### This is for admin panel
 
@@ -231,7 +233,7 @@ function AdminPanel(props) {
 ```
 
 
-##FormDelete
+## FormDelete
 
 ```javascript
 import{FormDelete} from "reactstrap-react-lib"
