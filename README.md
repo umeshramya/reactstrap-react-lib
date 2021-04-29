@@ -17,7 +17,7 @@ This is for submiting data to server. it has inbuilt submit button and also rese
 6. errorCalback is prop which has to passed in onError function
 
 ```javascript
-import{ButtonP, FormSubmit, FormDelete, SectioPanel,Sidebar} from "reactstrap-react-lib"
+import{FormSubmit} from "reactstrap-react-lib"
 import React,{useState} from 'react'
 import {Container, Row, Col, FormGroup, Input, Label} from "reactstrap"
 
