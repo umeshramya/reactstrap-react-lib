@@ -21,14 +21,18 @@ export default function table() {
             accessor : "age",
 
         }
+        ,{
+            Header : "Date",
+            accessor : "date"
+        }
     ]
 
     const data  = [
-        { id : 1, name : "umesh", age : 53},
-        { id : 2, name : "Ramya", age : 38},
-        { id : 3, name : "Pradyumna", age : 21},
-        { id : 4, name : "Prajnya", age : 21},
-        { id : 5, name : "Nischita", age : 11},
+        { id : 1, name : "umesh", age : 53,     date : "1969-09-29"},
+        { id : 2, name : "Ramya", age : 38,     date : "1983-08-11"},
+        { id : 3, name : "Pradyumna", age : 21, date : "1999-12-03"},
+        { id : 4, name : "Prajnya", age : 21,   date : "1999-12-03"},
+        { id : 5, name : "Nischita", age : 11,  date : "1999-09-02"},
     ]
     return (
         <>
