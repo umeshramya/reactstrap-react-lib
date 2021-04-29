@@ -67,7 +67,7 @@ function submitForm(props) {
 
                     validation ={()=>{
                         // return "validation error"
-                        //if no wrror return ""
+                        // if no error return ""
                        
                         return ""
                     }}
