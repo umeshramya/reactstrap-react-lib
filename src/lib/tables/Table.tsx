@@ -14,17 +14,22 @@ export default function TableCompenent({ columns, data,filter, sort }: Props): R
     const [stSort, setStSort] = useState(true)
 
 
-    const sortHandle =(accessor:any)=>{
+    const sortHandle =(accessor:any, dataType:column["dataType"])=>{
 
       const sort = (argData:any[]) => {
         argData.sort((a:any, b:any)=>{
 
             let aValue:any;
             let bValue:any;
-            if(typeof a === "number"){
+            
+            if(dataType === "Date" ){
+                aValue = new Date(a);
+                bValue = new Date(b);
+
+            }else if(dataType === "number"){
                 aValue = a;
                 bValue = b;
-            }else{
+            }else{//means string or undefined
                 aValue = `${a[accessor]}`.toLocaleLowerCase()
                 bValue = `${b[accessor]}`.toLocaleLowerCase()
             }
@@ -138,7 +143,7 @@ export default function TableCompenent({ columns, data,filter, sort }: Props): R
                                         {
                                             sort == true ? <FaSort 
                                                 onClick = {
-                                                    ()=>sortHandle(col.accessor)
+                                                    ()=>sortHandle(col.accessor, col.dataType)
                                                 }
                                             
                                             /> : ""
