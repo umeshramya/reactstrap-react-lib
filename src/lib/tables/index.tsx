@@ -22,16 +22,38 @@ import {FaSort} from "react-icons/fa"
     /** sort thr column */
 
 }
+/**
+ * type of request method
+ */
+type method = "POST" | "GET" ;
+/**
+ * this is data to passed on change of page in server side pagination
+ */
+type PageData = [];
+/**
+ * This is applicable to server side pagination 
+ * uri string for api call
+ * querydata is data to passed
+ */
+
+type  ApiRequest= [method:method, uri:string, queryData:{}]
+
+/**
+ * size of the page in client side pagination
+ */
+type PageSize = number
+
 
 export interface Props {
     columns:column[];
     data:[];
     filter : "Global" | "Column" | "Both" | "None"
     sort :boolean;
+    pagination ?: ["ServerSide", PageData | ApiRequest ] | ["ClientSide", PageSize ]
 }
 
 
-export default function index({columns, data, filter, sort=false}: Props): ReactElement {
+export default function index({columns, data, filter = "Both", sort=true, pagination}: Props): ReactElement {
     const [search, setSearch] = useState("")
     const [stData, setstData] = useState<typeof data>([])
 

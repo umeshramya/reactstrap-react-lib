@@ -1,8 +1,7 @@
 import React, { ReactElement, useEffect, useState } from 'react'
 import { Table, Row, Col, Input } from "reactstrap"
 import { Props, column } from "./index"
-
-
+import  {FaSort} from "react-icons/fa"
 
 
 
@@ -12,6 +11,12 @@ export default function TableCompenent({ columns, data,filter, sort }: Props): R
      * This is state forn data prop
      */
     const [stData, setstData] = useState([])
+
+
+    const sortHandle =(accessor:string)=>{
+
+    }
+
     /**
      * This is state for all column filterobject to manege input value and onChange event
      */
@@ -111,6 +116,18 @@ export default function TableCompenent({ columns, data,filter, sort }: Props): R
                                             onChange={(e) => filterOnChangeHandle(e, col.accessor)} 
                                             placeholder={`Search by ${col.accessor}`}
                                             /> : ""
+
+                                            
+                                        }
+
+                                        {
+                                            sort == true ? <FaSort 
+                                                onClick = {
+                                                    ()=>sortHandle(col.accessor)
+                                                }
+                                            
+                                            /> : ""
+
                                         }
 
                                     </th>
@@ -121,7 +138,7 @@ export default function TableCompenent({ columns, data,filter, sort }: Props): R
                 </thead>
                 <tbody>
                     {
-                        stData.map((row, index) => {
+                        stData.map((row, index) => { 
                             return (
                                 <tr key={index}>
                                     {
