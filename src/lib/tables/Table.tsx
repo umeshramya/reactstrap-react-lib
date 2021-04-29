@@ -11,10 +11,37 @@ export default function TableCompenent({ columns, data,filter, sort }: Props): R
      * This is state forn data prop
      */
     const [stData, setstData] = useState([])
+    const [stSort, setStSort] = useState(true)
 
 
-    const sortHandle =(accessor:string)=>{
+    const sortHandle =(accessor:any)=>{
 
+      const sort = (argData:any[]) => {
+        argData.sort((a:any, b:any)=>{
+
+            let aValue:any;
+            let bValue:any;
+            if(typeof a === "number"){
+                aValue = a;
+                bValue = b;
+            }else{
+                aValue = `${a[accessor]}`.toLocaleLowerCase()
+                bValue = `${b[accessor]}`.toLocaleLowerCase()
+            }
+            
+            if(stSort){
+                return (aValue < bValue) ? -1 : (aValue > bValue) ? 1 : 0;
+            }else{
+                return (aValue > bValue) ? -1 : (aValue < bValue) ? 1 : 0;
+            }
+      })
+      }
+      let tempStDate:any = [];
+      Object.assign(tempStDate, stData);
+      sort(tempStDate);
+      setstData(tempStDate)
+      setStSort(!stSort);
+    
     }
 
     /**
@@ -108,6 +135,15 @@ export default function TableCompenent({ columns, data,filter, sort }: Props): R
                                     <th key={index}>
 
                                         <strong>{col.Header}</strong>
+                                        {
+                                            sort == true ? <FaSort 
+                                                onClick = {
+                                                    ()=>sortHandle(col.accessor)
+                                                }
+                                            
+                                            /> : ""
+
+                                        }
 
                                         {
                                             filter == "Column"  || filter == "Both"   ? 
@@ -120,15 +156,7 @@ export default function TableCompenent({ columns, data,filter, sort }: Props): R
                                             
                                         }
 
-                                        {
-                                            sort == true ? <FaSort 
-                                                onClick = {
-                                                    ()=>sortHandle(col.accessor)
-                                                }
-                                            
-                                            /> : ""
-
-                                        }
+                                        
 
                                     </th>
                                 )

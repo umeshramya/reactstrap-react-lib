@@ -43,8 +43,8 @@ export default function table() {
                             <Table
                                 columns={columns}
                                 data={data}
-                                filter= "Both"
-                                sort = {false}
+                                // filter= "Both"
+                                // sort = {false}
                                 
 
                             />
