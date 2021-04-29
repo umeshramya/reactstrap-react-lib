@@ -3,11 +3,9 @@
 This is build with typescript for using  with react and reactstrap
 
 This contains forloowing lib modules
-1. AlertP
-2. ButtonP
-3. ModelP
-4. FormSubmit
-5. FormDelete
+1. FormSubmit
+2. React-Table
+3. DeleteForm
 
 ## FormSubmit
 This is for submiting data to server. it has inbuilt submit button and also reset button.
