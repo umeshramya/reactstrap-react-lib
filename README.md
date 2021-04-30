@@ -1,5 +1,4 @@
 # reactstrap-react-lib
-
 This is build with typescript for using  with react and reactstrap
 
 This contains forloowing lib modules
@@ -7,6 +6,99 @@ This contains forloowing lib modules
 2. React-Table
 3. AdminPanel/Sidebar
 3. DeleteForm
+
+## React-Table 
+### This is react-table following code shows the implimentation.
+#### 1. columns prop has to be assigned the way shown in code below. This has following properties
+    1. Header 
+    2. accessor
+    3. Cell
+    4. dataType
+#### 2. Filter props accepts  one othe follwign strings `Filter : "Global" | "Column" | "Both" | "None"`
+#### 3. sort prop is boolean by defualt it is true
+#### 4. dataTyle
+
+| Prop         | Possible Values                                    |  Description              |
+|--------------|----------------------------------------------------|---------------------------|
+| columns      | { Header accessor Cell  dataType}                  |see code below             |
+| filter       | "Global" or "Column" or "Both"or "None"            |These are filter for table |
+| sort         | boolean                                            |true means allows false no |
+
+
+
+
+```javascript
+import React from 'react'
+import {Row, Col, Container} from "reactstrap"
+import {LinkP, Table} from "reactstrap-react-lib"
+
+
+
+export default function table() {
+
+    const columns = [
+        {
+            Header : "Id",
+            accessor : "id",
+            Cell : ({value})=> <LinkP link = {`/edit/${value}`} value = {value} />,
+            dataType : "number"
+            
+    
+        },
+        {
+            Header : "Name",
+            accessor : "name",
+            dataType : "string"
+
+            
+        },{
+            Header : "Age",
+            accessor : "age",
+            dataType : "number"
+
+        }
+        ,{
+            Header : "Date",
+            accessor : "date",
+            Cell : ({value})=> new Date(value).toDateString(),
+            dataType : "Date"
+
+        }
+    ]
+
+    const data  = [
+        { id : 1, name : "Varun", age : 53,     date : "1969-09-29"},
+        { id : 2, name : "Ramesh", age : 38,     date : "1983-08-11"},
+        { id : 3, name : "Jhon", age : 21, date : "1999-12-03"},
+        { id : 4, name : "Pamela", age : 21,   date : "1999-12-03"},
+        { id : 5, name : "Irfan", age : 11,  date : "1999-01-02"},
+    ]
+    return (
+        <>
+            <Container>
+                    <Row>
+                        <Col>
+                            <Table
+                                columns={columns}
+                                data={data}
+                                filter= "Both"
+                                // sort = {false}
+                                
+
+                            />
+                        </Col>
+                    </Row>
+            </Container>
+            
+        </>
+
+    )
+}
+
+
+
+```
+
 
 ## FormSubmit
 This is for submiting data to server. it has inbuilt submit button and also reset button.
@@ -88,85 +180,6 @@ function submitForm(props) {
 ```
 
 
-## React-Table 
-### This is react-table following code shows the implimentation.
-1. columns prop has to be assigned the way shown in code below
-2. Filter props accepts  one othe follwign strings `Filter : "Global" | "Column" | "Both" | "None"`
-3. sort prop is boolean by defualt it is true
-
-
-
-```javascript
-import React from 'react'
-import {Row, Col, Container} from "reactstrap"
-import {LinkP, Table} from "reactstrap-react-lib"
-
-
-
-export default function table() {
-
-    const columns = [
-        {
-            Header : "Id",
-            accessor : "id",
-            Cell : ({value})=> <LinkP link = {`/edit/${value}`} value = {value} />,
-            dataType : "number"
-            
-    
-        },
-        {
-            Header : "Name",
-            accessor : "name",
-            dataType : "string"
-
-            
-        },{
-            Header : "Age",
-            accessor : "age",
-            dataType : "number"
-
-        }
-        ,{
-            Header : "Date",
-            accessor : "date",
-            Cell : ({value})=> new Date(value).toDateString(),
-            dataType : "Date"
-
-        }
-    ]
-
-    const data  = [
-        { id : 1, name : "umesh", age : 53,     date : "1969-09-29"},
-        { id : 2, name : "Ramya", age : 38,     date : "1983-08-11"},
-        { id : 3, name : "Pradyumna", age : 21, date : "1999-12-03"},
-        { id : 4, name : "Prajnya", age : 21,   date : "1999-12-03"},
-        { id : 5, name : "Nischita", age : 11,  date : "1999-01-02"},
-    ]
-    return (
-        <>
-            <Container>
-                    <Row>
-                        <Col>
-                            <Table
-                                columns={columns}
-                                data={data}
-                                filter= "Both"
-                                // sort = {false}
-                                
-
-                            />
-                        </Col>
-                    </Row>
-            </Container>
-            
-        </>
-
-    )
-}
-
-
-
-```
 
 ## AdminPanel / Sidebar
 ### This is for admin panel
