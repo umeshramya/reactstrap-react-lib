@@ -24,15 +24,22 @@ export  function NextAndPrevious({}: Props): ReactElement {
     return (
         <>
         <Row >
-            <Col className = "justify-content-center">
-                <GrCaretPrevious onClick= {(e)=> previous(e)} style={{cursor : "pointer"}}/>
+            <Col style={{display : "flex", justifyContent : "end"}}>
+                < GrChapterPrevious size={"35px"}  onClick= {(e)=> previous(e)} style={{cursor : "pointer"}}/>
             </Col>
-            <Col className = "justify-content-center">
+            <Col style={{display : "flex", justifyContent : "end"}}>
+                < GrCaretPrevious size={"35px"}  onClick= {(e)=> previous(e)} style={{cursor : "pointer"}}/>
+            </Col>
+            <Col style={{display : "flex", justifyContent : "center"}}>
                 <Input type="number" value ={pageNo} onChange={(e)=>pageNoHandle(e)} width={"23px"}/>
             </Col>
-            <Col className = "justify-content-center">
-                <GrCaretNext  onClick= {(e)=> next(e)} style={{cursor : "pointer"}} />
+            <Col style ={{display : "flex", justifyContent : "start"}}>
+                <GrCaretNext size={"35px"} onClick= {(e)=> next(e)} style={{cursor : "pointer"}} />
             </Col>
+            <Col style ={{display : "flex", justifyContent : "start"}}>
+                <GrChapterNext size={"35px"} onClick= {(e)=> next(e)} style={{cursor : "pointer"}} />
+            </Col>
+            
             
         </Row>
         </>
