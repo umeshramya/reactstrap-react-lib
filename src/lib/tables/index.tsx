@@ -1,7 +1,7 @@
 import React, { ReactElement, useState, useEffect } from 'react'
 import {Row, Col, FormGroup, Input} from "reactstrap"
 import TableCompenent from "./Table"
-import {FaSort} from "react-icons/fa"
+import {NextAndPrevious} from "./NextAndPrevious"
 
 /**
  * This column of table whoose array has to be passed as defination of table by user
@@ -72,8 +72,6 @@ export default function index({columns, data, filter = "Both", sort=true, pagina
         setSearch(value);
         //code here for filter
         let keys = columns.map(col=>col.accessor);
-
-
         let tempData =data.filter(o=>{
             let oString="";
             for (const key of keys){
@@ -82,15 +80,8 @@ export default function index({columns, data, filter = "Both", sort=true, pagina
             if(oString.toLowerCase().search(value.trim().toString().toLowerCase()) >= 0){
                 return o;
              }
-        
-        
         }) as []
-         
-   
-
         setstData(tempData)
-
-
     }
 
     return (
@@ -106,6 +97,7 @@ export default function index({columns, data, filter = "Both", sort=true, pagina
                 </Col>
                 <Col sm={12} md={6}>
                     {/* Pagination code here */}
+                    <NextAndPrevious />
                 </Col>
             </Row>
             
