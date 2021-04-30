@@ -4,40 +4,54 @@ import {GrCaretNext, GrChapterNext, GrCaretPrevious, GrChapterPrevious} from 're
 import {Col, Input, Row} from "reactstrap"
 
 interface Props {
-    
+    pageNo          : number;
+    pageSize        : number;
+    data            : [];
+    nextPageApi     : Function;
+    preViousPageApi : Function;
+    firstPageApi    : Function;
+    lastPageApi     : Function;
 }
 
-export  function NextAndPrevious({}: Props): ReactElement {
+export  function NextAndPrevious(props: Props): ReactElement {
     const [pageNo, setpageNo] = useState(1)
 
+    const firstPage = (e:any)=>{
+
+    }
+
+    const lastPage = (e:any)=>{
+
+    }
+
     const pageNoHandle = (e:any)=>{
+        setpageNo(e.target.value);
+    }
+
+    const nextPage= (e:any)=>{
 
     }
 
-    const next= (e:any)=>{
-
-    }
-
-    const previous = (e:any)=>{
+    const previousPage = (e:any)=>{
 
     }
     return (
         <>
         <Row >
             <Col style={{display : "flex", justifyContent : "end"}}>
-                < GrChapterPrevious size={"35px"}  onClick= {(e)=> previous(e)} style={{cursor : "pointer"}}/>
+                < GrChapterPrevious size={"35px"}  onClick= {(e)=> firstPage(e)} style={{cursor : "pointer"}}/>
             </Col>
             <Col style={{display : "flex", justifyContent : "end"}}>
-                < GrCaretPrevious size={"35px"}  onClick= {(e)=> previous(e)} style={{cursor : "pointer"}}/>
+                < GrCaretPrevious size={"35px"}  onClick= {(e)=> previousPage(e)} style={{cursor : "pointer"}}/>
             </Col>
             <Col style={{display : "flex", justifyContent : "center"}}>
                 <Input type="number" value ={pageNo} onChange={(e)=>pageNoHandle(e)} width={"23px"}/>
             </Col>
             <Col style ={{display : "flex", justifyContent : "start"}}>
-                <GrCaretNext size={"35px"} onClick= {(e)=> next(e)} style={{cursor : "pointer"}} />
+                <GrCaretNext size={"35px"} onClick= {(e)=> nextPage(e)} style={{cursor : "pointer"}} />
             </Col>
             <Col style ={{display : "flex", justifyContent : "start"}}>
-                <GrChapterNext size={"35px"} onClick= {(e)=> next(e)} style={{cursor : "pointer"}} />
+                <GrChapterNext size={"35px"} onClick= {(e)=> lastPage(e)} style={{cursor : "pointer"}} />
             </Col>
             
             
