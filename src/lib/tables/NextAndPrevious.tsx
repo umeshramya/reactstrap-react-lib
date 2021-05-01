@@ -3,10 +3,12 @@ import React, { ReactElement, useState } from 'react'
 import {GrCaretNext, GrChapterNext, GrCaretPrevious, GrChapterPrevious} from 'react-icons/gr'
 import {Col, Input, Row} from "reactstrap"
 
+type side = ["server", {} ] | ["client" ]
+
 interface Props {
     pageNo          : number;
-    pageSize        : number;
-    data            : [];
+    data            : []; 
+    pageFrom        : side
     nextPageApi     : Function;
     preViousPageApi : Function;
     firstPageApi    : Function;
@@ -14,7 +16,7 @@ interface Props {
 }
 
 export  function NextAndPrevious(props: Props): ReactElement {
-    const [pageNo, setpageNo] = useState(1)
+    const [pageNo, setPageNo] = useState(1)
 
     const firstPage = (e:any)=>{
 
@@ -25,10 +27,21 @@ export  function NextAndPrevious(props: Props): ReactElement {
     }
 
     const pageNoHandle = (e:any)=>{
-        setpageNo(e.target.value);
+        let value:number = parseInt(e.target.value);
+        if(value < 1 ){
+            value = 0;
+        }
+        setPageNo(value);
     }
 
     const nextPage= (e:any)=>{
+        let data:any = {}
+        // check server vs clinet
+        if(props.pageFrom[0] === "server"){
+            data = props.pageFrom[1]
+        }
+
+        // if server look data given or to get from api
 
     }
 
@@ -53,8 +66,6 @@ export  function NextAndPrevious(props: Props): ReactElement {
             <Col style ={{display : "flex", justifyContent : "start"}}>
                 <GrChapterNext size={"35px"} onClick= {(e)=> lastPage(e)} style={{cursor : "pointer"}} />
             </Col>
-            
-            
         </Row>
         </>
     )
