@@ -97,7 +97,10 @@ export default function index({columns, data, filter = "Both", sort=true, pagina
                 </Col>
                 <Col sm={12} md={6}>
                     {/* Pagination code here */}
-                    <NextAndPrevious />
+                    <NextAndPrevious 
+                        pageFrom = {}
+                        pageNo = {}
+                    />
                 </Col>
             </Row>
             

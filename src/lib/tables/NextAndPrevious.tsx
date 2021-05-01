@@ -3,28 +3,28 @@ import React, { ReactElement, useState, useEffect } from 'react'
 import {GrCaretNext, GrChapterNext, GrCaretPrevious, GrChapterPrevious} from 'react-icons/gr'
 import {Col, Input, Row} from "reactstrap"
 
-type side = "Server"//| "Cleint"
+type side = "Server"  | "Client"
 
 interface Props {
     pageNo          : number;
-    data            : any[]; 
-    pageFrom        : [side:side,  Function:(...arg: any)=>any[]]
-    nextPageApi     : Function;
-    preViousPageApi : Function;
-    firstPageApi    : Function;
-    lastPageApi     : Function;
+    pageFrom        : [side:side,  Function:(...arg: any)=>Promise<any[]>]
+
 }
 
 export  function NextAndPrevious(props: Props): ReactElement {
     const [pageNo, setPageNo] = useState(1)
-    const [data, setdata] = useState(props.data)
 
 
-    const firstPage = (e:any)=>{
+
+    const firstPage = async(e:any)=>{
+        let curdata = await props.pageFrom[1]()
+        return curdata;
 
     }
 
-    const lastPage = (e:any)=>{
+    const lastPage = async(e:any)=>{
+        let curdata = await props.pageFrom[1]()
+        return curdata;
 
     }
 
@@ -41,7 +41,8 @@ export  function NextAndPrevious(props: Props): ReactElement {
         // check server vs clinet
         if(props.pageFrom[0] === "Server"){
            let curdata = await props.pageFrom[1]()
-           setdata(curdata)
+           return curdata;
+ 
         }
 
 
@@ -50,10 +51,10 @@ export  function NextAndPrevious(props: Props): ReactElement {
     }
 
     const previousPage = async(e:any)=>{
-        if(props.pageFrom[0] === "Server"){
-         let curdata = await props.pageFrom[1]();
-         setdata(curdata);
-        }
+ 
+        let curdata = await props.pageFrom[1]();
+        return curdata
+        
     }
     return (
         <>
