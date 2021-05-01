@@ -1,14 +1,14 @@
 import next from 'next'
-import React, { ReactElement, useState } from 'react'
+import React, { ReactElement, useState, useEffect } from 'react'
 import {GrCaretNext, GrChapterNext, GrCaretPrevious, GrChapterPrevious} from 'react-icons/gr'
 import {Col, Input, Row} from "reactstrap"
 
-type side = ["server", {} ] | ["client" ]
+type side = "Server"//| "Cleint"
 
 interface Props {
     pageNo          : number;
-    data            : []; 
-    pageFrom        : side
+    data            : any[]; 
+    pageFrom        : [side:side,  Function:(...arg: any)=>any[]]
     nextPageApi     : Function;
     preViousPageApi : Function;
     firstPageApi    : Function;
@@ -17,6 +17,8 @@ interface Props {
 
 export  function NextAndPrevious(props: Props): ReactElement {
     const [pageNo, setPageNo] = useState(1)
+    const [data, setdata] = useState(props.data)
+
 
     const firstPage = (e:any)=>{
 
@@ -34,25 +36,35 @@ export  function NextAndPrevious(props: Props): ReactElement {
         setPageNo(value);
     }
 
-    const nextPage= (e:any)=>{
-        let data:any = {}
+    const nextPage= async(e:any)=>{
+       
         // check server vs clinet
-        if(props.pageFrom[0] === "server"){
-            data = props.pageFrom[1]
+        if(props.pageFrom[0] === "Server"){
+           let curdata = await props.pageFrom[1]()
+           setdata(curdata)
         }
+
 
         // if server look data given or to get from api
 
     }
 
-    const previousPage = (e:any)=>{
-
+    const previousPage = async(e:any)=>{
+        if(props.pageFrom[0] === "Server"){
+         let curdata = await props.pageFrom[1]();
+         setdata(curdata);
+        }
     }
     return (
         <>
         <Row >
             <Col style={{display : "flex", justifyContent : "end"}}>
-                < GrChapterPrevious size={"35px"}  onClick= {(e)=> firstPage(e)} style={{cursor : "pointer"}}/>
+                {
+                    props.pageFrom[0] !== "Server" ?
+                    < GrChapterPrevious size={"35px"}  onClick= {(e)=> firstPage(e)} style={{cursor : "pointer"}}/>
+                    :""
+                }
+                
             </Col>
             <Col style={{display : "flex", justifyContent : "end"}}>
                 < GrCaretPrevious size={"35px"}  onClick= {(e)=> previousPage(e)} style={{cursor : "pointer"}}/>
@@ -64,7 +76,13 @@ export  function NextAndPrevious(props: Props): ReactElement {
                 <GrCaretNext size={"35px"} onClick= {(e)=> nextPage(e)} style={{cursor : "pointer"}} />
             </Col>
             <Col style ={{display : "flex", justifyContent : "start"}}>
-                <GrChapterNext size={"35px"} onClick= {(e)=> lastPage(e)} style={{cursor : "pointer"}} />
+                {
+                    props.pageFrom[0] !== "Server" ?
+                    <GrChapterNext size={"35px"} onClick= {(e)=> lastPage(e)} style={{cursor : "pointer"}} />:
+                    ""
+
+                }
+                
             </Col>
         </Row>
         </>
