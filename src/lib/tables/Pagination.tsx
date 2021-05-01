@@ -7,23 +7,35 @@ type side = "Server"  | "Client"
 
 export interface PaginationProps {
     pageNo          ?: number;
-    pageFrom        ?: [side:side,  Function:(...arg: any)=>Promise<any[]>]
+    pageFrom        ?: side;
+    firstPage       ?: (...arg:any[])=>Promise<any[]>
+    lastPage        ?: (...arg:any[])=>Promise<any[]>
+    nextPage        ?: (...arg:any[])=>Promise<any[]>
+    previousPage    ?: (...arg:any[])=>Promise<any[]>
+
 
 }
 
-export  function Pagination({pageNo = 1, pageFrom =["Server", async()=>[]]}: PaginationProps): ReactElement {
+export  function Pagination(
+    {pageNo     = 1, 
+    pageFrom    = "Server", 
+    firstPage   = async()=>[],
+    lastPage   = async()=>[],
+    nextPage   = async()=>[],
+    previousPage   = async()=>[],
+}: PaginationProps): ReactElement {
     const [stpageNo, setStPageNo] = useState(1)
 
 
 
-    const firstPage = async(e:any)=>{
-        let curdata = await pageFrom[1]()
+    const firstPageHandle = async(firstPage:Function):Promise<any[]>=>{
+        let curdata = await  firstPage()
         return curdata;
 
     }
 
-    const lastPage = async(e:any)=>{
-        let curdata = await pageFrom[1]()
+    const lastPageHandle = async(lastPage:Function):Promise<any[]>=>{
+        let curdata = await lastPage()
         return curdata;
 
     }
@@ -36,23 +48,13 @@ export  function Pagination({pageNo = 1, pageFrom =["Server", async()=>[]]}: Pag
         setStPageNo(value);
     }
 
-    const nextPage= async(e:any)=>{
-       
-        // check server vs clinet
-        if(pageFrom[0] === "Server"){
-           let curdata = await pageFrom[1]()
+    const nextPageHandle= async(nextPage:Function):Promise<any[]>=>{
+           let curdata = await nextPage()
            return curdata;
- 
-        }
-
-
-        // if server look data given or to get from api
-
     }
 
-    const previousPage = async(e:any)=>{
- 
-        let curdata = await pageFrom[1]();
+    const previousPageHandle = async(previousPage:Function):Promise<any[]>=>{
+        let curdata = await previousPage();
         return curdata
         
     }
@@ -61,25 +63,25 @@ export  function Pagination({pageNo = 1, pageFrom =["Server", async()=>[]]}: Pag
         <Row >
             <Col style={{display : "flex", justifyContent : "end"}}>
                 {
-                    pageFrom[0] !== "Server" ?
-                    < GrChapterPrevious size={"35px"}  onClick= {(e)=> firstPage(e)} style={{cursor : "pointer"}}/>
+                    pageFrom !== "Server" ?
+                    < GrChapterPrevious size={"35px"}  onClick= {(e)=> firstPageHandle(firstPage)} style={{cursor : "pointer"}}/>
                     :""
                 }
                 
             </Col>
             <Col style={{display : "flex", justifyContent : "end"}}>
-                < GrCaretPrevious size={"35px"}  onClick= {(e)=> previousPage(e)} style={{cursor : "pointer"}}/>
+                < GrCaretPrevious size={"35px"}  onClick= {(e)=> previousPageHandle(previousPage)} style={{cursor : "pointer"}}/>
             </Col>
             <Col >
                 <Input type="number" value ={stpageNo} onChange={(e)=>pageNoHandle(e)} width={"23px"}/>
             </Col>
             <Col style ={{display : "flex", justifyContent : "start"}}>
-                <GrCaretNext size={"35px"} onClick= {(e)=> nextPage(e)} style={{cursor : "pointer"}} />
+                <GrCaretNext size={"35px"} onClick= {(e)=> nextPageHandle(nextPage)} style={{cursor : "pointer"}} />
             </Col>
             <Col style ={{display : "flex", justifyContent : "start"}}>
                 {
-                    pageFrom[0] !== "Server" ?
-                    <GrChapterNext size={"35px"} onClick= {(e)=> lastPage(e)} style={{cursor : "pointer"}} />:
+                    pageFrom !== "Server" ?
+                    <GrChapterNext size={"35px"} onClick= {(e)=> lastPageHandle(lastPage)} style={{cursor : "pointer"}} />:
                     ""
 
                 }
