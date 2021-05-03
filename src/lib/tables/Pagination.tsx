@@ -6,33 +6,33 @@ import {Col, Input, Row} from "reactstrap"
 type side = "Server"  | "Client"
 
 export interface PaginationProps {
-    // pageNo          ?: number;
+
     pageFrom        ?: side;
     firstPage       ?: (pageNo:number, pageSize?:number, ...arg:any[])=>Promise<number>
     lastPage        ?: (pageNo:number, pageSize?:number, ...arg:any[])=>Promise<number>
-    nextPage        ?: (pageNo:number, pageSize?:number, ...arg:any[])=>Promise<number>
-    previousPage    ?: (pageNo:number, pageSize?:number, ...arg:any[])=>Promise<number>
+    nextPage        ?: (pageNo?:number, pageSize?:number, ...arg:any[])=>Promise<boolean>
+    previousPage    ?: (pageNo?:number, pageSize?:number, ...arg:any[])=>Promise<boolean>
 }
 
 
     export  function Pagination(
     {
-    // pageNo     = 1, 
+
     pageFrom    = "Server", 
-    firstPage   = async()=>0,
-    lastPage   = async()=>0,
-    nextPage   = async()=>0,
-    previousPage   = async()=>0,
+    firstPage   = async()=>1,
+    lastPage   = async()=>1,
+    nextPage   = async()=>false,
+    previousPage   = async()=>false,
 }: PaginationProps): ReactElement {
 
-    const [stPageNo, setStPageNo] = useState(1)
+    const [stPageNo, setStPageNo] = useState(0)
 
 
 
     const firstPageHandle = async(firstPage:PaginationProps["firstPage"]):Promise<void>=>{
         if(firstPage !== undefined){
-            let curdata = await  firstPage(1)
-            setStPageNo(1);
+            let pageNumber  = await  firstPage(1)
+            pageNumber === 0 ? setStPageNo(0) : 0;
         }
 
 
@@ -40,8 +40,8 @@ export interface PaginationProps {
 
     const lastPageHandle = async(lastPage:PaginationProps["lastPage"]):Promise<void>=>{
         if(lastPage !== undefined){
-        let curdata = await lastPage(stPageNo)
-        setStPageNo(curdata)
+        let pageNumber = await lastPage(stPageNo)
+         pageNumber >= 0 ?  setStPageNo(stPageNo) : 0;
         }
 
     }
@@ -56,16 +56,22 @@ export interface PaginationProps {
 
     const nextPageHandle= async(nextPage:PaginationProps["nextPage"]):Promise<void>=>{
         if(nextPage !== undefined){
-            let curdata = await nextPage(stPageNo)
-            setStPageNo(curdata)
+            let pageSet = await nextPage(stPageNo)
+             pageSet ? setStPageNo(stPageNo + 1) : 0;
         }
 
     }
 
     const previousPageHandle = async(previousPage:PaginationProps["previousPage"]):Promise<void>=>{
         if(previousPage !== undefined){
-            let curdata = await previousPage(stPageNo);
-            setStPageNo(curdata)
+            let pageSet = await previousPage(stPageNo);
+            if(pageSet){
+                if(stPageNo > 0){
+                    setStPageNo(stPageNo - 1)
+                }else{
+                    setStPageNo(0);
+                }
+            }
         }
 
         

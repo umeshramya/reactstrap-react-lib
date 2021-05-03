@@ -1,10 +1,25 @@
-import React from 'react'
+import React,{useState, useEffect} from 'react'
 import {Row, Col, Container} from "reactstrap"
 import {LinkP, Table} from "reactstrap-react-lib"
+import data from "../MOCK_DATA .json"
 
-
+// {"id":1,"first_name":"Aubine","last_name":"McClenaghan","email":"amcclenaghan0@prnewswire.com","gender":"Polygender","ip_address":"11.4.220.200","date":"2020-08-17"}
 
 export default function table() {
+    const [pageData, setpageData] = useState([])
+    const [pagesize, setPagesize] = useState(100)
+    useEffect(() => {
+        pageDatehandle(0)
+        return () => {}
+    }, [data])
+
+    const pageDatehandle = (pageNo)=>{
+        let page = pageNo * pagesize
+        console.log(page)
+        let curPageData = data.slice ( page , page + pagesize)
+    
+        setpageData(curPageData)
+    }
 
     const columns = [
         {
@@ -16,15 +31,34 @@ export default function table() {
     
         },
         {
-            Header : "Name",
-            accessor : "name",
+            Header : "first_name",
+            accessor : "first_name",
             dataType : "string"
 
             
         },{
-            Header : "Age",
-            accessor : "age",
-            dataType : "number"
+            Header : "last_name",
+            accessor : "last_name",
+            dataType : "string"
+
+            
+        },{
+            Header : "email",
+            accessor : "email",
+            dataType : "string"
+
+            
+        },{
+            Header : "gender",
+            accessor : "gender",
+            dataType : "string"
+
+            
+        },
+        {
+            Header : "ip_address",
+            accessor : "ip_address",
+            dataType : "string"
 
         }
         ,{
@@ -36,13 +70,6 @@ export default function table() {
         }
     ]
 
-    const data  = [
-        { id : 1, name : "umesh", age : 53,     date : "1969-09-29"},
-        { id : 2, name : "Ramya", age : 38,     date : "1983-08-11"},
-        { id : 3, name : "Pradyumna", age : 21, date : "1999-12-03"},
-        { id : 4, name : "Prajnya", age : 21,   date : "1999-12-03"},
-        { id : 5, name : "Nischita", age : 11,  date : "1999-01-02"},
-    ]
     return (
         <>
             <Container>
@@ -50,12 +77,19 @@ export default function table() {
                         <Col>
                             <Table
                                 columns={columns}
-                                data={data}
+                                data={pageData}
                                 filter= "Both"
                                 // sort = {false}
                                 pagination = {{
-                                "nextPage" : (pageNo)=>pageNo+1,
-                                "previousPage" : (pageNo) =>pageNo -1
+                                "nextPage" : (pageNo)=>{
+                                    pageDatehandle(pageNo)
+                                    return true;
+                                },
+                                "previousPage" : (pageNo) =>{
+                                    pageDatehandle(pageNo)
+                                    return true
+                                }
+                               
                             }}
                                
                                 
