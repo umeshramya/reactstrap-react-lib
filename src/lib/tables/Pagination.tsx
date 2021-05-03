@@ -6,37 +6,43 @@ import {Col, Input, Row} from "reactstrap"
 type side = "Server"  | "Client"
 
 export interface PaginationProps {
-    pageNo          ?: number;
+    // pageNo          ?: number;
     pageFrom        ?: side;
-    firstPage       ?: (...arg:any[])=>Promise<any[]>
-    lastPage        ?: (...arg:any[])=>Promise<any[]>
-    nextPage        ?: (...arg:any[])=>Promise<any[]>
-    previousPage    ?: (...arg:any[])=>Promise<any[]>
-
-
+    firstPage       ?: (pageNo:number, pageSize?:number, ...arg:any[])=>Promise<number>
+    lastPage        ?: (pageNo:number, pageSize?:number, ...arg:any[])=>Promise<number>
+    nextPage        ?: (pageNo:number, pageSize?:number, ...arg:any[])=>Promise<number>
+    previousPage    ?: (pageNo:number, pageSize?:number, ...arg:any[])=>Promise<number>
 }
 
-export  function Pagination(
-    {pageNo     = 1, 
+
+    export  function Pagination(
+    {
+    // pageNo     = 1, 
     pageFrom    = "Server", 
-    firstPage   = async()=>[],
-    lastPage   = async()=>[],
-    nextPage   = async()=>[],
-    previousPage   = async()=>[],
+    firstPage   = async()=>0,
+    lastPage   = async()=>0,
+    nextPage   = async()=>0,
+    previousPage   = async()=>0,
 }: PaginationProps): ReactElement {
-    const [stpageNo, setStPageNo] = useState(1)
+
+    const [stPageNo, setStPageNo] = useState(1)
 
 
 
-    const firstPageHandle = async(firstPage:Function):Promise<any[]>=>{
-        let curdata = await  firstPage()
-        return curdata;
+    const firstPageHandle = async(firstPage:PaginationProps["firstPage"]):Promise<void>=>{
+        if(firstPage !== undefined){
+            let curdata = await  firstPage(1)
+            setStPageNo(1);
+        }
+
 
     }
 
-    const lastPageHandle = async(lastPage:Function):Promise<any[]>=>{
-        let curdata = await lastPage()
-        return curdata;
+    const lastPageHandle = async(lastPage:PaginationProps["lastPage"]):Promise<void>=>{
+        if(lastPage !== undefined){
+        let curdata = await lastPage(stPageNo)
+        setStPageNo(curdata)
+        }
 
     }
 
@@ -48,14 +54,20 @@ export  function Pagination(
         setStPageNo(value);
     }
 
-    const nextPageHandle= async(nextPage:Function):Promise<any[]>=>{
-           let curdata = await nextPage()
-           return curdata;
+    const nextPageHandle= async(nextPage:PaginationProps["nextPage"]):Promise<void>=>{
+        if(nextPage !== undefined){
+            let curdata = await nextPage(stPageNo)
+            setStPageNo(curdata)
+        }
+
     }
 
-    const previousPageHandle = async(previousPage:Function):Promise<any[]>=>{
-        let curdata = await previousPage();
-        return curdata
+    const previousPageHandle = async(previousPage:PaginationProps["previousPage"]):Promise<void>=>{
+        if(previousPage !== undefined){
+            let curdata = await previousPage(stPageNo);
+            setStPageNo(curdata)
+        }
+
         
     }
     return (
@@ -73,7 +85,7 @@ export  function Pagination(
                 < GrCaretPrevious size={"35px"}  onClick= {(e)=> previousPageHandle(previousPage)} style={{cursor : "pointer"}}/>
             </Col>
             <Col >
-                <Input type="number" value ={stpageNo} onChange={(e)=>pageNoHandle(e)} width={"23px"}/>
+                <Input type="number" value ={stPageNo} onChange={(e)=>pageNoHandle(e)} width={"23px"}/>
             </Col>
             <Col style ={{display : "flex", justifyContent : "start"}}>
                 <GrCaretNext size={"35px"} onClick= {(e)=> nextPageHandle(nextPage)} style={{cursor : "pointer"}} />

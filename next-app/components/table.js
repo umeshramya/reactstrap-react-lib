@@ -53,11 +53,9 @@ export default function table() {
                                 data={data}
                                 filter= "Both"
                                 // sort = {false}
-                                pagination = {{"firstPage" : ()=>{
-                                    return alert("firstPage")
-                                },
-                                "nextPage" : ()=>alert("nextPage"),
-                                "previousPage" : ()=>alert("previousPage")
+                                pagination = {{
+                                "nextPage" : (pageNo)=>pageNo+1,
+                                "previousPage" : (pageNo) =>pageNo -1
                             }}
                                
                                 

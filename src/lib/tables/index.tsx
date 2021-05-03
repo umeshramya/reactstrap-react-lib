@@ -80,7 +80,7 @@ export default function index({columns, data, filter = "Both", sort=true, pagina
                     {/* Pagination code here */}
                     <Pagination 
                         pageFrom = {pagination ?.pageFrom}
-                        pageNo = {pagination ?.pageNo}
+                        // pageNo = {pagination ?.pageNo}
                         firstPage = {pagination?.firstPage}
                         lastPage = {pagination?.lastPage}
                         nextPage = {pagination?.nextPage}

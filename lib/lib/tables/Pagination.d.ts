@@ -1,13 +1,12 @@
 import { ReactElement } from 'react';
 declare type side = "Server" | "Client";
 export interface PaginationProps {
-    pageNo?: number;
     pageFrom?: side;
-    firstPage?: (...arg: any[]) => Promise<any[]>;
-    lastPage?: (...arg: any[]) => Promise<any[]>;
-    nextPage?: (...arg: any[]) => Promise<any[]>;
-    previousPage?: (...arg: any[]) => Promise<any[]>;
+    firstPage?: (pageNo: number, pageSize?: number, ...arg: any[]) => Promise<number>;
+    lastPage?: (pageNo: number, pageSize?: number, ...arg: any[]) => Promise<number>;
+    nextPage?: (pageNo: number, pageSize?: number, ...arg: any[]) => Promise<number>;
+    previousPage?: (pageNo: number, pageSize?: number, ...arg: any[]) => Promise<number>;
 }
-export declare function Pagination({ pageNo, pageFrom, firstPage, lastPage, nextPage, previousPage, }: PaginationProps): ReactElement;
+export declare function Pagination({ pageFrom, firstPage, lastPage, nextPage, previousPage, }: PaginationProps): ReactElement;
 export {};
 //# sourceMappingURL=Pagination.d.ts.map
