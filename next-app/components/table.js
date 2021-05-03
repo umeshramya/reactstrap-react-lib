@@ -14,9 +14,8 @@ export default function table() {
     }, [data])
 
     const pageDatehandle = (pageNo)=>{
-        let page = pageNo * pagesize
-        console.log(page)
-        let curPageData = data.slice ( page , page + pagesize)
+        let pageStart = pageNo * pagesize
+        let curPageData = data.slice ( pageStart , pageStart + pagesize)
     
         setpageData(curPageData)
     }
@@ -82,10 +81,12 @@ export default function table() {
                                 // sort = {false}
                                 pagination = {{
                                 "nextPage" : (pageNo)=>{
+
                                     pageDatehandle(pageNo)
                                     return true;
                                 },
                                 "previousPage" : (pageNo) =>{
+
                                     pageDatehandle(pageNo)
                                     return true
                                 }

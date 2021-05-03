@@ -31,7 +31,7 @@ export interface PaginationProps {
 
     const firstPageHandle = async(firstPage:PaginationProps["firstPage"]):Promise<void>=>{
         if(firstPage !== undefined){
-            let pageNumber  = await  firstPage(1)
+            let pageNumber  = await  firstPage(0)
             pageNumber === 0 ? setStPageNo(0) : 0;
         }
 
@@ -55,24 +55,23 @@ export interface PaginationProps {
     }
 
     const nextPageHandle= async(nextPage:PaginationProps["nextPage"]):Promise<void>=>{
+        let newPageNo = stPageNo + 1;
         if(nextPage !== undefined){
-            let pageSet = await nextPage(stPageNo)
-             pageSet ? setStPageNo(stPageNo + 1) : 0;
+            let pageSet = await nextPage(newPageNo)
+             pageSet ? setStPageNo(newPageNo) : 0;
         }
 
     }
 
     const previousPageHandle = async(previousPage:PaginationProps["previousPage"]):Promise<void>=>{
-        if(previousPage !== undefined){
-            let pageSet = await previousPage(stPageNo);
-            if(pageSet){
-                if(stPageNo > 0){
-                    setStPageNo(stPageNo - 1)
-                }else{
-                    setStPageNo(0);
-                }
+            let newPageNo = 0
+            if(stPageNo > 0){
+                newPageNo = stPageNo - 1;
             }
-        }
+            if(previousPage !== undefined){
+                let pageSet = await previousPage(newPageNo);
+                pageSet ? setStPageNo(newPageNo) : 0;
+            }
 
         
     }

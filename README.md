@@ -28,15 +28,30 @@ This contains forloowing lib modules
 
 
 ```javascript
-import React from 'react'
+import React,{useState, useEffect} from 'react'
 import {Row, Col, Container} from "reactstrap"
 import {LinkP, Table} from "reactstrap-react-lib"
+import data from "../MOCK_DATA .json"
 
 
 
 export default function table() {
+    const [pageData, setpageData] = useState([])
+    const [pagesize, setPagesize] = useState(100)
+    useEffect(() => {
+        pageDatehandle(0)
+        return () => {}
+    }, [data])
+
+    const pageDatehandle = (pageNo)=>{
+        let pageStart = pageNo * pagesize
+        let curPageData = data.slice ( pageStart , pageStart + pagesize)
+    
+        setpageData(curPageData)
+    }
 
     const columns = [
+        // {"id":1,"first_name":"Aubine","last_name":"McClenaghan","email":"amcclenaghan0@prnewswire.com","gender":"Polygender","ip_address":"11.4.220.200","date":"2020-08-17"}
         {
             Header : "Id",
             accessor : "id",
@@ -46,15 +61,34 @@ export default function table() {
     
         },
         {
-            Header : "Name",
-            accessor : "name",
+            Header : "first_name",
+            accessor : "first_name",
             dataType : "string"
 
             
         },{
-            Header : "Age",
-            accessor : "age",
-            dataType : "number"
+            Header : "last_name",
+            accessor : "last_name",
+            dataType : "string"
+
+            
+        },{
+            Header : "email",
+            accessor : "email",
+            dataType : "string"
+
+            
+        },{
+            Header : "gender",
+            accessor : "gender",
+            dataType : "string"
+
+            
+        },
+        {
+            Header : "ip_address",
+            accessor : "ip_address",
+            dataType : "string"
 
         }
         ,{
@@ -66,13 +100,6 @@ export default function table() {
         }
     ]
 
-    const data  = [
-        { id : 1, name : "Varun", age : 53,     date : "1969-09-29"},
-        { id : 2, name : "Ramesh", age : 38,     date : "1983-08-11"},
-        { id : 3, name : "Jhon", age : 21, date : "1999-12-03"},
-        { id : 4, name : "Pamela", age : 21,   date : "1999-12-03"},
-        { id : 5, name : "Irfan", age : 11,  date : "1999-01-02"},
-    ]
     return (
         <>
             <Container>
@@ -80,10 +107,23 @@ export default function table() {
                         <Col>
                             <Table
                                 columns={columns}
-                                data={data}
+                                data={pageData}
                                 filter= "Both"
                                 // sort = {false}
-                                
+                                pagination = {{
+                                "nextPage" : (pageNo)=>{
+
+                                    pageDatehandle(pageNo)
+                                    return true;
+                                },
+                                "previousPage" : (pageNo) =>{
+
+                                    pageDatehandle(pageNo)
+                                    return true
+                                }
+                               
+                            }}
+                               
 
                             />
                         </Col>
@@ -94,7 +134,6 @@ export default function table() {
 
     )
 }
-
 
 
 ```
