@@ -98,6 +98,7 @@ function Delete({curUri, curObj, onSuccess, onError, successCallBack, errorCallb
                         text = "Delete"
                         color="danger"
                         ref={butRef}
+                        disabled={false}
                     />
                     </Form>
                     <AlertP ref={alerRef}/>

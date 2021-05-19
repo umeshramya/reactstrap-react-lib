@@ -21,6 +21,7 @@ const  FormSubmit = ({curObj,curUri,Inputs, reset=()=>{} , onSuccess, onError, s
     const alerRef           = useRef<AlertP>(null)
     const [triggerSubmitCount, setTriggerSubmitCount] = useState(0)
     const [triggerResetCount, setTriggerResetCount] = useState(0)
+    const [submitDisable, setSubmitDisable] = useState(false)
 
     const router            = useRouter();
 
@@ -55,12 +56,15 @@ const  FormSubmit = ({curObj,curUri,Inputs, reset=()=>{} , onSuccess, onError, s
             try {
                 modRef.current?.close();
                 butRef.current?.showSpin();
+                setSubmitDisable(true)
                 alerRef.current?.alertLight();
+                
 
                 validationErrorMessage =_validation();
                 if(validationErrorMessage !== ""){
                     alerRef.current?.alertError(validationErrorMessage);
                     butRef.current?.hideSpin();
+                    setSubmitDisable(false)
                     return;
                 }
 
@@ -76,6 +80,7 @@ const  FormSubmit = ({curObj,curUri,Inputs, reset=()=>{} , onSuccess, onError, s
                     // code to use router to push the page said
                     router.push(`${_curUri}/?${queryString.stringify(_curObj[1])}`);
                     butRef.current?.hideSpin();
+                    setSubmitDisable(false)
                     alerRef.current?.alertSuccess("Successfully completed action");
                     return;
                 }else{
@@ -88,6 +93,7 @@ const  FormSubmit = ({curObj,curUri,Inputs, reset=()=>{} , onSuccess, onError, s
                 let _successMessage =  _onSuccess(res, successCallBack)
                 
                 butRef.current?.hideSpin();
+                setSubmitDisable(false)
                 alerRef.current?.alertSuccess(_successMessage);
 
                 
@@ -99,6 +105,7 @@ const  FormSubmit = ({curObj,curUri,Inputs, reset=()=>{} , onSuccess, onError, s
                
                 alerRef.current?.alertError(_errorMessage);
                 butRef.current?.hideSpin();
+                setSubmitDisable(false)
                 
                 
     
@@ -107,19 +114,7 @@ const  FormSubmit = ({curObj,curUri,Inputs, reset=()=>{} , onSuccess, onError, s
         }
     return (
         <>
-            {/* <style>
-                {
-                    `
-                        .required{
-                        color :brown;
-                        }
-                        .required::after{
-                        content: " #";
-                        }
-                            
-                    `
-                }
-            </style> */}
+
 
             <Row>
                 <Col>
@@ -146,7 +141,9 @@ const  FormSubmit = ({curObj,curUri,Inputs, reset=()=>{} , onSuccess, onError, s
                     <Col>
                         <ButtonP 
                             text = "Submit"
-                            ref={butRef} 
+                            ref={butRef}
+                            disabled = {submitDisable}
+
                         />
                     </Col>
                     <Col>
@@ -154,6 +151,7 @@ const  FormSubmit = ({curObj,curUri,Inputs, reset=()=>{} , onSuccess, onError, s
                             text={"Reset"}
                             color={"warning"}
                             onClick={reset}
+                            disabled={false}
                         />
                     </Col>
                 </Row>

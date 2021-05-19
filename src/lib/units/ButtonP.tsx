@@ -6,6 +6,7 @@ interface Props{
     text:string;
     onClick?: ()=>void
     color?:string
+    disabled:boolean
 }
 interface State {
     toggelSpin:boolean
@@ -28,47 +29,12 @@ export default class ButtonP extends Component<Props, State> {
 
     render() {
         return (
-        <Button block color={this.props.color} onClick = {this.props.onClick} >{`${this.props.text}  `}
+        <Button block color={this.props.color} onClick = {this.props.onClick} disabled = {this.props.disabled}>{`${this.props.text}  `}
             {this.state.toggelSpin ? <Spinner/> : ""}
-
+            
         </Button>
         )
     }
 }
 
 
-
-// import React, {useState, useImperativeHandle} from 'react'
-// import {Button, Spinner} from "reactstrap"
-
-// interface Props{
-//     text:string;
-//     onClick?: ()=>void
-// }
-
-
-//  const ButtonP =  React.forwardRef(({text, onClick}:Props, ref) => {
-//     const [toggelSpin, setsToggelSpin] = useState(false)
-
-//     useImperativeHandle(ref, ()=>({
-//         spin : ()=> setsToggelSpin(!toggelSpin),
-//         showSpin : ()=> setsToggelSpin(true),
-//         hideSpin : ()=> setsToggelSpin(false),
-
-//       }))
-//     return (
-
-
-//         <Button block onClick = {onClick} >{`${text}  `}
-//             {toggelSpin ? <Spinner/> : ""}
-
-//         </Button>
-
-//     )
-// })
-
-// export default ButtonP
-
-// ButtonP.defaultProps={
-//     text : "Click",
-// }

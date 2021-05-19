@@ -123,7 +123,7 @@ const Sidebar = (props: Props) => {
                 </style>
 
                 {/* side bar */}
-                <Col sm={12} lg={3} className={`sidebar`} >
+                <Col sm={12} lg={2} className={`sidebar`} >
                     {/* display icon + name with link / panel */}
                     <>
                         <h4>{props.orgName}</h4>
@@ -144,7 +144,7 @@ const Sidebar = (props: Props) => {
                     </>
                 </Col>
                 {/* /Area for horizontal bar and main */}
-                <Col sm={12} lg={9}>
+                <Col sm={12} lg={10}>
                     <Row>
                         {/* Horizontal bar */}
                         <Col sm={12} className={`menubar`}>

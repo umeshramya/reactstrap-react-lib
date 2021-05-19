@@ -134,9 +134,13 @@ export default function TableCompenent({ columns, data,filter, sort }: Props): R
 
 
     return (
-        <>
+        <Row style={{
+            maxHeight: '500px',
+            overflowY: 'auto'
+          }}>
 
-            <Table hover responsive bordered>
+ 
+            <Table hover responsive bordered >
                 <thead>
                     <tr>
                         {
@@ -202,7 +206,7 @@ export default function TableCompenent({ columns, data,filter, sort }: Props): R
 
             </Table>
 
-        </>
+        </Row>
     )
 }
 
