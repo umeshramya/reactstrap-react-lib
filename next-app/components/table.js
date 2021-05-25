@@ -9,11 +9,11 @@ export default function table() {
     const [pageData, setpageData] = useState([])
     const [pagesize, setPagesize] = useState(100)
     useEffect(() => {
-        pageDatehandle(0)
+        pageDataHandle(0)
         return () => {}
     }, [data])
 
-    const pageDatehandle = (pageNo)=>{
+    const pageDataHandle = (pageNo)=>{
         let pageStart = pageNo * pagesize
         let curPageData = data.slice ( pageStart , pageStart + pagesize)
     
@@ -82,12 +82,12 @@ export default function table() {
                                 pagination = {{
                                 "nextPage" : (pageNo)=>{
 
-                                    pageDatehandle(pageNo)
+                                    pageDataHandle(pageNo)
                                     return true;
                                 },
                                 "previousPage" : (pageNo) =>{
 
-                                    pageDatehandle(pageNo)
+                                    pageDataHandle(pageNo)
                                     return true
                                 }
                                

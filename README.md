@@ -1,5 +1,9 @@
 # reactstrap-react-lib
 This is build with typescript for using  with react and reactstrap
+## install this library by using this commonf
+`npm install reactstrap-react-lib`
+## use our cli for generating forms and table
+`npx reactstrap-react-lib-cli`
 
 This contains forloowing lib modules
 1. FormSubmit
@@ -25,25 +29,23 @@ This contains forloowing lib modules
 | sort         | boolean                                            |true means allows false no |
 
 
-
-
 ```javascript
 import React,{useState, useEffect} from 'react'
 import {Row, Col, Container} from "reactstrap"
 import {LinkP, Table} from "reactstrap-react-lib"
 import data from "../MOCK_DATA .json"
 
-
+// {"id":1,"first_name":"Aubine","last_name":"McClenaghan","email":"amcclenaghan0@prnewswire.com","gender":"Polygender","ip_address":"11.4.220.200","date":"2020-08-17"}
 
 export default function table() {
     const [pageData, setpageData] = useState([])
     const [pagesize, setPagesize] = useState(100)
     useEffect(() => {
-        pageDatehandle(0)
+        pageDataHandle(0)
         return () => {}
     }, [data])
 
-    const pageDatehandle = (pageNo)=>{
+    const pageDataHandle = (pageNo)=>{
         let pageStart = pageNo * pagesize
         let curPageData = data.slice ( pageStart , pageStart + pagesize)
     
@@ -51,7 +53,6 @@ export default function table() {
     }
 
     const columns = [
-        // {"id":1,"first_name":"Aubine","last_name":"McClenaghan","email":"amcclenaghan0@prnewswire.com","gender":"Polygender","ip_address":"11.4.220.200","date":"2020-08-17"}
         {
             Header : "Id",
             accessor : "id",
@@ -113,17 +114,18 @@ export default function table() {
                                 pagination = {{
                                 "nextPage" : (pageNo)=>{
 
-                                    pageDatehandle(pageNo)
+                                    pageDataHandle(pageNo)
                                     return true;
                                 },
                                 "previousPage" : (pageNo) =>{
 
-                                    pageDatehandle(pageNo)
+                                    pageDataHandle(pageNo)
                                     return true
                                 }
                                
                             }}
                                
+                                
 
                             />
                         </Col>
@@ -136,9 +138,8 @@ export default function table() {
 }
 
 
+
 ```
-
-
 ## FormSubmit
 This is for submiting data to server. it has inbuilt submit button and also reset button.
 1. declare states as {} your component asign it curObj prop like this `={["POST", curObj]}`
