@@ -1,13 +1,13 @@
 # reactstrap-react-lib
 This is build with typescript for using  with react and reactstrap
-## install this library by using this commonf
+## install this library by using this command
 `npm install reactstrap-react-lib`
 ## use our cli for generating forms and table
 `npx reactstrap-react-lib-cli`
 
-This contains forloowing lib modules
-1. FormSubmit
-2. React-Table
+This contains following lib modules
+1. React-Table
+2. FormSubmit
 3. AdminPanel/Sidebar
 3. DeleteForm
 
@@ -27,6 +27,7 @@ This contains forloowing lib modules
 | columns      | { Header accessor Cell  dataType}                  |see code below             |
 | filter       | "Global" or "Column" or "Both"or "None"            |These are filter for table |
 | sort         | boolean                                            |true means allows false no |
+| pagination   | object containing functiona                        |                           |                  
 
 
 ```javascript
