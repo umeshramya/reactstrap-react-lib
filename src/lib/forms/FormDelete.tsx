@@ -6,12 +6,13 @@ import AlertP from "../units/AlertP"
 import ModelP from "../units/ModelP"
 import {propMaster} from "../Interfaces/interfaces"
 
+type Props = Omit<propMaster, "reset">;
 
-
-interface Props extends propMaster{
-    /**id is value by which the record has to be deleted  */
-    id:any
-}
+// interface Props extends propMaster{
+//     /**id is value by which the record has to be deleted  */
+//     // id:any
+ 
+// }
 
 function Delete({curUri, curObj, onSuccess, onError, successCallBack, errorCallback,validation=()=>"" , AxiosRequestConfig={}}:Props) {
     const butRef            = useRef<ButtonP>(null)
