@@ -110,7 +110,7 @@ function submitForm(props) {
                     <FormDelete
             
                         curUri="api/form-delete"
-                        curObj = {["POST", {id : 1}]}
+                        curObj = {["PUT", {id : 1}]}
                         onSuccess={(res)=>{
                             
                             return res.data.mes

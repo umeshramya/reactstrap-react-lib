@@ -8,13 +8,10 @@ import {propMaster} from "../Interfaces/interfaces"
 
 type Props = Omit<propMaster, "reset">;
 
-// interface Props extends propMaster{
-//     /**id is value by which the record has to be deleted  */
-//     // id:any
- 
-// }
 
-function Delete({curUri, curObj, onSuccess, onError, successCallBack, errorCallback,validation=()=>"" , AxiosRequestConfig={}}:Props) {
+
+// function Delete({curUri, curObj, onSuccess, onError, successCallBack, errorCallback,validation=()=>"" , AxiosRequestConfig={}}:Props) {
+    function Delete(props:Props) {
     const butRef            = useRef<ButtonP>(null)
     const modRef            = useRef<ModelP>(null)
     const alerRef           = useRef<AlertP>(null)
@@ -24,9 +21,9 @@ function Delete({curUri, curObj, onSuccess, onError, successCallBack, errorCallb
         return () => {
         
         }
-    }, [curObj])
+    }, [props.curObj])
 
-    const  submitHandle =  async(_curUri:string, _curObj:typeof curObj, _onSuccess:typeof onSuccess, _onError:typeof onError, _validation:typeof validation)=>{
+    const  submitHandle =  async(_curUri:string, _curObj:typeof props.curObj, _onSuccess:typeof props.onSuccess, _onError:typeof props.onError, _validation:typeof props.validation=()=>"")=>{
         let validationErrorMessage:string = "";
           
         try {
@@ -46,18 +43,18 @@ function Delete({curUri, curObj, onSuccess, onError, successCallBack, errorCallb
                 
                 let res:AxiosResponse;
                  if( _curObj[0] === "GET"){
-                    res = await axios.get(_curUri,AxiosRequestConfig).then(res=>res)
+                    res = await axios.get(_curUri,props.AxiosRequestConfig).then(res=>res)
                 }else if(_curObj[0] === "DELETE"){
-                    res = await axios.delete(_curUri, AxiosRequestConfig).then(res=>res);
+                    res = await axios.delete(_curUri, props.AxiosRequestConfig).then(res=>res);
                 }else if(_curObj[0] === "PUT"){
-                    res= await axios.put(_curUri, _curObj, AxiosRequestConfig).then(res=>res);
+                    res= await axios.put(_curUri, _curObj[1], props.AxiosRequestConfig).then(res=>res);
                 }else{
                     // default method
-                    res = await axios.post(_curUri, _curObj, AxiosRequestConfig).then(res=>res);
+                    res = await axios.post(_curUri, _curObj[1], props.AxiosRequestConfig).then(res=>res);
                 }
                 
             
-            let _successMessage =  _onSuccess(res, successCallBack)
+            let _successMessage =  _onSuccess(res, props.successCallBack)
             
             butRef.current?.hideSpin();
             alerRef.current?.alertSuccess(_successMessage);
@@ -67,7 +64,7 @@ function Delete({curUri, curObj, onSuccess, onError, successCallBack, errorCallb
 
         } catch (error) {
        
-            let _errorMessage =  _onError(error, errorCallback);
+            let _errorMessage =  _onError(error, props.errorCallback);
            
             alerRef.current?.alertError(_errorMessage);
             butRef.current?.hideSpin();
@@ -84,7 +81,7 @@ function Delete({curUri, curObj, onSuccess, onError, successCallBack, errorCallb
                     <ModelP 
                         ref = {modRef}
                         Ok ={(e)=>{
-                            submitHandle(curUri, curObj, onSuccess, onError,validation)
+                            submitHandle(props.curUri, props.curObj, props.onSuccess, props.onError, props.validation)
                             modRef.current?.close();
                         }}
                         modelTitle ="Do you want to delete data ?"
