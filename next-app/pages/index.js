@@ -1,11 +1,12 @@
-import Head from 'next/head'
-import styles from '../styles/Home.module.css'
 import ButtomP from "../components/submitForm"
 import Table from "../components/table"
+import DateTime from "../components/dateTime" 
 
 export default function Home() {
   return (
 <>
+    
+    <DateTime/>
     <ButtomP/>
     <Table />
 </>
