@@ -19,9 +19,9 @@ export default class Moment extends Date{
         return ret;
       }
       /**
-       * 
-       * @param date 
-       * @returns 
+       * This is for cvonverting system Date and Time to UTC using offset
+       * @param date system Time
+       * @returns UTC Date and Time
        */
       getUTCDateTime = (date:Date = this._date):Date=>{
         let offset = date.getTimezoneOffset();
