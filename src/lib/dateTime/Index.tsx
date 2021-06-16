@@ -2,19 +2,19 @@ import React, { ReactElement,useState } from 'react'
 import {Input} from "reactstrap"
 type dateString= string;
 interface Props {
-    setDateTime:dateString;
-    getDateTime:()=>dateString
+    setDateTime:string;
+    // getDateTime?:(fun:(val:dateString)=>void)=>void;
     
 }
 
 export default function Index(props: Props): ReactElement {
-    const [dateTime, setDateTime] = useState(props.setDateTime);
+    const [dateTimeState, setDateTimeState] = useState(props.setDateTime);
 
     const setDate = (e:any)=>{
         let date = e.target.value;
-        let preDate = dateTime.substring(0,10);
-        let newDate = dateTime.replace(preDate, date);
-        setDateTime(newDate);
+        let preDate = dateTimeState.substring(0,10);
+        let newDate = dateTimeState.replace(preDate, date);
+        setDateTimeState(newDate);
 
     }
 
@@ -23,23 +23,27 @@ export default function Index(props: Props): ReactElement {
     const setTime = (e:any)=>{
         
         let time = e.target.value;
-        let preTime = dateTime.substring(11, 19);
-        console.log(preTime)
-        let newTime = dateTime.replace(preTime, `${time}`);
-        setDateTime(newTime);
+        let preTime = dateTimeState.substring(11, 19);
+
+        let newTime = dateTimeState.replace(preTime, `${time}`);
+        setDateTimeState(newTime);
 
        
     }
 
-    props.getDateTime = ():dateString=>{
-        return dateTime;
-    }
+
 
     return (
 
         <>
-            <Input type="date" value={dateTime.substring(0,10) } onChange={(e)=>setDate(e)}/>
-            <Input type = 'time' value={dateTime.substring(11,19)} onChange={(e)=>setTime(e)}/>
+            {
+                    // props.getDateTime = (fun:(val:dateString)=>void):void=>{
+                    //     fun(dateTimeState);
+                    // }
+
+            }
+            <Input type="date" value={dateTimeState.substring(0,10) } onChange={(e)=>setDate(e)}/>
+            <Input type = 'time' value={dateTimeState.substring(11,19)} onChange={(e)=>setTime(e)}/>
 
         </>
     )
