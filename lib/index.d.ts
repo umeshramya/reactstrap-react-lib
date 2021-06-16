@@ -9,12 +9,14 @@ import SectioPanel from "./lib/admin/SectionPanel";
 import Sidebar from "./lib/admin/Sidebar";
 import { sectionEach, sectionElements, panelProps } from "./lib/admin/SectionPanel";
 import DateTime from "./lib/dateTime/Index";
+import Moment from "./lib/moment";
 export { AlertP, ButtonP, ModelP, LinkP };
 export { FormSubmit };
 export { FormDelete };
 export { Sidebar, SectioPanel };
 export { Table };
 export { DateTime };
+export { Moment };
 /**
  * interfaces
  */
