@@ -44,7 +44,7 @@ export default function Index(props: Props): ReactElement {
     return (
 
         <>
-            <Row>
+            <Row noGutters={true}>
                 <Col sm={6}>
                 <Input type="date" value={dateTimeState.substring(0, 10)} onChange={(e)=>setDate(e)} />
                 </Col>
