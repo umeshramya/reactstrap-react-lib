@@ -2,7 +2,7 @@ import { ReactElement } from 'react';
 declare type dateString = string;
 interface Props {
     setDateTime: dateString;
-    getDateTime?: (fun: (val: dateString) => void) => dateString;
+    getDateTime: (val: dateString) => void;
 }
 export default function Index(props: Props): ReactElement;
 export {};

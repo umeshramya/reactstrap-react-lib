@@ -1,10 +1,10 @@
 import React, { ReactElement,useState } from 'react'
-import {Input} from "reactstrap"
+import {Input, Row, Col} from "reactstrap"
 type dateString= string;
 
 interface Props {
     setDateTime:dateString;
-    getDateTime?:(fun:(val:dateString)=>void)=>dateString;
+    getDateTime:(val:dateString)=>void;
     
 }
 
@@ -16,6 +16,7 @@ export default function Index(props: Props): ReactElement {
         let date = e.target.value;
         let preDate = dateTimeState.substring(0,10);
         let newDate = dateTimeState.replace(preDate, date);
+        props.getDateTime(newDate)
         setDateTimeState(newDate);
 
     }
@@ -28,16 +29,14 @@ export default function Index(props: Props): ReactElement {
         let preTime = dateTimeState.substring(11, 19);
 
         let newTime = dateTimeState.replace(preTime, `${time}`);
+        props.getDateTime(newTime)
         setDateTimeState(newTime);
 
        
     }
 
 
-    props.getDateTime = (fun:(val:dateString)=>void):dateString=>{
-        fun(dateTimeState);
-        return dateTimeState;
-    }
+
 
 
 
@@ -45,9 +44,16 @@ export default function Index(props: Props): ReactElement {
     return (
 
         <>
-
-            <Input type="date" value={dateTimeState.substring(0, 10)} onChange={(e)=>setDate(e)}/>
-            <Input type = 'time' value={dateTimeState.substring(11,19)} onChange={(e)=>setTime(e)}/>
+            <Row>
+                <Col sm={6}>
+                <Input type="date" value={dateTimeState.substring(0, 10)} onChange={(e)=>setDate(e)} />
+                </Col>
+                <Col sm={6}>
+                <Input type = 'time' value={dateTimeState.substring(11,19)} onChange={(e)=>setTime(e)}/>
+                </Col>
+            </Row>
+            
+            
 
         </>
     )

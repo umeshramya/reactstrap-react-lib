@@ -10,6 +10,7 @@ This contains following lib modules
 2. FormSubmit
 3. AdminPanel/Sidebar
 3. DeleteForm
+4. DateTime widget
 
 ## React-Table 
 ### This is react-table following code shows the implimentation.
@@ -316,5 +317,37 @@ function deleteForm(props) {
             </Row>
     )
      
+```
+
+# DateTime widget
+```javascript
+    import React, {useRef, useState} from 'react'
+import {DateTime} from "reactstrap-react-lib"
+import { Row,Col, Container} from "reactstrap"
+
+export default function DateTimeComponent() {
+
+const [dateTime, setDateTime] = useState(null)
+  
+
+    
+    return (
+        <Container>
+            <Row>
+
+            <Col sm={12} md={6} lg={4}>
+               {dateTime}
+            <DateTime
+                setDateTime={new Date().toISOString()}
+                getDateTime = {(val)=>setDateTime(val)}
+            />
+
+            </Col>
+        </Row>
+
+        </Container>
+        
+    )
+}
 ```
 
