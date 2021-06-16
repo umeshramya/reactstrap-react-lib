@@ -351,3 +351,13 @@ const [dateTime, setDateTime] = useState(null)
 }
 ```
 
+# Moment 
+This is for manippltating date for timezone and UTC
+```javascript
+const {Moment} = require("reactstrap-react-lib")
+
+let moment = new Moment()
+console.log(moment.getSystemTimezoneDateTime().toISOString())
+console.log(moment.getUTCDateTime().toString())
+
+```
