@@ -1,13 +1,15 @@
 import React, { ReactElement,useState } from 'react'
 import {Input} from "reactstrap"
 type dateString= string;
+
 interface Props {
-    setDateTime:string;
-    // getDateTime?:(fun:(val:dateString)=>void)=>void;
+    setDateTime:dateString;
+    getDateTime?:(fun:(val:dateString)=>void)=>dateString;
     
 }
 
 export default function Index(props: Props): ReactElement {
+    
     const [dateTimeState, setDateTimeState] = useState(props.setDateTime);
 
     const setDate = (e:any)=>{
@@ -32,17 +34,19 @@ export default function Index(props: Props): ReactElement {
     }
 
 
+    props.getDateTime = (fun:(val:dateString)=>void):dateString=>{
+        fun(dateTimeState);
+        return dateTimeState;
+    }
+
+
+
 
     return (
 
         <>
-            {
-                    // props.getDateTime = (fun:(val:dateString)=>void):void=>{
-                    //     fun(dateTimeState);
-                    // }
 
-            }
-            <Input type="date" value={dateTimeState.substring(0,10) } onChange={(e)=>setDate(e)}/>
+            <Input type="date" value={dateTimeState.substring(0, 10)} onChange={(e)=>setDate(e)}/>
             <Input type = 'time' value={dateTimeState.substring(11,19)} onChange={(e)=>setTime(e)}/>
 
         </>

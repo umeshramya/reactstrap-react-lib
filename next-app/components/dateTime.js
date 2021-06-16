@@ -15,8 +15,8 @@ const [dateTime, setDateTime] = useState(null)
             <Col sm={12} md={6} lg={3}>
                 <h4>{dateTime}</h4>
             <DateTime
-                value={new Date().toISOString()}
-                // getDateTime = {(val)=>setDateTime(val)}
+                setDateTime={new Date().toISOString()}
+                getDateTime = {(val)=>setDateTime(val)}
             />
 
             </Col>
