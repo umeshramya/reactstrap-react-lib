@@ -29,6 +29,14 @@ export default class Moment extends Date{
         ret = new Date(date.getTime() + (offset*60*1000));
         return ret;
       }
+
+      convertToDataBaseString(_date:Date):string{
+     
+        let ret=""
+        let dateString= _date.toISOString()
+        ret = dateString.substring(0, 10) +  " " + dateString.substring(12, dateString.length-1 )
+        return ret.trim();
+      }
     
 }
 
