@@ -18,8 +18,8 @@ const [dateTime, setDateTime] = useState(null)
                 setDateTime={new Date().toISOString()}
                 getDateTime = {(val)=>{
                     let moment = new Moment();
-                    let utcDate =  moment.getUTCDateTime(new Date(val))
-                    let dataBaseString = moment.convertToDataBaseString(utcDate)
+                    let utcDate =  moment._getUTCDateTime(new Date(val))
+                    let dataBaseString = moment._convertToDataBaseString(utcDate)
                     setDateTime(dataBaseString)
                 }}
             />
