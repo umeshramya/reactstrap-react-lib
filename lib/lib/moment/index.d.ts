@@ -11,10 +11,11 @@ export default class Moment extends Date {
      */
     getSystemTimezoneDateTime: (date?: Date) => Date;
     /**
-     *
-     * @param date
-     * @returns
+     * This is for cvonverting system Date and Time to UTC using offset
+     * @param date system Time
+     * @returns UTC Date and Time
      */
     getUTCDateTime: (date?: Date) => Date;
+    convertToDataBaseString(_date: Date): string;
 }
 //# sourceMappingURL=index.d.ts.map
