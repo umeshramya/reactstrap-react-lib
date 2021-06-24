@@ -1,38 +1,41 @@
 /**
  * This oclass deals with maniplitation of time and date
  */
-export default class Moment extends Date{
-    private date: Date;
+export default class Moment{
+    private _date: Date;
 
-    public get _date(): Date {
-      return this.date;
+
+    public get date(): Date {
+      return this._date;
+    }
+    public set date(value: Date) {
+      this._date = value;
     }
 
+
     constructor(date:Date = new Date()){
-        super(date);
-        this.date = date;
+        this._date = date;
     }
     /**
      * convert the utc date and time to local time using system timezone offset
      * @param date UTC dateand time
      * @returns date and time local timezone
      */
-     _getSystemTimezoneDateTime= (date:Date = this.date):Date=>{
+     getSystemTimezoneDateTime= (date:Date = this._date):Moment=>{
         let offset = date.getTimezoneOffset() * -1;
-        let ret:Date;
-        ret = new Date(date.getTime() + (offset*60*1000));
-        return ret;
+        this._date = new Date(date.getTime() + (offset*60*1000)) ;
+        return this
       }
       /**
        * This is for cvonverting system Date and Time to UTC using offset
        * @param date system Time
        * @returns UTC Date and Time
        */
-      _getUTCDateTime = (date:Date = this.date):Date=>{
+      getUTCDateTime = (date:Date = this._date):Moment=>{
         let offset = date.getTimezoneOffset();
-        let ret:Date;
-        ret = new Date(date.getTime() + (offset*60*1000));
-        return ret;
+
+        this._date = new Date(date.getTime() + (offset*60*1000));
+        return this
       }
  
       /**
@@ -40,7 +43,7 @@ export default class Moment extends Date{
        * @param _date date to converted default instance date
        * @returns string 'YYYY-MM-DD hh:mm:ss[.fraction]'
        */
-      _convertToDataBaseString(_date:Date = this.date):string{
+      convertToDataBaseString(_date:Date = this._date):string{
      
         let ret=""
         let dateString= _date.toISOString()
