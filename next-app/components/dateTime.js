@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import {DateTime} from "reactstrap-react-lib"
+import {DateTime, Moment} from "reactstrap-react-lib"
 import { Row,Col, Container} from "reactstrap"
 
 export default function DateTimeComponent() {
@@ -16,7 +16,12 @@ const [dateTime, setDateTime] = useState(null)
                {dateTime}
             <DateTime
                 setDateTime={new Date().toISOString()}
-                getDateTime = {(val)=>setDateTime(val)}
+                getDateTime = {(val)=>{
+                    let moment = new Moment();
+                    let utcDate =  moment._getUTCDateTime(new Date(val))
+                    let dataBaseString = moment._convertToDataBaseString(utcDate)
+                    setDateTime(dataBaseString)
+                }}
             />
 
             </Col>

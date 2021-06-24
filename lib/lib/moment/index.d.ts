@@ -9,12 +9,13 @@ export default class Moment extends Date {
      * @param date UTC dateand time
      * @returns date and time local timezone
      */
-    getSystemTimezoneDateTime: (date?: Date) => Date;
+    _getSystemTimezoneDateTime: (date?: Date) => Date;
     /**
-     *
-     * @param date
-     * @returns
+     * This is for cvonverting system Date and Time to UTC using offset
+     * @param date system Time
+     * @returns UTC Date and Time
      */
-    getUTCDateTime: (date?: Date) => Date;
+    _getUTCDateTime: (date?: Date) => Date;
+    _convertToDataBaseString(_date: Date): string;
 }
 //# sourceMappingURL=index.d.ts.map
