@@ -2,7 +2,8 @@
  * This oclass deals with maniplitation of time and date
  */
 export default class Moment extends Date {
-    _date: Date;
+    private date;
+    get _date(): Date;
     constructor(date?: Date);
     /**
      * convert the utc date and time to local time using system timezone offset
@@ -16,6 +17,11 @@ export default class Moment extends Date {
      * @returns UTC Date and Time
      */
     _getUTCDateTime: (date?: Date) => Date;
-    _convertToDataBaseString(_date: Date): string;
+    /**
+     * Converts the Date to date base storable format string 'YYYY-MM-DD hh:mm:ss[.fraction]'
+     * @param _date date to converted default instance date
+     * @returns string 'YYYY-MM-DD hh:mm:ss[.fraction]'
+     */
+    _convertToDataBaseString(_date?: Date): string;
 }
 //# sourceMappingURL=index.d.ts.map
