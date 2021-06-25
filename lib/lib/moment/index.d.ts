@@ -11,13 +11,13 @@ export default class Moment {
      * @param date UTC dateand time
      * @returns date and time local timezone
      */
-    getSystemTimezoneDateTime: (date?: Date) => Moment;
+    setSystemTimeZoneToUTC: (date?: Date) => Moment;
     /**
      * This is for cvonverting system Date and Time to UTC using offset
      * @param date system Time
      * @returns UTC Date and Time
      */
-    getUTCDateTime: (date?: Date) => Moment;
+    setUtcToSystemTimeZone: (date?: Date) => Moment;
     /**
      * Converts the Date to date base storable format string 'YYYY-MM-DD hh:mm:ss[.fraction]'
      * @param _date date to converted default instance date

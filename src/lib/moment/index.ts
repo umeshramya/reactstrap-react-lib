@@ -21,8 +21,9 @@ export default class Moment{
      * @param date UTC dateand time
      * @returns date and time local timezone
      */
-     getSystemTimezoneDateTime= (date:Date = this._date):Moment=>{
-        let offset = date.getTimezoneOffset() * -1;
+     setSystemTimeZoneToUTC= (date:Date = this._date):Moment=>{
+        let offset = date.getTimezoneOffset();
+   
         this._date = new Date(date.getTime() + (offset*60*1000)) ;
         return this
       }
@@ -31,8 +32,8 @@ export default class Moment{
        * @param date system Time
        * @returns UTC Date and Time
        */
-      getUTCDateTime = (date:Date = this._date):Moment=>{
-        let offset = date.getTimezoneOffset();
+      setUtcToSystemTimeZone = (date:Date = this._date):Moment=>{
+        let offset = date.getTimezoneOffset()* -1;
 
         this._date = new Date(date.getTime() + (offset*60*1000));
         return this
