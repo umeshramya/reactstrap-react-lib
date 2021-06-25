@@ -48,7 +48,7 @@ export default class Moment{
      
         let ret=""
         let dateString= _date.toISOString()
-        ret = dateString.substring(0, 10) +  " " + dateString.substring(12, dateString.length-1 )
+        ret = dateString.substring(0, 10) +  " " + dateString.substring(11, dateString.length-1 )
         return ret.trim();
       }
     

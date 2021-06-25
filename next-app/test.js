@@ -7,5 +7,8 @@ let  curdate = moment.convertToDataBaseString();
 
 
 console.log(curdate);
-console.log(moment.setSystemTimeZoneToUTC().convertToDataBaseString(), "system time zone");
-console.log(moment.setUtcToSystemTimeZone().convertToDataBaseString(), "back to utc");
+console.log(moment.setSystemTimeZoneToUTC().convertToDataBaseString(), "System time zone");
+console.log(moment.setUtcToSystemTimeZone().convertToDataBaseString(), "Back to utc");
+
+
+
