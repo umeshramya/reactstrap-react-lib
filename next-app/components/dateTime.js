@@ -15,12 +15,16 @@ const [dateTime, setDateTime] = useState(null)
             <Col sm={12} md={6} lg={4}>
                {dateTime}
             <DateTime
-                setDateTime={new Date().toISOString()}
+                setDateTime={new Moment().setUtcToSystemTimeZone().convertToDataBaseString()}
+                // getDateTime = {(val)=>{
+                //     // let moment = new Moment();
+                //     // let utcDate =  moment._getUTCDateTime(new Date(val))
+                //     // let dataBaseString = moment._convertToDataBaseString(utcDate)
+                //     // setDateTime(new Moment(new Date(val)).setSystemTimeZoneToUTC().convertToDataBaseString())
+                // }}
+
                 getDateTime = {(val)=>{
-                    let moment = new Moment();
-                    let utcDate =  moment._getUTCDateTime(new Date(val))
-                    let dataBaseString = moment._convertToDataBaseString(utcDate)
-                    setDateTime(dataBaseString)
+                    setDateTime(new Moment(new Date(val)).convertToDataBaseString())
                 }}
             />
 
