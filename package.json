@@ -1,12 +1,12 @@
 {
   "name": "reactstrap-react-lib",
-  "version": "1.1.26",
+  "version": "1.2.0",
   "description": "This is a lib for react and next",
   "main": "lib/index.js",
   "types": "lib",
   "scripts": {
     "build": "tsc -p .",
-    "dev": "npm run build && echo Built the lib \\n && yalc publish && echo  Published  to local repo \\n && cd next-app && echo Now inside next-app \\n && yalc update && echo Update from local repo \\n && npm run dev"
+    "dev": "npm run build && echo Built the lib \\n && yalc publish && echo  Published  to local repo \\n && cd next-app && echo Now inside next-app \\n && yalc add reactstrap-react-lib && yalc update && echo Update from local repo \\n && npm run dev"
   },
   "repository": {
     "type": "git",
