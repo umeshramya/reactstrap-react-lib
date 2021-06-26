@@ -1,25 +1,29 @@
 // main entry for libr
-import AlertP from "./lib/units/AlertP"
-import ButtonP from "./lib/units/ButtonP"
-import ModelP from "./lib/units/ModelP"
-import LinkP from "./lib/units/LinkP"
-import FormSubmit from "./lib/forms/FormSubmit"
-import FormDelete from "./lib/forms/FormDelete"
-import Table, {column} from "./lib/tables/"
-import SectioPanel from "./lib/admin/SectionPanel"
-import Sidebar from "./lib/admin/Sidebar"
-import {sectionEach, sectionElements, panelProps} from "./lib/admin/SectionPanel"
-import DateTime from  "./lib/dateTime/Index"
-import Moment from "./lib/moment"
+import AlertP from "./lib/units/AlertP";
+import ButtonP from "./lib/units/ButtonP";
+import ModelP from "./lib/units/ModelP";
+import LinkP from "./lib/units/LinkP";
+import FormSubmit from "./lib/forms/FormSubmit";
+import FormDelete from "./lib/forms/FormDelete";
+import Table, { column } from "./lib/tables/";
+import SectioPanel from "./lib/admin/SectionPanel";
+import Sidebar from "./lib/admin/Sidebar";
+import {
+  sectionEach,
+  sectionElements,
+  panelProps,
+} from "./lib/admin/SectionPanel";
+import DateTime from "./lib/dateTime/Index";
+import Moment from "./lib/moment";
 
-export {AlertP, ButtonP, ModelP, LinkP }
-export {FormSubmit}
-export {FormDelete}
-export {Sidebar, SectioPanel}
-export {Table }
-export {DateTime}
-export {Moment}
+export { AlertP, ButtonP, ModelP, LinkP };
+export { FormSubmit };
+export { FormDelete };
+export { Sidebar, SectioPanel };
+export { Table };
+export { DateTime };
+export { Moment };
 /**
  * interfaces
  */
-export type {sectionEach, sectionElements, panelProps , column}
+export type { sectionEach, sectionElements, panelProps, column };

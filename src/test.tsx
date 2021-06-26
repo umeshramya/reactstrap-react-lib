@@ -1,9 +1,8 @@
-const submit = async(onSuccess:()=>Promise<string>)=>{
- let u =   await onSuccess()
- console.log(u)
-}
+const submit = async (onSuccess: () => Promise<string>) => {
+  let u = await onSuccess();
+  console.log(u);
+};
 
+const onSuccess = async () => "umesh";
 
-const  onSuccess = async()=>"umesh";
-
-submit(onSuccess)
+submit(onSuccess);
