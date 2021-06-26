@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 interface Props {
 }
 declare const _default: React.ForwardRefExoticComponent<Props & React.RefAttributes<unknown>>;

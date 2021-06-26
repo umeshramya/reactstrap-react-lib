@@ -1,4 +1,4 @@
-import { ReactElement } from 'react';
+import { ReactElement } from "react";
 import { panelProps } from "./SectionPanel";
 /** These are the items which will displayed insde side bar */
 interface sidebarLink {

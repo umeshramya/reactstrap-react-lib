@@ -21,7 +21,6 @@ export default function Index(props: Props): ReactElement {
   const setTime = (e: any) => {
     let time = e.target.value;
     let preTime = dateTimeState.substring(11, 19);
-
     let newTime = dateTimeState.replace(preTime, `${time}`);
     props.getDateTime(newTime);
     setDateTimeState(newTime);

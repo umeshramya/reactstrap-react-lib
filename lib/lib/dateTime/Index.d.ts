@@ -1,4 +1,4 @@
-import { ReactElement } from 'react';
+import { ReactElement } from "react";
 declare type dateString = string;
 interface Props {
     setDateTime: dateString;

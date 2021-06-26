@@ -1,4 +1,4 @@
-import { ReactElement } from 'react';
+import { ReactElement } from "react";
 declare type side = "Server" | "Client";
 export interface PaginationProps {
     pageFrom?: side;
