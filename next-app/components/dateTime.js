@@ -5,9 +5,6 @@ import { Row,Col, Container} from "reactstrap"
 export default function DateTimeComponent() {
 
 const [dateTime, setDateTime] = useState(null)
-  
-
-    
     return (
         <Container>
             <Row>
@@ -16,21 +13,12 @@ const [dateTime, setDateTime] = useState(null)
                {dateTime}
             <DateTime
                 setDateTime={new Moment().setUtcToSystemTimeZone().convertToDataBaseString()}
-                // getDateTime = {(val)=>{
-                //     // let moment = new Moment();
-                //     // let utcDate =  moment._getUTCDateTime(new Date(val))
-                //     // let dataBaseString = moment._convertToDataBaseString(utcDate)
-                //     // setDateTime(new Moment(new Date(val)).setSystemTimeZoneToUTC().convertToDataBaseString())
-                // }}
-
                 getDateTime = {(val)=>{
                     setDateTime(new Moment(new Date(val)).convertToDataBaseString())
                 }}
             />
-
             </Col>
         </Row>
-
         </Container>
         
     )

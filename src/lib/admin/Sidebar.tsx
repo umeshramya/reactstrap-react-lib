@@ -1,72 +1,68 @@
-import React, {Component,useState, useRef, ReactElement}  from 'react'
-import SectionPanel, { panelProps, sectionEach } from "./SectionPanel"
-import { Row, Col } from "reactstrap"
-import { useRouter } from 'next/router'
-
+import React, { Component, useState, useRef, ReactElement } from "react";
+import SectionPanel, { panelProps, sectionEach } from "./SectionPanel";
+import { Row, Col } from "reactstrap";
+import { useRouter } from "next/router";
 
 /** These are the items which will displayed insde side bar */
 interface sidebarLink {
-    /**name diplayed in the sidebar */
-    name: string;
-    /**react-icons as component */
-    icon?: any;
-    /**sectionpanel or link to be shown on click */
-    panel?: panelProps
-    link?: string;
+  /**name diplayed in the sidebar */
+  name: string;
+  /**react-icons as component */
+  icon?: any;
+  /**sectionpanel or link to be shown on click */
+  panel?: panelProps;
+  link?: string;
 }
 
-
-interface Props{
-    /** Main compone nt to be displayed */
-    Main: ReactElement;
-    /**orgnization name to be displayed above in sidebar */
-    orgName?: string;
-    /**user name as string */
-    userName?: string;
-    /**siderBarLinks*/
-    siderBarLinks: sidebarLink[];
-
+interface Props {
+  /** Main compone nt to be displayed */
+  Main: ReactElement;
+  /**orgnization name to be displayed above in sidebar */
+  orgName?: string;
+  /**user name as string */
+  userName?: string;
+  /**siderBarLinks*/
+  siderBarLinks: sidebarLink[];
 }
 
 const Sidebar = (props: Props) => {
-    const   router = useRouter();
-    const curSectionPanel:any= useRef()
+  const router = useRouter();
+  const curSectionPanel: any = useRef();
 
-    let initPanelTitle:panelProps["panelTitle"]="";
-    let initSection:panelProps["section"] = [];
+  let initPanelTitle: panelProps["panelTitle"] = "";
+  let initSection: panelProps["section"] = [];
 
-    const [panelTitle, setpanelTitle] = useState(initPanelTitle);
-    const [section, setSection] = useState(initSection);
+  const [panelTitle, setpanelTitle] = useState(initPanelTitle);
+  const [section, setSection] = useState(initSection);
 
-
-    const dispalyEachLink: any = (eachLink: sidebarLink, index: number): any => {
-        return (
-            <Col onClick={() => {
-                if(eachLink.panel){
-                    // change the states of panel
-                    setpanelTitle(eachLink.panel.panelTitle);
-                    setSection(eachLink.panel.section)
-
-                    curSectionPanel.current?.panelOpen();
-                    
-                }else if(eachLink.link !== undefined){
-                    // use router to push to new link
-                    router.push(eachLink.link);
-                    
-                }
-                
-            }} sm={12} className={`sidebarLi`} key={index}>
-                {eachLink.name}
-            </Col>
-        )
-    }
-
-
+  const dispalyEachLink: any = (eachLink: sidebarLink, index: number): any => {
     return (
-            <Row>
-                <style>
-                    {
-                        `.menubar{
+      <Col
+        onClick={() => {
+          if (eachLink.panel) {
+            // change the states of panel
+            setpanelTitle(eachLink.panel.panelTitle);
+            setSection(eachLink.panel.section);
+
+            curSectionPanel.current?.panelOpen();
+          } else if (eachLink.link !== undefined) {
+            // use router to push to new link
+            router.push(eachLink.link);
+          }
+        }}
+        sm={12}
+        className={`sidebarLi`}
+        key={index}
+      >
+        {eachLink.name}
+      </Col>
+    );
+  };
+
+  return (
+    <Row>
+      <style>
+        {`.menubar{
             background-color: #060b26;
             color: #f5f5f5;
             height: 60px;
@@ -118,62 +114,47 @@ const Sidebar = (props: Props) => {
         .PanalClose:hover{
             cursor: pointer;
         }
-        `
-                    }
-                </style>
+        `}
+      </style>
 
-                {/* side bar */}
-                <Col sm={12} lg={2} className={`sidebar`} >
-                    {/* display icon + name with link / panel */}
-                    <>
-                        <h4>{props.orgName}</h4>
-                        <h5>{props.userName}</h5>
-                        <Row className={`sidebarUl`}>
+      {/* side bar */}
+      <Col sm={12} lg={2} className={`sidebar`}>
+        {/* display icon + name with link / panel */}
+        <>
+          <h4>{props.orgName}</h4>
+          <h5>{props.userName}</h5>
+          <Row className={`sidebarUl`}>
+            {props.siderBarLinks !== undefined
+              ? props.siderBarLinks.map((eachLink, index) => {
+                  return dispalyEachLink(eachLink, index);
+                })
+              : ""}
+          </Row>
+        </>
+      </Col>
+      {/* /Area for horizontal bar and main */}
+      <Col sm={12} lg={10}>
+        <Row>
+          {/* Horizontal bar */}
+          <Col sm={12} className={`menubar`}></Col>
+        </Row>
+        <Row>
+          {/* Main area */}
+          <Col sm={12}>
+            {
+              <SectionPanel
+                panelTitle={panelTitle}
+                section={section}
+                ref={curSectionPanel}
+              />
+            }
 
-                            {
-                                props.siderBarLinks !== undefined ?
-                                    props.siderBarLinks.map((eachLink, index) => {
-                                        return (
-                                            dispalyEachLink(eachLink, index)
-                                        )
-                                    }) : ""
-                            }
+            {props.Main}
+          </Col>
+        </Row>
+      </Col>
+    </Row>
+  );
+};
 
-                        </Row>
-
-                    </>
-                </Col>
-                {/* /Area for horizontal bar and main */}
-                <Col sm={12} lg={10}>
-                    <Row>
-                        {/* Horizontal bar */}
-                        <Col sm={12} className={`menubar`}>
-
-                        </Col>
-                    </Row>
-                    <Row>
-                        {/* Main area */}
-                        <Col sm={12}>
-                            {
-
-                                <SectionPanel
-                                    panelTitle={panelTitle}
-                                    section={section}
-                                    ref={curSectionPanel}
-                                    
-                                />
-                            }
-
-                            {props.Main}
-                        </Col>
-                    </Row>
-
-                </Col>
-
-            </Row>
-        
-    )
-}
-
-
-export default Sidebar
+export default Sidebar;

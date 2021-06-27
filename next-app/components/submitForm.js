@@ -70,8 +70,8 @@ function submitForm(props) {
                         </>
                     }
 
-                    curObj = {["ACTION", obj]}
-                    curUri = ""
+                    curObj = {["POST", obj]}
+                    curUri = "/api/submit-form"
 
                     successCallBack = {(res)=>res.data.mes}
 

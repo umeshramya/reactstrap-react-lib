@@ -1,4 +1,4 @@
-import { ReactElement } from 'react';
+import { ReactElement } from "react";
 import { PaginationProps } from "./Pagination";
 /**
  * This column of table whoose array has to be passed as defination of table by user
@@ -19,7 +19,7 @@ export interface column {
     /** sort thr column
      * any and string treated as string
      * thids is function useful for sorting
-    */
+     */
     dataType: "number" | "string" | "Date" | "boolean" | "any";
 }
 export interface Props {
@@ -29,5 +29,5 @@ export interface Props {
     sort: boolean;
     pagination?: PaginationProps;
 }
-export default function index({ columns, data, filter, sort, pagination }: Props): ReactElement;
+export default function index({ columns, data, filter, sort, pagination, }: Props): ReactElement;
 //# sourceMappingURL=index.d.ts.map
