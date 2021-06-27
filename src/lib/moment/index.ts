@@ -22,7 +22,7 @@ export default class Moment {
    * @returns date and time local timezone
    */
   setSystemTimeZoneToUTC = (date: Date = this._date): Moment => {
-    let offset = date.getTimezoneOffset();
+    let offset = date.getTimezoneOffset() * -1;
 
     this._date = new Date(date.getTime() + (offset * 60 * 1000));
     return this
@@ -33,7 +33,7 @@ export default class Moment {
    * @returns UTC Date and Time
    */
   setUtcToSystemTimeZone = (date: Date = this._date): Moment => {
-    let offset = date.getTimezoneOffset() * -1;
+    let offset = date.getTimezoneOffset();
 
     this._date = new Date(date.getTime() + (offset * 60 * 1000));
     return this
