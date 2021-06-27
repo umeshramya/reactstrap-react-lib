@@ -12,7 +12,7 @@ const [dateTime, setDateTime] = useState(null)
             <Col sm={12} md={6} lg={4}>
                {dateTime}
             <DateTime
-                setDateTime={new Moment().setUtcToSystemTimeZone().convertToDataBaseString()}
+                setDateTime={new Moment().setSystemTimeZoneToUTC().convertToDataBaseString()}
                 getDateTime = {(val)=>{
                     setDateTime(new Moment(new Date(val)).convertToDataBaseString())
                 }}
