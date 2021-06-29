@@ -11,6 +11,7 @@ This contains following lib modules
 3. AdminPanel/Sidebar
 3. DeleteForm
 4. DateTime widget
+5. TimeZone
 
 ## React-Table 
 ### This is react-table following code shows the implimentation.
@@ -351,7 +352,7 @@ const [dateTime, setDateTime] = useState(null)
 }
 ```
 
-# Moment 
+# TimeZone 
 This is for manippltating date for timezone and UTC
 ```javascript
 const  {Moment} = require("reactstrap-react-lib")
