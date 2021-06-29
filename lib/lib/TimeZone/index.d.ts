@@ -23,8 +23,10 @@ export default class TimeZone {
    */
     convertToDataBaseString(_date?: Date): string;
     /**
-     * This is private meththod
-     * @deprecated
+     *
+     * This converts the class Date time to UTC
+     * By default class time zoen is set to UTC
+     *
      * @param date UTC dateand time
      * @returns date and time local timezone
      */

@@ -38,9 +38,9 @@ export default class TimeZone {
  */
   convertToDataBaseString(_date: Date = this._date): string {
 
-    let ret = ""
-    let dateString = _date.toISOString()
-    ret = dateString.substring(0, 10) + " " + dateString.substring(11, dateString.length - 1)
+    let ret = "";
+    let dateString = _date.toISOString();
+    ret = dateString.substring(0, 10) + " " + dateString.substring(11, dateString.length - 1);
     return ret.trim();
   }
 
@@ -48,19 +48,19 @@ export default class TimeZone {
 
 
   /**
-   * This is private meththod
-   * @deprecated
+   * 
+   * This converts the class Date time to UTC
+   * By default class time zoen is set to UTC
+   * 
    * @param date UTC dateand time
    * @returns date and time local timezone
    */
   setSystemTimeZoneToUTC = (date: Date = this._date): TimeZone => {
-    let offset = date.getTimezoneOffset() * -1;
+    let offset = date.getTimezoneOffset();
 
     this._date = new Date(date.getTime() + (offset * 60 * 1000));
     return this
   }
-
-
 
 
 
@@ -70,7 +70,7 @@ export default class TimeZone {
    * @returns UTC Date and Time
    */
   setUTCToSystemTimeZone = (date: Date = this._date): TimeZone => {
-    let offset = date.getTimezoneOffset();
+    let offset = date.getTimezoneOffset() * -1;
 
     this._date = new Date(date.getTime() + (offset * 60 * 1000));
     return this

@@ -355,17 +355,13 @@ const [dateTime, setDateTime] = useState(null)
 # TimeZone 
 This is for manippltating date for timezone and UTC
 ```javascript
-const  {Moment} = require("reactstrap-react-lib")
+const { TimeZone } = require("reactstrap-react-lib")
 
+let timeZone = new TimeZone()// sets current time stamp to UTC time zone
+timeZone.setDate(new Date())// sets passed date time to UTC time zone
+console.log(timeZone.setDate(new Date()).convertToDataBaseString())// return string date
+console.log(timeZone.setUTCToSystemTimeZone().convertToDataBaseString())// retunr string date in system time zone
 
-const moment = new Moment();
-
-let  curdate = moment.convertToDataBaseString();
-
-
-console.log(curdate, "UTC"); // utc
-console.log(moment.setUtcToSystemTimeZone().convertToDataBaseString(), "system time zone");
-console.log(moment. setSystemTimeZoneToUTC().convertToDataBaseString(), "Back To UTC");
 console.log(curdate.substring(0,10),  "Only date")
 console.log(curdate.substring(11, 19), "only time")
 
