@@ -49,18 +49,18 @@ export default class TimeZone {
 
   /**
    * 
-   * This converts the class back to UTC time zone
+   * This converts the class Date time to UTC
+   * By default class time zoen is set to UTC
+   * 
    * @param date UTC dateand time
    * @returns date and time local timezone
    */
-  setBackSystemToUTC = (date: Date = this._date): TimeZone => {
+  setSystemTimeZoneToUTC = (date: Date = this._date): TimeZone => {
     let offset = date.getTimezoneOffset();
 
     this._date = new Date(date.getTime() + (offset * 60 * 1000));
     return this
   }
-
-
 
 
 

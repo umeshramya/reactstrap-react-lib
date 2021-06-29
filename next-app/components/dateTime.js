@@ -12,7 +12,7 @@ export default function DateTimeComponent() {
                 <Col sm={12} md={6} lg={4}>
                     {dateTime}
                     <DateTime
-                        setDateTime={new TimeZone().setSystemTimeZoneToUTC().convertToDataBaseString()}
+                        setDateTime={new TimeZone().setUTCToSystemTimeZone().convertToDataBaseString()}
                         getDateTime={(val) => {
                             setDateTime(new TimeZone().setDate(new Date(val)).convertToDataBaseString())
                         }}
