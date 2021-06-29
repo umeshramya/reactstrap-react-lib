@@ -1,5 +1,5 @@
-const {Moment} = require("reactstrap-react-lib")
+const { TimeZone } = require("reactstrap-react-lib")
 
-let moment = new Moment()
+let moment = new TimeZone()
 console.log(moment.setSystemTimeZoneToUTC().convertToDataBaseString())
 

@@ -14,7 +14,7 @@ import {
   panelProps,
 } from "./lib/admin/SectionPanel";
 import DateTime from "./lib/dateTime/Index";
-import Moment from "./lib/moment";
+import TimeZone from "./lib/TimeZone";
 
 export { AlertP, ButtonP, ModelP, LinkP };
 export { FormSubmit };
@@ -22,7 +22,7 @@ export { FormDelete };
 export { Sidebar, SectioPanel };
 export { Table };
 export { DateTime };
-export { Moment };
+export { TimeZone };
 /**
  * interfaces
  */
