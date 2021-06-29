@@ -14,7 +14,7 @@ export default function DateTimeComponent() {
                     <DateTime
                         setDateTime={new TimeZone().setSystemTimeZoneToUTC().convertToDataBaseString()}
                         getDateTime={(val) => {
-                            setDateTime(new TimeZone(new Date(val)).convertToDataBaseString())
+                            setDateTime(new TimeZone().setDate(new Date(val)).convertToDataBaseString())
                         }}
                     />
                 </Col>
