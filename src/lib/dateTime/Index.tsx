@@ -1,10 +1,11 @@
-import React, { ReactElement, useState } from "react";
+import React, { ReactElement, useState, useEffect } from "react";
 import { Input, Row, Col } from "reactstrap";
 type dateString = string;
 
 interface Props {
   setDateTime: dateString;
   getDateTime: (val: dateString) => void;
+  onLoad?: (val: dateString) => void;
 }
 
 export default function Index(props: Props): ReactElement {
@@ -25,6 +26,13 @@ export default function Index(props: Props): ReactElement {
     props.getDateTime(newTime);
     setDateTimeState(newTime);
   };
+
+  useEffect(() => {
+    if (props.onLoad) {
+      props.onLoad(dateTimeState);
+    }
+    return () => {};
+  }, []);
 
   return (
     <>
