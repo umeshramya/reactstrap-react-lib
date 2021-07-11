@@ -322,34 +322,33 @@ function deleteForm(props) {
 
 # DateTime widget
 ```javascript
-import React, {useState} from 'react'
-import {DateTime} from "reactstrap-react-lib"
-import { Row,Col, Container} from "reactstrap"
+import React, { useState } from 'react'
+import { DateTime, TimeZone } from "reactstrap-react-lib"
+import { Row, Col, Container } from "reactstrap"
 
 export default function DateTimeComponent() {
 
-const [dateTime, setDateTime] = useState(null)
-  
-
-    
+    const [dateTime, setDateTime] = useState(null)
     return (
         <Container>
             <Row>
 
-            <Col sm={12} md={6} lg={4}>
-               {dateTime}
-            <DateTime
-                setDateTime={new Date().toISOString()}
-                getDateTime = {(val)=>setDateTime(val)}
-            />
-
-            </Col>
-        </Row>
-
+                <Col sm={12} md={6} lg={4}>
+                    {dateTime}
+                    <DateTime
+                        setDateTime={new TimeZone().setUTCToSystemTimeZone().convertToDataBaseString()}
+                        onLoad= {(val)=>console.log(val)}
+                        getDateTime={(val) => {
+                            setDateTime(new TimeZone().setDate(new Date(val)).convertToDataBaseString())
+                        }}
+                    />
+                </Col>
+            </Row>
         </Container>
-        
+
     )
 }
+
 ```
 
 # TimeZone 

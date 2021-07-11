@@ -13,6 +13,7 @@ export default function DateTimeComponent() {
                     {dateTime}
                     <DateTime
                         setDateTime={new TimeZone().setUTCToSystemTimeZone().convertToDataBaseString()}
+                        onLoad= {(val)=>console.log(val)}
                         getDateTime={(val) => {
                             setDateTime(new TimeZone().setDate(new Date(val)).convertToDataBaseString())
                         }}
