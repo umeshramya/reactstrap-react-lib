@@ -6,6 +6,7 @@ interface Props {
   setDateTime: dateString;
   getDateTime: (val: dateString) => void;
   onLoad?: (val: dateString) => void;
+  onSetDateTime?: (val: dateString) => void
 }
 
 export default function Index(props: Props): ReactElement {
@@ -31,8 +32,15 @@ export default function Index(props: Props): ReactElement {
     if (props.onLoad) {
       props.onLoad(dateTimeState);
     }
-    return () => {};
+    return () => { };
   }, []);
+
+  useEffect(() => {
+    if (props.onSetDateTime) {
+      props.onSetDateTime(dateTimeState)
+    }
+    return () => { }
+  }, [dateTimeState])
 
   return (
     <>

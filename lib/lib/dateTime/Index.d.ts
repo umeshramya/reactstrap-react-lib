@@ -4,6 +4,7 @@ interface Props {
     setDateTime: dateString;
     getDateTime: (val: dateString) => void;
     onLoad?: (val: dateString) => void;
+    onSetDateTime?: (val: dateString) => void;
 }
 export default function Index(props: Props): ReactElement;
 export {};
