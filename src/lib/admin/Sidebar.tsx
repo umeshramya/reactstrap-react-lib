@@ -17,6 +17,8 @@ interface sidebarLink {
 interface Props {
   /** Main compone nt to be displayed */
   Main: ReactElement;
+  /**Page name tobe displayed */
+  pageName: string;
   /**orgnization name to be displayed above in sidebar */
   orgName?: string;
   /**user name as string */
@@ -126,8 +128,8 @@ const Sidebar = (props: Props) => {
           <Row className={`sidebarUl`}>
             {props.siderBarLinks !== undefined
               ? props.siderBarLinks.map((eachLink, index) => {
-                  return dispalyEachLink(eachLink, index);
-                })
+                return dispalyEachLink(eachLink, index);
+              })
               : ""}
           </Row>
         </>
@@ -137,6 +139,14 @@ const Sidebar = (props: Props) => {
         <Row>
           {/* Horizontal bar */}
           <Col sm={12} className={`menubar`}></Col>
+          <Row>
+            <Col>
+              <h3>{props.pageName}</h3>
+            </Col>
+            <Col>
+
+            </Col>
+          </Row>
         </Row>
         <Row>
           {/* Main area */}
