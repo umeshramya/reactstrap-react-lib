@@ -144,7 +144,7 @@ const Sidebar = (props: Props) => {
               <h3>{props.pageName}</h3>
             </Col>
             <Col>
-
+              {/*  */}
             </Col>
           </Row>
         </Row>
