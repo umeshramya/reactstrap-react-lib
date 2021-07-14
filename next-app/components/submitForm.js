@@ -1,166 +1,105 @@
-import{ButtonP, FormSubmit, FormDelete, SectioPanel,Sidebar} from "reactstrap-react-lib"
-import React,{useState} from 'react'
-import {Container, Row, Col, FormGroup, Input, Label} from "reactstrap"
+import { ButtonP, FormSubmit, FormDelete } from "reactstrap-react-lib"
+import React, { useState } from 'react'
+import { Container, Row, Col, FormGroup, Input, Label } from "reactstrap"
 
 
 
 
 function submitForm(props) {
 
-    const iObj = {firstName:"", lastName : "", email : ""}
+    const iObj = { firstName: "", lastName: "", email: "" }
     const [obj, setObj] = useState(iObj)
     const [submitTrigger, setSubmitTrigger] = useState(false)
-
-    const Employee =[
-
-        {name : "create", link : "/employee/create"},
-        {name : "edit", link : "/employee/edit"},
-        {name : "delete", link : "/employee/delete"},
-                    ]
-    const Shifts = [
-        {name : "create", link : "/shifts/create"},
-        {name : "edit", link : "/shifts/edit"},
-        {name : "delete", link : "/shifts/delete"},
-    ]
-
-    const Roster = [
-        {name : "create", link : "/shifts/create"},
-        {name : "edit", link : "/shifts/edit"},
-        {name : "delete", link : "/shifts/delete"},
-    ]
-
-    const Onboarding = [
-        {name : "create", link : "/shifts/create"},
-        {name : "edit", link : "/shifts/edit"},
-        {name : "delete", link : "/shifts/delete"},
-    ]
-
-
-   const  section  = [
-        {title : "Employee",sectionElements : Employee},
-        {title : "Shifts", sectionElements : Shifts},
-        {title : "Roster", sectionElements : Roster},
-        {title : "Onboarding", sectionElements : Onboarding}
-
-    ]
 
     return (
         <Container>
             {/* FormSubmit */}
             <Row>
                 <Col>
-                
-                <FormSubmit
-                    Inputs={
-                        <>
-                            <FormGroup>
-                                <Label className="required">Firtname</Label>
-                                <Input type="text" value={obj.firstName} onChange={(e)=>setObj({...obj, firstName : e.target.value})} required={true}/>
-                            </FormGroup>
-                            
-                            <FormGroup>
-                                <Label>lastName</Label>
-                                <Input type="text" value={obj.lastName} onChange={(e)=>setObj({...obj, lastName : e.target.value})} required={true}/>
-                            </FormGroup>
-                            <FormGroup>
-                                <Label>email</Label>
-                                <Input type="email" value={obj.email} onChange={(e)=>setObj({...obj, email : e.target.value})} required={true}/>
-                            </FormGroup>
 
-                        </>
-                    }
+                    <FormSubmit
+                        Inputs={
+                            <>
+                                <FormGroup>
+                                    <Label className="required">Firtname</Label>
+                                    <Input type="text" value={obj.firstName} onChange={(e) => setObj({ ...obj, firstName: e.target.value })} required={true} />
+                                </FormGroup>
 
-                    curObj = {["POST", obj]}
-                    curUri = "/api/submit-form"
+                                <FormGroup>
+                                    <Label>lastName</Label>
+                                    <Input type="text" value={obj.lastName} onChange={(e) => setObj({ ...obj, lastName: e.target.value })} required={true} />
+                                </FormGroup>
+                                <FormGroup>
+                                    <Label>email</Label>
+                                    <Input type="email" value={obj.email} onChange={(e) => setObj({ ...obj, email: e.target.value })} required={true} />
+                                </FormGroup>
 
-                    successCallBack = {(res)=>res.data.mes}
+                            </>
+                        }
 
-                    onSuccess = {(res, successCallBack)=>{
-                        
-                        return successCallBack(res);
-                    }}
+                        curObj={["POST", obj]}
+                        curUri="/api/submit-form"
 
-                    onError={(err)=>{
+                        successCallBack={(res) => res.data.mes}
 
-                        return "error ocuu"
-                    }
-                    }
+                        onSuccess={(res, successCallBack) => {
 
-                    validation ={()=>{
-                        // return "validation error"
-                       
-                        return ""
-                    }}
+                            return successCallBack(res);
+                        }}
 
-                    triggerSubmit={submitTrigger}
-                    
-                    reset={()=>setObj(iObj)}
-                    AxiosRequestConfig={{}}
-                
-                />
+                        onError={(err) => {
 
-                <ButtonP text="Submit Trigger" onClick={()=>setSubmitTrigger(!submitTrigger)}/>
+                            return "error ocuu"
+                        }
+                        }
+
+                        validation={() => {
+                            // return "validation error"
+
+                            return ""
+                        }}
+
+                        triggerSubmit={submitTrigger}
+
+                        reset={() => setObj(iObj)}
+                        AxiosRequestConfig={{}}
+
+                    />
+
+                    <ButtonP text="Submit Trigger" onClick={() => setSubmitTrigger(!submitTrigger)} />
 
                 </Col>
             </Row>
             {/* Form Delete */}
             <Row>
                 <Col>
-                
+
                     <FormDelete
-            
+
                         curUri="api/form-delete"
-                        curObj = {["PUT", {id : 1}]}
-                        onSuccess={(res)=>{
-                            
+                        curObj={["PUT", { id: 1 }]}
+                        onSuccess={(res) => {
+
                             return res.data.mes
                         }}
-                        onError={(err)=>{
+                        onError={(err) => {
                             console.log(err.response)
                             return err.response.data
                         }}
 
-                        
-                     
-                    
-                    />
-                </Col>
-            </Row>
-                          {/* Section Panel */}
-            <Row>
-                <Col>
-            
- 
-                {/* <SectioPanel
-                    panelTitle={"Employee"}
-                    section = {[
-                        {title : "Employee",sectionElements : Employee},
-                        {title : "Shifts", sectionElements : Shifts},
-                        {title : "Roster", sectionElements : Roster},
-                        {title : "Onboarding", sectionElements : Onboarding}
-                    ]}
-                /> */}
 
-                    <Sidebar
-                        Main ={<h3>Umesh </h3>}
-                        orgName = "JJH Hubli"
-                        userName = "umesh"
-                        siderBarLinks ={[
-                            {name : "Zoho", link : "/admin/Zoho"},
-                            {name : "Employee", panel: {"panelTitle": "Employee" , "section" :  section }}
-                        ]}
 
 
                     />
-                
-
                 </Col>
             </Row>
-        
+            {/* Section Panel */}
+
+
         </Container>
 
-        
-            
+
+
     )
 }
 
