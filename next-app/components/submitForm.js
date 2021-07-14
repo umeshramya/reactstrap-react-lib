@@ -1,4 +1,4 @@
-import { ButtonP, FormSubmit, FormDelete, SectioPanel, Sidebar } from "reactstrap-react-lib"
+import { ButtonP, FormSubmit, FormDelete } from "reactstrap-react-lib"
 import React, { useState } from 'react'
 import { Container, Row, Col, FormGroup, Input, Label } from "reactstrap"
 
@@ -10,39 +10,6 @@ function submitForm(props) {
     const iObj = { firstName: "", lastName: "", email: "" }
     const [obj, setObj] = useState(iObj)
     const [submitTrigger, setSubmitTrigger] = useState(false)
-
-    const Employee = [
-
-        { name: "create", link: "/employee/create" },
-        { name: "edit", link: "/employee/edit" },
-        { name: "delete", link: "/employee/delete" },
-    ]
-    const Shifts = [
-        { name: "create", link: "/shifts/create" },
-        { name: "edit", link: "/shifts/edit" },
-        { name: "delete", link: "/shifts/delete" },
-    ]
-
-    const Roster = [
-        { name: "create", link: "/shifts/create" },
-        { name: "edit", link: "/shifts/edit" },
-        { name: "delete", link: "/shifts/delete" },
-    ]
-
-    const Onboarding = [
-        { name: "create", link: "/shifts/create" },
-        { name: "edit", link: "/shifts/edit" },
-        { name: "delete", link: "/shifts/delete" },
-    ]
-
-
-    const section = [
-        { title: "Employee", sectionElements: Employee },
-        { title: "Shifts", sectionElements: Shifts },
-        { title: "Roster", sectionElements: Roster },
-        { title: "Onboarding", sectionElements: Onboarding }
-
-    ]
 
     return (
         <Container>
@@ -127,37 +94,7 @@ function submitForm(props) {
                 </Col>
             </Row>
             {/* Section Panel */}
-            <Row>
-                <Col>
 
-
-                    {/* <SectioPanel
-                    panelTitle={"Employee"}
-                    section = {[
-                        {title : "Employee",sectionElements : Employee},
-                        {title : "Shifts", sectionElements : Shifts},
-                        {title : "Roster", sectionElements : Roster},
-                        {title : "Onboarding", sectionElements : Onboarding}
-                    ]}
-                /> */}
-
-                    <Sidebar
-                        Main={<h3>Umesh </h3>}
-                        orgName="JJH Hubli"
-                        userName="umesh"
-                        siderBarLinks={[
-                            { name: "Zoho", link: "/admin/Zoho" },
-                            { name: "Employee", panel: { "panelTitle": "Employee", "section": section } }
-                        ]}
-                        pageName="My Page Name"
-                        barComponent={<><input type="text" /></>}
-
-
-                    />
-
-
-                </Col>
-            </Row>
 
         </Container>
 
