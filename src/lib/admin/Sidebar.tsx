@@ -19,6 +19,8 @@ interface Props {
   Main: ReactElement;
   /**Page name tobe displayed */
   pageName: string;
+  /**horizontal bar component */
+  barComponent?: Component
   /**orgnization name to be displayed above in sidebar */
   orgName?: string;
   /**user name as string */
@@ -138,15 +140,17 @@ const Sidebar = (props: Props) => {
       <Col sm={12} lg={10}>
         <Row>
           {/* Horizontal bar */}
-          <Col sm={12} className={`menubar`}></Col>
-          <Row>
-            <Col>
-              <h3>{props.pageName}</h3>
-            </Col>
-            <Col>
-              {/*  */}
-            </Col>
-          </Row>
+          <Col sm={12} className={`menubar`}>
+            <Row>
+              <Col>
+                <h5>{props.pageName}</h5>
+              </Col>
+              <Col>
+                {props.barComponent}
+              </Col>
+            </Row>
+          </Col>
+
         </Row>
         <Row>
           {/* Main area */}
