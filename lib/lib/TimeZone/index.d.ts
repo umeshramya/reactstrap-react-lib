@@ -1,3 +1,4 @@
+import { AgeType } from "../Interfaces/types";
 /**
  * This oclass deals with maniplitation of time and date
  */
@@ -37,5 +38,18 @@ export default class TimeZone {
      * @returns UTC Date and Time
      */
     setUTCToSystemTimeZone: (date?: Date) => TimeZone;
+    /**
+      *
+      * @param dob date of birth
+      * @returns age in days month or years
+      */
+    dobToAge(dob: Date): string;
+    /**
+     * Approx date of birth  input is in years only not for those less than 1 year
+     * @param age: number
+     * @param type  : "Years" | "Months" | "Days"
+     * @returns Date date of birth
+     */
+    ageToDob(age: number, type: AgeType): Date;
 }
 //# sourceMappingURL=index.d.ts.map

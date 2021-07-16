@@ -18,7 +18,7 @@ export type axiosMethodObj = ["GET"] | ["POST", typeof data] | ["PUT", typeof da
 
 
 
-
+export type AgeType = "Years" | "Months" | "Days"
 
 
 
