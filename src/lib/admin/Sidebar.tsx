@@ -122,7 +122,7 @@ const Sidebar = (props: Props) => {
       </style>
 
       {/* side bar */}
-      <Col sm={0} lg={2} className={`sidebar sticky-top`}>
+      <Col sm={0} md={2} className={`sidebar`}>
         {/* display icon + name with link / panel */}
         <>
           <h4>{props.orgName}</h4>
@@ -130,14 +130,14 @@ const Sidebar = (props: Props) => {
           <Row className={`sidebarUl`}>
             {props.siderBarLinks !== undefined
               ? props.siderBarLinks.map((eachLink, index) => {
-                return dispalyEachLink(eachLink, index);
-              })
+                  return dispalyEachLink(eachLink, index);
+                })
               : ""}
           </Row>
         </>
       </Col>
       {/* /Area for horizontal bar and main */}
-      <Col sm={12} lg={10}>
+      <Col sm={12} md={10}>
         <Row>
           {/* Horizontal bar */}
           <Col sm={12} className={`menubar`}>
