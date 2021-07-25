@@ -23,6 +23,7 @@ interface Props {
     userName?: string;
     /**siderBarLinks*/
     siderBarLinks: sidebarLink[];
+    mainBG?: string;
 }
 declare const Sidebar: (props: Props) => JSX.Element;
 export default Sidebar;

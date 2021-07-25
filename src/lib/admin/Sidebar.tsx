@@ -27,6 +27,8 @@ interface Props {
   userName?: string;
   /**siderBarLinks*/
   siderBarLinks: sidebarLink[];
+  /*background color main area*/
+  mainBG?: string;
 }
 
 const Sidebar = (props: Props) => {
@@ -67,8 +69,8 @@ const Sidebar = (props: Props) => {
     <Row>
       <style>
         {`.menubar{
-            background-color: #060b26;
-            color: #f5f5f5;
+            // background-color: #060b26;
+            // color: #c5c5c5;
             height: 60px;
             margin-bottom: 10px;
             padding:8px;
@@ -76,13 +78,11 @@ const Sidebar = (props: Props) => {
         
         
         .sidebar{
-            background-color: #060b26;
-            color: #f5f5f5;
+            // background-color: #060b26;
+            // color: #f5f5f5;
             height: 100vh;
-            display: flex;
-            justify-content:flex-start;
-            align-items: flex-start;
-            flex-direction: column;
+            position: sticky; 
+            top: 0px;
         }
         
         .sidebarUl{
@@ -118,15 +118,18 @@ const Sidebar = (props: Props) => {
         .PanalClose:hover{
             cursor: pointer;
         }
+        // .main{
+        //   background-color: #ffff
+        // }
         `}
       </style>
 
       {/* side bar */}
-      <Col sm={0} md={2} className={`sidebar`}>
+      <Col sm={12} lg={2} className={`sidebar bg-dark text-light`}>
         {/* display icon + name with link / panel */}
         <>
-          <h4>{props.orgName}</h4>
-          <h5>{props.userName}</h5>
+          <h5>{props.orgName}</h5>
+          <h6>{props.userName}</h6>
           <Row className={`sidebarUl`}>
             {props.siderBarLinks !== undefined
               ? props.siderBarLinks.map((eachLink, index) => {
@@ -137,10 +140,10 @@ const Sidebar = (props: Props) => {
         </>
       </Col>
       {/* /Area for horizontal bar and main */}
-      <Col sm={12} md={10}>
+      <Col sm={12} lg={10}>
         <Row>
           {/* Horizontal bar */}
-          <Col sm={12} className={`menubar`}>
+          <Col sm={12} className={`menubar bg-dark text-light`}>
             <Row>
               <Col>
                 <h5>{props.pageName}</h5>
@@ -151,7 +154,12 @@ const Sidebar = (props: Props) => {
         </Row>
         <Row>
           {/* Main area */}
-          <Col sm={12}>
+          <Col
+            sm={12}
+            className={`main ${
+              props.mainBG === undefined ? "bg-white" : props.mainBG
+            }`}
+          >
             {
               <SectionPanel
                 panelTitle={panelTitle}
