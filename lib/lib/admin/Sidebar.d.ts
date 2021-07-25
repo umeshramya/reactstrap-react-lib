@@ -25,6 +25,16 @@ interface Props {
     siderBarLinks: sidebarLink[];
     mainBG?: string;
 }
+/**
+ * @props Main: ReactElement;
+ * @props pageName: string;
+ * @props barComponent?: Component This for horzayal bar
+ * @props orgName?: string;
+ * @props userName?: string;
+ * @props siderBarLinks: sidebarLink[];
+ * @props mainBG?: string; background color of main area
+ * @returns component
+ */
 declare const Sidebar: (props: Props) => JSX.Element;
 export default Sidebar;
 //# sourceMappingURL=Sidebar.d.ts.map

@@ -31,6 +31,16 @@ interface Props {
   mainBG?: string;
 }
 
+/**
+ * @props Main: ReactElement;
+ * @props pageName: string;
+ * @props barComponent?: Component This for horzayal bar
+ * @props orgName?: string;
+ * @props userName?: string;
+ * @props siderBarLinks: sidebarLink[];
+ * @props mainBG?: string; background color of main area
+ * @returns component
+ */
 const Sidebar = (props: Props) => {
   const router = useRouter();
   const curSectionPanel: any = useRef();
