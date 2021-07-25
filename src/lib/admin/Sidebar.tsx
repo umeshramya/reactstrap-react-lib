@@ -20,7 +20,7 @@ interface Props {
   /**Page name tobe displayed */
   pageName: string;
   /**horizontal bar component */
-  barComponent?: Component
+  barComponent?: Component;
   /**orgnization name to be displayed above in sidebar */
   orgName?: string;
   /**user name as string */
@@ -122,7 +122,7 @@ const Sidebar = (props: Props) => {
       </style>
 
       {/* side bar */}
-      <Col sm={12} lg={2} className={`sidebar`}>
+      <Col sm={12} lg={2} className={`sidebar sticky-top`}>
         {/* display icon + name with link / panel */}
         <>
           <h4>{props.orgName}</h4>
@@ -130,8 +130,8 @@ const Sidebar = (props: Props) => {
           <Row className={`sidebarUl`}>
             {props.siderBarLinks !== undefined
               ? props.siderBarLinks.map((eachLink, index) => {
-                return dispalyEachLink(eachLink, index);
-              })
+                  return dispalyEachLink(eachLink, index);
+                })
               : ""}
           </Row>
         </>
@@ -145,12 +145,9 @@ const Sidebar = (props: Props) => {
               <Col>
                 <h5>{props.pageName}</h5>
               </Col>
-              <Col>
-                {props.barComponent}
-              </Col>
+              <Col>{props.barComponent}</Col>
             </Row>
           </Col>
-
         </Row>
         <Row>
           {/* Main area */}

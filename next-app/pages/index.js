@@ -1,16 +1,12 @@
-import Forms from "../components/submitForm"
-import Table from "../components/table"
-import DateTime from "../components/dateTime"
+
 import AdminPanel from "../components/Admin"
 
 export default function Home() {
   return (
     <>
+      {/* <AdminPanel /> */}
 
-      <DateTime />
-      <Forms />
-      <AdminPanel />
-      <Table />
+      <AdminPanel/>
     </>
   )
 }

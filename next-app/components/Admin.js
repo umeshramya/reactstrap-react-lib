@@ -1,6 +1,8 @@
 import React from 'react'
-import { Row, Col } from 'reactstrap'
 import { Sidebar, SectioPanel } from "reactstrap-react-lib"
+import Forms from "../components/submitForm"
+import Table from "../components/table"
+import DateTime from "../components/dateTime"
 
 
 export default function Admin() {
@@ -39,8 +41,8 @@ export default function Admin() {
 
     return (
         <>
-            <Row>
-                <Col>
+            {/* <Row>
+                <Col> */}
 
 
                     {/* <SectioPanel
@@ -51,10 +53,16 @@ export default function Admin() {
                 {title : "Roster", sectionElements : Roster},
                 {title : "Onboarding", sectionElements : Onboarding}
             ]}
-        /> */}
+        /> */}  
 
-                    <Sidebar
-                        Main={<h3>Umesh </h3>}
+
+                     <Sidebar
+                        Main={<>
+                                <DateTime />
+                                <Forms />
+                                <Table />
+                            </>
+                        }
                         orgName="JJH Hubli"
                         userName="umesh"
                         siderBarLinks={[
@@ -63,11 +71,11 @@ export default function Admin() {
                         ]}
                         pageName="My Page Name"
                         barComponent={<><input type="text" /></>}
-                    />
+                    /> 
 
 
-                </Col>
-            </Row >
+                {/* </Col>
+            </Row > */}
 
         </>
     )
