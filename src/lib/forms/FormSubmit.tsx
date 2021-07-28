@@ -11,13 +11,14 @@ import queryString from "querystring";
 interface Props extends propMaster {
   /**This is Form input elements. do not add Form elemet thise get rendered inside the form itself */
   Inputs: ReactFragment;
+  showResetButton: boolean
 }
 
 const FormSubmit = ({
   curObj,
   curUri,
   Inputs,
-  reset = () => {},
+  reset = () => { },
   onSuccess,
   onError,
   successCallBack,
@@ -26,6 +27,8 @@ const FormSubmit = ({
   AxiosRequestConfig = {},
   triggerSubmit,
   triggerReset,
+  showResetButton = false
+
 }: Props) => {
   const butRef = useRef<ButtonP>(null);
   const modRef = useRef<ModelP>(null);
@@ -38,7 +41,7 @@ const FormSubmit = ({
 
   useEffect(() => {
     alerRef.current?.alertLight();
-    return () => {};
+    return () => { };
   }, [curObj]);
 
   useEffect(() => {
@@ -46,7 +49,7 @@ const FormSubmit = ({
       submitHandle(curUri, curObj, onSuccess, onError, validation);
     }
     setTriggerSubmitCount(triggerSubmitCount + 1);
-    return () => {};
+    return () => { };
   }, [triggerSubmit]);
 
   useEffect(() => {
@@ -55,7 +58,7 @@ const FormSubmit = ({
     }
 
     setTriggerResetCount(triggerResetCount + 1);
-    return () => {};
+    return () => { };
   }, [triggerReset]);
 
   const submitHandle = async (
@@ -129,7 +132,7 @@ const FormSubmit = ({
               submitHandle(curUri, curObj, onSuccess, onError, validation);
               modRef.current?.close();
             }}
-            modelText="Press Ok to Submit data to server \n Press cancel to exit"
+            modelText="Press Ok to Submit data to server, Press cancel to exit"
             modelTitle="Do you want to submit Data ?"
           />
           <Form
@@ -148,14 +151,18 @@ const FormSubmit = ({
               <Col>
                 <ButtonP text="Submit" ref={butRef} disabled={submitDisable} />
               </Col>
-              <Col>
-                <ButtonP
-                  text={"Reset"}
-                  color={"warning"}
-                  onClick={reset}
-                  disabled={false}
-                />
-              </Col>
+              {
+                showResetButton ?
+                  <Col>
+                    <ButtonP
+                      text={"Reset"}
+                      color={"warning"}
+                      onClick={reset}
+                      disabled={false}
+                    />
+                  </Col> : ""
+              }
+
             </Row>
           </Form>
           <AlertP ref={alerRef} />
