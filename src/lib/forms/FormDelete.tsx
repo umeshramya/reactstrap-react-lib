@@ -16,7 +16,7 @@ function Delete(props: Props) {
 
   useEffect(() => {
     alerRef.current?.alertLight();
-    return () => {};
+    return () => { };
   }, [props.curObj]);
 
   const submitHandle = async (
@@ -90,7 +90,7 @@ function Delete(props: Props) {
               modRef.current?.close();
             }}
             modelTitle="Do you want to delete data ?"
-            modelText="Press Ok to delete data from server \n Press cancel to exit"
+            modelText="Press Ok to delete data from server, Press cancel to exit"
           />
           <Form
             onSubmit={(e) => {

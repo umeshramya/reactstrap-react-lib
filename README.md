@@ -152,77 +152,111 @@ This is for submiting data to server. it has inbuilt submit button and also rese
 5. successCalback is prop which has to passed in onSuccess function
 6. errorCalback is prop which has to passed in onError function
 
+
 ```javascript
-import{FormSubmit} from "reactstrap-react-lib"
-import React,{useState} from 'react'
-import {Container, Row, Col, FormGroup, Input, Label} from "reactstrap"
+import { ButtonP, FormSubmit, FormDelete } from "reactstrap-react-lib"
+import React, { useState } from 'react'
+import { Container, Row, Col, FormGroup, Input, Label } from "reactstrap"
+
+
+
 
 function submitForm(props) {
 
-    const initObj = {firstName:"", lastName : "", email : ""}//intial value sof inputs
-    const [obj, setObj] = useState(initObj)
+    const iObj = { firstName: "", lastName: "", email: "" }
+    const [obj, setObj] = useState(iObj)
+    const [submitTrigger, setSubmitTrigger] = useState(false)
+
     return (
         <Container>
             {/* FormSubmit */}
             <Row>
                 <Col>
-                
-                <FormSubmit
-                    Inputs={
-                        <>
-                            <FormGroup>
-                                <Label className="required">Firtname</Label>
-                                <Input type="text" value={obj.firstName} onChange={(e)=>setObj({...obj, firstName : e.target.value})} required={true}/>
-                            </FormGroup>
-                            
-                            <FormGroup>
-                                <Label>lastName</Label>
-                                <Input type="text" value={obj.lastName} onChange={(e)=>setObj({...obj, lastName : e.target.value})} required={true}/>
-                            </FormGroup>
-                            <FormGroup>
-                                <Label>email</Label>
-                                <Input type="email" value={obj.email} onChange={(e)=>setObj({...obj, email : e.target.value})} required={true}/>
-                            </FormGroup>
 
-                        </>
-                    }
+                    <FormSubmit
+                        Inputs={
+                            <>
+                                <FormGroup>
+                                    <Label className="required">Firtname</Label>
+                                    <Input type="text" value={obj.firstName} onChange={(e) => setObj({ ...obj, firstName: e.target.value })} required={true} />
+                                </FormGroup>
 
-                    curObj = {["POST", obj]} //"POST , "GET", "PUT", "DELETE", "ACTON"
-                    curUri = "/api/auth/login" //login
+                                <FormGroup>
+                                    <Label>lastName</Label>
+                                    <Input type="text" value={obj.lastName} onChange={(e) => setObj({ ...obj, lastName: e.target.value })} required={true} />
+                                </FormGroup>
+                                <FormGroup>
+                                    <Label>email</Label>
+                                    <Input type="email" value={obj.email} onChange={(e) => setObj({ ...obj, email: e.target.value })} required={true} />
+                                </FormGroup>
 
+                            </>
+                        }
 
-                    onSuccess = {(res)=>{
-                        return res.data.mes // mes is key of json sent from api
-                    }}
+                        curObj={["POST", obj]}
+                        curUri="/api/submit-form"
 
-                    onError={(err)=>{
-                        return err.response.data
-                    }
-                    }
-                    
+                        successCallBack={(res) => res.data.mes}
 
-                    validation ={()=>{
-                        // return "validation error"
-                        // if no error return ""
-                       
-                        return ""
-                    }}
+                        onSuccess={(res, successCallBack) => {
+                            return successCallBack(res);
+                        }}
 
-  
-                    
-                    reset={()=>setObj(initObj)}// this resets the inputs to intialstate
-                    AxiosRequestConfig={{//axios config setting}}
-                
-                />
+                        onError={(err) => {
+                            return "error ocuu"
+                        }
+                        }
+
+                        validation={() => {
+                            // return "validation error"
+                            return ""
+                        }}
+
+                        triggerSubmit={submitTrigger}
+
+                        reset={() => setObj(iObj)}
+                        AxiosRequestConfig={{}}
+                        showResetButton={true}
+
+                    />
+                    <ButtonP text="Submit Trigger" onClick={() => setSubmitTrigger(!submitTrigger)} />
                 </Col>
             </Row>
-         </Container>
-      }
+            {/* Form Delete */}
+            <Row>
+                <Col>
 
+                    <FormDelete
+
+                        curUri="api/form-delete"
+                        curObj={["PUT", { id: 1 }]}
+                        onSuccess={(res) => {
+
+                            return res.data.mes
+                        }}
+                        onError={(err) => {
+                            console.log(err.response)
+                            return err.response.data
+                        }}
+
+
+
+
+                    />
+                </Col>
+            </Row>
+
+
+        </Container>
+
+
+
+    )
+}
+
+export default submitForm
 
 ```
-
-
 
 ## AdminPanel / Sidebar
 ### This is for admin panel
