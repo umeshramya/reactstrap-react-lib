@@ -1,9 +1,11 @@
 import { Component } from "react";
+import { recpthaSetting } from "../Interfaces/interfaces";
 interface Props {
     text: string;
     onClick?: () => void;
     color?: string;
     disabled: boolean;
+    recpthaSetting?: recpthaSetting;
 }
 interface State {
     toggelSpin: boolean;

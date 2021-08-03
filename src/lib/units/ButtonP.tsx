@@ -1,11 +1,14 @@
 import React, { Component } from "react";
 import { Button, Spinner } from "reactstrap";
+import { recpthaSetting } from "../Interfaces/interfaces"
+
 
 interface Props {
   text: string;
   onClick?: () => void;
   color?: string;
   disabled: boolean;
+
 }
 interface State {
   toggelSpin: boolean;
