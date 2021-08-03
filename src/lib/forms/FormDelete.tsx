@@ -1,19 +1,22 @@
 import axios, { AxiosError, AxiosResponse } from "axios";
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import { Row, Col, Form } from "reactstrap";
 import ButtonP from "../units/ButtonP";
 import AlertP from "../units/AlertP";
 import ModelP from "../units/ModelP";
-import { propMaster } from "../Interfaces/interfaces";
+import { propMaster, recpthaSetting } from "../Interfaces/interfaces";
 
-type Props = Omit<propMaster, "reset">;
+type propsMasterwithoutReset = Omit<propMaster, "reset">;
 
-// function Delete({curUri, curObj, onSuccess, onError, successCallBack, errorCallback,validation=()=>"" , AxiosRequestConfig={}}:Props) {
+interface Props extends propsMasterwithoutReset {
+  recpthaSetting: recpthaSetting
+}
+
 function Delete(props: Props) {
   const butRef = useRef<ButtonP>(null);
   const modRef = useRef<ModelP>(null);
   const alerRef = useRef<AlertP>(null);
-
+  const [recaptchaToken, setrecaptchaToken] = useState(null)
   useEffect(() => {
     alerRef.current?.alertLight();
     return () => { };
@@ -40,6 +43,11 @@ function Delete(props: Props) {
         return;
       }
       ``;
+
+      if (_curObj[1]) {
+        //@ts-ignore
+        _curObj[1].recaptchaToken = recaptchaToken
+      }
 
       let res: AxiosResponse;
       if (_curObj[0] === "GET") {
@@ -95,7 +103,20 @@ function Delete(props: Props) {
           <Form
             onSubmit={(e) => {
               e.preventDefault();
-              modRef.current?.show();
+              // modRef.current?.show();
+              if (props.recpthaSetting) {
+                //@ts-ignore
+                let grecaptcha = window.grecaptcha
+                grecaptcha.ready(function () {
+                  grecaptcha.execute(props.recpthaSetting.siteKey, { action: props.recpthaSetting.action }).then(function (token: any) {
+                    setrecaptchaToken(token)
+                    modRef.current?.show();
+                  });
+                });
+
+              } else {
+                modRef.current?.show();
+              }
             }}
           >
             <ButtonP

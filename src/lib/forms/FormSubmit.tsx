@@ -93,6 +93,11 @@ const FormSubmit = ({
         return;
       }
 
+      if (_curObj[1]) {
+        //@ts-ignore
+        _curObj[1].recaptchaToken = recaptchaToken
+      }
+
       let res: AxiosResponse;
       if (_curObj[0] === "GET") {
         res = await axios.get(_curUri, AxiosRequestConfig).then((res) => res);
@@ -154,7 +159,6 @@ const FormSubmit = ({
                 let grecaptcha = window.grecaptcha
                 grecaptcha.ready(function () {
                   grecaptcha.execute(recpthaSetting.siteKey, { action: recpthaSetting.action }).then(function (token: any) {
-                    // Add your logic to submit to your backend server here.
                     setrecaptchaToken(token)
                     modRef.current?.show();
                   });

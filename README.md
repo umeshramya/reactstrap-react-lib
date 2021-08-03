@@ -154,6 +154,12 @@ This is for submiting data to server. it has inbuilt submit button and also rese
 
 
 ```javascript
+/*
+    use this script tag to access the recaptcha
+      <script src="https://www.google.com/recaptcha/api.js?render=6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"></script>
+      chage the site key in root document
+      one can access the recaptchaToken in backend frpm body
+*/     
 import { ButtonP, FormSubmit, FormDelete } from "reactstrap-react-lib"
 import React, { useState } from 'react'
 import { Container, Row, Col, FormGroup, Input, Label } from "reactstrap"
@@ -199,16 +205,19 @@ function submitForm(props) {
                         successCallBack={(res) => res.data.mes}
 
                         onSuccess={(res, successCallBack) => {
+
                             return successCallBack(res);
                         }}
 
                         onError={(err) => {
+
                             return "error ocuu"
                         }
                         }
 
                         validation={() => {
                             // return "validation error"
+
                             return ""
                         }}
 
@@ -217,9 +226,15 @@ function submitForm(props) {
                         reset={() => setObj(iObj)}
                         AxiosRequestConfig={{}}
                         showResetButton={true}
+                        recpthaSetting={{
+                            "action": "Submit",
+                            "siteKey": "6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"
+                        }}
 
                     />
+
                     <ButtonP text="Submit Trigger" onClick={() => setSubmitTrigger(!submitTrigger)} />
+
                 </Col>
             </Row>
             {/* Form Delete */}
@@ -237,6 +252,10 @@ function submitForm(props) {
                         onError={(err) => {
                             console.log(err.response)
                             return err.response.data
+                        }}
+                        recpthaSetting={{
+                            "action": "Submit",
+                            "siteKey": "6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"
                         }}
 
 
