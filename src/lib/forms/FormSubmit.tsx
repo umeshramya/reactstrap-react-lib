@@ -40,6 +40,7 @@ const FormSubmit = ({
   const [triggerSubmitCount, setTriggerSubmitCount] = useState(0);
   const [triggerResetCount, setTriggerResetCount] = useState(0);
   const [submitDisable, setSubmitDisable] = useState(false);
+  const [recaptchaToken, setrecaptchaToken] = useState(null)
 
   const router = useRouter();
 
@@ -148,13 +149,23 @@ const FormSubmit = ({
           <Form
             onSubmit={(e) => {
               e.preventDefault();
-              let grecaptcha = window.grecaptcha
-              grecaptcha.ready(() => {
-                grecaptcha.execute(recpthaSetting?.siteKey, { action: recpthaSetting?.action }).then(token => {
-                  modRef.current?.show();
-
+              if (recpthaSetting) {
+                //@ts-ignore
+                let grecaptcha = window.grecaptcha
+                grecaptcha.ready(function () {
+                  grecaptcha.execute(recpthaSetting.siteKey, { action: recpthaSetting.action }).then(function (token: any) {
+                    // Add your logic to submit to your backend server here.
+                    setrecaptchaToken(token)
+                    modRef.current?.show();
+                  });
                 });
-              });
+
+              } else {
+                modRef.current?.show();
+              }
+
+
+
 
             }}
           >
