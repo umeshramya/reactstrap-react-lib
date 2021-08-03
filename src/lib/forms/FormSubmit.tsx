@@ -1,17 +1,19 @@
 import axios, { AxiosError, AxiosResponse } from "axios";
-import React, { useRef, useEffect, ReactFragment, useState } from "react";
+import React, { useRef, useEffect, ReactFragment, useState, useCallback } from "react";
 import { Container, Row, Col, Form } from "reactstrap";
 import { useRouter } from "next/router";
 import ButtonP from "../units/ButtonP";
 import AlertP from "../units/AlertP";
 import ModelP from "../units/ModelP";
-import { propMaster } from "../Interfaces/interfaces";
+import { propMaster, recpthaSetting } from "../Interfaces/interfaces";
 import queryString from "querystring";
+
 
 interface Props extends propMaster {
   /**This is Form input elements. do not add Form elemet thise get rendered inside the form itself */
   Inputs: ReactFragment;
   showResetButton: boolean
+  recpthaSetting?: recpthaSetting
 }
 
 const FormSubmit = ({
@@ -23,11 +25,13 @@ const FormSubmit = ({
   onError,
   successCallBack,
   errorCallback,
+  recpthaSetting,
   validation = () => "",
   AxiosRequestConfig = {},
   triggerSubmit,
   triggerReset,
   showResetButton = false
+
 
 }: Props) => {
   const butRef = useRef<ButtonP>(null);
@@ -36,6 +40,7 @@ const FormSubmit = ({
   const [triggerSubmitCount, setTriggerSubmitCount] = useState(0);
   const [triggerResetCount, setTriggerResetCount] = useState(0);
   const [submitDisable, setSubmitDisable] = useState(false);
+  const [recaptchaToken, setrecaptchaToken] = useState(null)
 
   const router = useRouter();
 
@@ -61,6 +66,10 @@ const FormSubmit = ({
     return () => { };
   }, [triggerReset]);
 
+
+
+
+
   const submitHandle = async (
     _curUri: string,
     _curObj: typeof curObj,
@@ -82,6 +91,11 @@ const FormSubmit = ({
         butRef.current?.hideSpin();
         setSubmitDisable(false);
         return;
+      }
+
+      if (_curObj[1]) {
+        //@ts-ignore
+        _curObj[1].recaptchaToken = recaptchaToken
       }
 
       let res: AxiosResponse;
@@ -122,6 +136,8 @@ const FormSubmit = ({
       setSubmitDisable(false);
     }
   };
+
+
   return (
     <>
       <Row>
@@ -138,7 +154,23 @@ const FormSubmit = ({
           <Form
             onSubmit={(e) => {
               e.preventDefault();
-              modRef.current?.show();
+              if (recpthaSetting) {
+                //@ts-ignore
+                let grecaptcha = window.grecaptcha
+                grecaptcha.ready(function () {
+                  grecaptcha.execute(recpthaSetting.siteKey, { action: recpthaSetting.action }).then(function (token: any) {
+                    setrecaptchaToken(token)
+                    modRef.current?.show();
+                  });
+                });
+
+              } else {
+                modRef.current?.show();
+              }
+
+
+
+
             }}
           >
             <Row>
@@ -149,7 +181,8 @@ const FormSubmit = ({
             </Row>
             <Row>
               <Col>
-                <ButtonP text="Submit" ref={butRef} disabled={submitDisable} />
+                <ButtonP text="Submit" ref={butRef} disabled={submitDisable}
+                />
               </Col>
               {
                 showResetButton ?

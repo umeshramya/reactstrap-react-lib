@@ -52,4 +52,8 @@ export interface propMaster {
      */
     triggerReset?: boolean;
 }
+export interface recpthaSetting {
+    siteKey: string;
+    action: string;
+}
 //# sourceMappingURL=interfaces.d.ts.map

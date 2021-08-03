@@ -62,3 +62,8 @@ export interface propMaster {
 
 
 }
+
+export interface recpthaSetting {
+    siteKey: string;
+    action: string;
+}

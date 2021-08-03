@@ -64,6 +64,10 @@ function submitForm(props) {
                         reset={() => setObj(iObj)}
                         AxiosRequestConfig={{}}
                         showResetButton={true}
+                        recpthaSetting={{
+                            "action": "Submit",
+                            "siteKey": "6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"
+                        }}
 
                     />
 
