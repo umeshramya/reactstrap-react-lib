@@ -1,5 +1,11 @@
 import axios, { AxiosError, AxiosResponse } from "axios";
-import React, { useRef, useEffect, ReactFragment, useState, useCallback } from "react";
+import React, {
+  useRef,
+  useEffect,
+  ReactFragment,
+  useState,
+  useCallback,
+} from "react";
 import { Container, Row, Col, Form } from "reactstrap";
 import { useRouter } from "next/router";
 import ButtonP from "../units/ButtonP";
@@ -8,19 +14,18 @@ import ModelP from "../units/ModelP";
 import { propMaster, recpthaSetting } from "../Interfaces/interfaces";
 import queryString from "querystring";
 
-
 interface Props extends propMaster {
   /**This is Form input elements. do not add Form elemet thise get rendered inside the form itself */
   Inputs: ReactFragment;
-  showResetButton: boolean
-  recpthaSetting?: recpthaSetting
+  showResetButton: boolean;
+  recpthaSetting?: recpthaSetting;
 }
 
 const FormSubmit = ({
   curObj,
   curUri,
   Inputs,
-  reset = () => { },
+  reset = () => {},
   onSuccess,
   onError,
   successCallBack,
@@ -30,9 +35,7 @@ const FormSubmit = ({
   AxiosRequestConfig = {},
   triggerSubmit,
   triggerReset,
-  showResetButton = false
-
-
+  showResetButton = false,
 }: Props) => {
   const butRef = useRef<ButtonP>(null);
   const modRef = useRef<ModelP>(null);
@@ -40,13 +43,13 @@ const FormSubmit = ({
   const [triggerSubmitCount, setTriggerSubmitCount] = useState(0);
   const [triggerResetCount, setTriggerResetCount] = useState(0);
   const [submitDisable, setSubmitDisable] = useState(false);
-  const [recaptchaToken, setrecaptchaToken] = useState(null)
+  const [recaptchaToken, setrecaptchaToken] = useState("Unset reCaptcha Token");
 
   const router = useRouter();
 
   useEffect(() => {
     alerRef.current?.alertLight();
-    return () => { };
+    return () => {};
   }, [curObj]);
 
   useEffect(() => {
@@ -54,7 +57,7 @@ const FormSubmit = ({
       submitHandle(curUri, curObj, onSuccess, onError, validation);
     }
     setTriggerSubmitCount(triggerSubmitCount + 1);
-    return () => { };
+    return () => {};
   }, [triggerSubmit]);
 
   useEffect(() => {
@@ -63,12 +66,8 @@ const FormSubmit = ({
     }
 
     setTriggerResetCount(triggerResetCount + 1);
-    return () => { };
+    return () => {};
   }, [triggerReset]);
-
-
-
-
 
   const submitHandle = async (
     _curUri: string,
@@ -93,9 +92,9 @@ const FormSubmit = ({
         return;
       }
 
-      if (_curObj[1]) {
+      if (_curObj[1] && recaptchaToken !== "Unset reCaptcha Token") {
         //@ts-ignore
-        _curObj[1].recaptchaToken = recaptchaToken
+        _curObj[1].recaptchaToken = recaptchaToken;
       }
 
       let res: AxiosResponse;
@@ -137,7 +136,6 @@ const FormSubmit = ({
     }
   };
 
-
   return (
     <>
       <Row>
@@ -156,21 +154,20 @@ const FormSubmit = ({
               e.preventDefault();
               if (recpthaSetting) {
                 //@ts-ignore
-                let grecaptcha = window.grecaptcha
+                let grecaptcha = window.grecaptcha;
                 grecaptcha.ready(function () {
-                  grecaptcha.execute(recpthaSetting.siteKey, { action: recpthaSetting.action }).then(function (token: any) {
-                    setrecaptchaToken(token)
-                    modRef.current?.show();
-                  });
+                  grecaptcha
+                    .execute(recpthaSetting.siteKey, {
+                      action: recpthaSetting.action,
+                    })
+                    .then(function (token: any) {
+                      setrecaptchaToken(token);
+                      modRef.current?.show();
+                    });
                 });
-
               } else {
                 modRef.current?.show();
               }
-
-
-
-
             }}
           >
             <Row>
@@ -181,21 +178,20 @@ const FormSubmit = ({
             </Row>
             <Row>
               <Col>
-                <ButtonP text="Submit" ref={butRef} disabled={submitDisable}
-                />
+                <ButtonP text="Submit" ref={butRef} disabled={submitDisable} />
               </Col>
-              {
-                showResetButton ?
-                  <Col>
-                    <ButtonP
-                      text={"Reset"}
-                      color={"warning"}
-                      onClick={reset}
-                      disabled={false}
-                    />
-                  </Col> : ""
-              }
-
+              {showResetButton ? (
+                <Col>
+                  <ButtonP
+                    text={"Reset"}
+                    color={"warning"}
+                    onClick={reset}
+                    disabled={false}
+                  />
+                </Col>
+              ) : (
+                ""
+              )}
             </Row>
           </Form>
           <AlertP ref={alerRef} />

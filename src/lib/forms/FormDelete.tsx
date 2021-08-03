@@ -9,17 +9,17 @@ import { propMaster, recpthaSetting } from "../Interfaces/interfaces";
 type propsMasterwithoutReset = Omit<propMaster, "reset">;
 
 interface Props extends propsMasterwithoutReset {
-  recpthaSetting: recpthaSetting
+  recpthaSetting: recpthaSetting;
 }
 
 function Delete(props: Props) {
   const butRef = useRef<ButtonP>(null);
   const modRef = useRef<ModelP>(null);
   const alerRef = useRef<AlertP>(null);
-  const [recaptchaToken, setrecaptchaToken] = useState(null)
+  const [recaptchaToken, setrecaptchaToken] = useState("Unset reCaptcha Token");
   useEffect(() => {
     alerRef.current?.alertLight();
-    return () => { };
+    return () => {};
   }, [props.curObj]);
 
   const submitHandle = async (
@@ -44,9 +44,9 @@ function Delete(props: Props) {
       }
       ``;
 
-      if (_curObj[1]) {
+      if (_curObj[1] && recaptchaToken !== "Unset reCaptcha Token") {
         //@ts-ignore
-        _curObj[1].recaptchaToken = recaptchaToken
+        _curObj[1].recaptchaToken = recaptchaToken;
       }
 
       let res: AxiosResponse;
@@ -106,14 +106,17 @@ function Delete(props: Props) {
               // modRef.current?.show();
               if (props.recpthaSetting) {
                 //@ts-ignore
-                let grecaptcha = window.grecaptcha
+                let grecaptcha = window.grecaptcha;
                 grecaptcha.ready(function () {
-                  grecaptcha.execute(props.recpthaSetting.siteKey, { action: props.recpthaSetting.action }).then(function (token: any) {
-                    setrecaptchaToken(token)
-                    modRef.current?.show();
-                  });
+                  grecaptcha
+                    .execute(props.recpthaSetting.siteKey, {
+                      action: props.recpthaSetting.action,
+                    })
+                    .then(function (token: any) {
+                      setrecaptchaToken(token);
+                      modRef.current?.show();
+                    });
                 });
-
               } else {
                 modRef.current?.show();
               }

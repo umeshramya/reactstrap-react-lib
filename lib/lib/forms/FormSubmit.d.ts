@@ -6,6 +6,6 @@ interface Props extends propMaster {
     showResetButton: boolean;
     recpthaSetting?: recpthaSetting;
 }
-declare const FormSubmit: ({ curObj, curUri, Inputs, reset, onSuccess, onError, successCallBack, errorCallback, recpthaSetting, validation, AxiosRequestConfig, triggerSubmit, triggerReset, showResetButton }: Props) => JSX.Element;
+declare const FormSubmit: ({ curObj, curUri, Inputs, reset, onSuccess, onError, successCallBack, errorCallback, recpthaSetting, validation, AxiosRequestConfig, triggerSubmit, triggerReset, showResetButton, }: Props) => JSX.Element;
 export default FormSubmit;
 //# sourceMappingURL=FormSubmit.d.ts.map

@@ -91,7 +91,10 @@ function submitForm(props) {
                             console.log(err.response)
                             return err.response.data
                         }}
-
+                        recpthaSetting={{
+                            "action": "Submit",
+                            "siteKey": "6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"
+                        }}
 
 
 
