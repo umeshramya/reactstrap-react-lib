@@ -1,5 +1,5 @@
 import React from 'react'
-import { Sidebar, SectioPanel } from "reactstrap-react-lib"
+import { Sidebar, SectioPanel, FormUpload } from "reactstrap-react-lib"
 import Forms from "../components/submitForm"
 import Table from "../components/table"
 import DateTime from "../components/dateTime"
@@ -60,6 +60,7 @@ export default function Admin() {
                         Main={<>
                                 <DateTime />
                                 <Forms />
+                                <FormUpload/>
                                 <Table />
                             </>
                         }
