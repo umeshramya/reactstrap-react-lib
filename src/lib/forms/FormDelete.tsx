@@ -103,7 +103,7 @@ function Delete(props: Props) {
           <Form
             onSubmit={(e) => {
               e.preventDefault();
-              // modRef.current?.show();
+
               if (props.recpthaSetting) {
                 //@ts-ignore
                 let grecaptcha = window.grecaptcha;
