@@ -12,6 +12,7 @@ This contains following lib modules
 3. DeleteForm
 4. DateTime widget
 5. TimeZone
+6. ImageUpload
 
 ## React-Table 
 ### This is react-table following code shows the implimentation.
@@ -433,6 +434,72 @@ console.log(timeZone.setUTCToSystemTimeZone().convertToDataBaseString())// retun
 
 console.log(curdate.substring(0,10),  "Only date")
 console.log(curdate.substring(11, 19), "only time")
+
+
+```
+
+# Image Upload
+```javascript
+// front end code
+import React from 'react'
+import { ImageUpload } from "reactstrap-react-lib"
+
+export default function FormUploadCompent() {
+    return (
+        <ImageUpload
+            uri="/api/image-upload"
+            fileName="image"
+            onSuccess= {(res)=>{
+                return res.data.mes
+            }}
+
+            onError={(err)=>{
+               console.log( err.response.data)
+               return err.response.data
+            }}
+        />
+    )
+}
+
+
+
+// backennd next js rout with cloudanary
+// Next.js API route support: https://nextjs.org/docs/api-routes/introduction
+const cloudanry = require("cloudinary").v2
+export default async(req, res) => {
+  try {
+    const data = req.body.data
+
+    cloudanry.config({
+      "api_key": process.env.api_key,
+      "api_secret": process.env.api_secret,
+      "cloud_name": process.env.cloud_name,
+
+    })
+   let curRes = await cloudanry.uploader.upload(data, {
+      "public_id": "org1_letter_pad",
+      "overwrite": true
+    })
+
+    console.log(curRes)
+
+    res.status(200).json ({mes: "uploaded file"})
+
+
+    
+
+  } catch (error) {
+    console.log(error)
+    res.status(500).send(error)
+  }
+
+}
+
+
+
+
+
+
 
 
 ```
