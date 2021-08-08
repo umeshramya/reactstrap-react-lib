@@ -1,8 +1,9 @@
 import React from 'react'
-import { Sidebar, SectioPanel, FormUpload } from "reactstrap-react-lib"
+import { Sidebar } from "reactstrap-react-lib"
 import Forms from "../components/submitForm"
 import Table from "../components/table"
 import DateTime from "../components/dateTime"
+import FormUpload from "../components/FormUpload"
 
 
 export default function Admin() {

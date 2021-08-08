@@ -35,15 +35,14 @@ export default function FormUpload(props: Props): ReactElement {
 
       const formData = new FormData();
       if (selectedFile != undefined) {
-        formData.append("upload", selectedFile, selectedFile.name);
+        formData.append("upload", selectedFile, props.fileName);
 
-        let res = await axios.post("/api/form-upload", formData, {
+        let res = await axios.post(props.uri, formData, {
           headers: {
             "Content-Type": "multipart/form-data",
           },
         });
 
-        console.log(res);
         butRef.current?.hideSpin();
         alerRef.current?.alertSuccess("Uploaded file");
       } else {
