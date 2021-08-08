@@ -18,13 +18,20 @@ interface Props {
  *@returns ReactElement
  */
 export default function FormUpload(props: Props): ReactElement {
-  const [selectedFile, setSelectedFile] = useState<File>();
+  const [selectedFile, setSelectedFile] = useState<any>();
+  const [previewSource, setPreviewSource] = useState<any>();
   const butRef = useRef<ButtonP>(null);
   const modRef = useRef<ModelP>(null);
   const alerRef = useRef<AlertP>(null);
 
   const onChangeHandler = (e: any) => {
     setSelectedFile(e.target.files[0]);
+
+    const fileReader = new FileReader();
+    fileReader.readAsDataURL(e.target.files[0]);
+    fileReader.onloadend = () => {
+      setPreviewSource(fileReader.result);
+    };
   };
 
   const submitHandler = async () => {
@@ -91,6 +98,7 @@ export default function FormUpload(props: Props): ReactElement {
             </FormGroup>
             <AlertP ref={alerRef} />
           </Form>
+          {previewSource && <img src={previewSource} height="100rem" />}
         </Col>
       </Row>
     </>
