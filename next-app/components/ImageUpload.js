@@ -1,9 +1,9 @@
 import React from 'react'
-import {FormUpload} from "reactstrap-react-lib"
+import {ImageUpload} from "reactstrap-react-lib"
 
 export default function FormUploadCompent() {
     return (
-        <FormUpload
+        <ImageUpload
             uri = "/api/form-upload"
             fileName = "image"
         />

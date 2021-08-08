@@ -3,7 +3,7 @@ import { Sidebar } from "reactstrap-react-lib"
 import Forms from "../components/submitForm"
 import Table from "../components/table"
 import DateTime from "../components/dateTime"
-import FormUpload from "../components/FormUpload"
+import ImageUpload from "../components/ImageUpload"
 
 
 export default function Admin() {
@@ -61,7 +61,7 @@ export default function Admin() {
                         Main={<>
                                 <DateTime />
                                 <Forms />
-                                <FormUpload/>
+                                <ImageUpload/>
                                 <Table />
                             </>
                         }

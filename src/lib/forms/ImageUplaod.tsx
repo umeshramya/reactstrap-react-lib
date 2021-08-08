@@ -6,7 +6,6 @@ import AlertP from "../units/AlertP";
 import ModelP from "../units/ModelP";
 
 interface Props {
-  accept?: string;
   fileName: string;
   uri: string;
 }
@@ -18,15 +17,13 @@ interface Props {
  *@returns ReactElement
  */
 export default function FormUpload(props: Props): ReactElement {
-  const [selectedFile, setSelectedFile] = useState<any>();
+  // const [selectedFile, setSelectedFile] = useState<any>();
   const [previewSource, setPreviewSource] = useState<any>();
   const butRef = useRef<ButtonP>(null);
   const modRef = useRef<ModelP>(null);
   const alerRef = useRef<AlertP>(null);
 
   const onChangeHandler = (e: any) => {
-    setSelectedFile(e.target.files[0]);
-
     const fileReader = new FileReader();
     fileReader.readAsDataURL(e.target.files[0]);
     fileReader.onloadend = () => {
@@ -40,20 +37,8 @@ export default function FormUpload(props: Props): ReactElement {
       butRef.current?.showSpin();
       alerRef.current?.alertLight();
 
-      const formData = new FormData();
-      if (selectedFile != undefined) {
-        formData.append("upload", selectedFile, props.fileName);
-
-        let res = await axios.post(props.uri, formData, {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        });
-
-        butRef.current?.hideSpin();
-        alerRef.current?.alertSuccess("Uploaded file");
-      } else {
-        throw (new Error().message = "File can not be null");
+      if (previewSource) {
+        let res = await axios.post(props.uri, { data: previewSource });
       }
     } catch (error) {
       console.log(error);
@@ -85,7 +70,7 @@ export default function FormUpload(props: Props): ReactElement {
               <Label>Upload</Label>
               <Input
                 type="file"
-                accept={props.accept}
+                accept={"image/*"}
                 multiple={false}
                 onChange={(e) => {
                   onChangeHandler(e);
