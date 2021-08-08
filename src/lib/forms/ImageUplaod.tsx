@@ -1,10 +1,10 @@
 import React, { ReactElement, useState, useRef } from "react";
 import { Form, FormGroup, Input, Label, Row, Col } from "reactstrap";
-import { ButtonP } from "../../index";
+
 import axios, { AxiosError } from "axios";
 import AlertP from "../units/AlertP";
 import ModelP from "../units/ModelP";
-
+import ButtonP from "../units/ButtonP"
 interface Props {
   fileName: string;
   uri: string;
@@ -17,8 +17,9 @@ interface Props {
  *@returns ReactElement
  */
 export default function FormUpload(props: Props): ReactElement {
-  // const [selectedFile, setSelectedFile] = useState<any>();
+
   const [previewSource, setPreviewSource] = useState<any>();
+  const [UploadButtonDisable, setUploadButtonDisable] = useState(false)
   const butRef = useRef<ButtonP>(null);
   const modRef = useRef<ModelP>(null);
   const alerRef = useRef<AlertP>(null);
@@ -34,15 +35,22 @@ export default function FormUpload(props: Props): ReactElement {
   const submitHandler = async () => {
     try {
       modRef.current?.close();
+      setUploadButtonDisable(true)
       butRef.current?.showSpin();
+
       alerRef.current?.alertLight();
 
       if (previewSource) {
         let res = await axios.post(props.uri, { data: previewSource });
       }
+
+
     } catch (error) {
-      console.log(error);
+
+
+    } finally {
       alerRef.current?.alertError("Error Occured");
+      setUploadButtonDisable(false)
       butRef.current?.hideSpin();
     }
   };
@@ -79,7 +87,7 @@ export default function FormUpload(props: Props): ReactElement {
             </FormGroup>
 
             <FormGroup>
-              <ButtonP disabled={false} text="Upload" />
+              <ButtonP disabled={UploadButtonDisable} text="Upload" ref={butRef} />
             </FormGroup>
             <AlertP ref={alerRef} />
           </Form>
