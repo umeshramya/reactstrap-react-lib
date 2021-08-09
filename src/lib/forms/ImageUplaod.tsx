@@ -9,6 +9,7 @@ import { recpthaSetting } from "../Interfaces/interfaces";
 interface Props {
   fileName: string;
   uri: string;
+  inputs: HTMLInputElement;
   recpthaSetting?: recpthaSetting;
   imageSizeinKB?: number;
   onSuccess: (res: AxiosResponse) => string;
@@ -137,9 +138,10 @@ export default function FormUpload(props: Props): ReactElement {
                 ref={butRef}
               />
             </FormGroup>
+            {previewSource && <img src={previewSource} height="100rem" />}
+            {props.inputs}
             <AlertP ref={alerRef} />
           </Form>
-          {previewSource && <img src={previewSource} height="100rem" />}
         </Col>
       </Row>
     </>
