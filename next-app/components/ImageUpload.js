@@ -6,6 +6,7 @@ export default function FormUploadCompent() {
         <ImageUpload
             uri="/api/image-upload"
             fileName="image"
+            imageSizeinKB={35}
             onSuccess= {(res)=>{
                 return res.data.mes
             }}
@@ -14,6 +15,11 @@ export default function FormUploadCompent() {
                console.log( err.response.data)
                return err.response.data
             }}
+            recpthaSetting={{
+                "action": "Upload",
+                "siteKey": "6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"
+            }}
+
         />
     )
 }
