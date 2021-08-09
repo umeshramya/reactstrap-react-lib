@@ -9,7 +9,8 @@ import { recpthaSetting } from "../Interfaces/interfaces";
 interface Props {
   fileName: string;
   uri: string;
-  inputs: HTMLInputElement;
+  inputs?: HTMLInputElement | any;
+  inputsData?: {};
   recpthaSetting?: recpthaSetting;
   imageSizeinKB?: number;
   onSuccess: (res: AxiosResponse) => string;
@@ -20,6 +21,8 @@ interface Props {
  *@props accept?: string;
  *@props fileName: string;
  *@props uri: string;
+ *@props inputs?: HTMLInputElement | any;
+ *@props inputsData?: {};
  *@props recpthaSetting?: recpthaSetting; google recaptcha setting
  *@props imageSizeinKB?: number; upperlimt size of image allowed
  *@props onSuccess: (res: AxiosResponse) => string;
@@ -66,11 +69,13 @@ export default function FormUpload(props: Props): ReactElement {
         if (recaptchaToken !== "Unset reCaptcha Token") {
           data = {
             data: previewSource,
+            inputs: props.inputsData ? props.inputsData : {},
             recaptchaToken: recaptchaToken,
           };
         } else {
           data = {
             data: previewSource,
+            inputs: props.inputsData ? props.inputsData : {},
           };
         }
         let res = await axios.post(props.uri, data);
@@ -120,17 +125,25 @@ export default function FormUpload(props: Props): ReactElement {
             }}
           >
             <FormGroup>
-              <Label>Upload</Label>
-              <Input
-                type="file"
-                accept={"image/*"}
-                multiple={false}
-                onChange={(e) => {
-                  onChangeHandler(e);
-                }}
-              />
+              <Row>
+                <Col sm={12} md={12} lg={6}>
+                  <Label>Choose Image</Label>
+                  <Input
+                    type="file"
+                    accept={"image/*"}
+                    multiple={false}
+                    onChange={(e) => {
+                      onChangeHandler(e);
+                    }}
+                  />
+                </Col>
+                <Col sm={12} md={12} lg={6}>
+                  {previewSource && <img src={previewSource} height="100rem" />}
+                </Col>
+              </Row>
             </FormGroup>
 
+            {props.inputs}
             <FormGroup>
               <ButtonP
                 disabled={UploadButtonDisable}
@@ -138,8 +151,6 @@ export default function FormUpload(props: Props): ReactElement {
                 ref={butRef}
               />
             </FormGroup>
-            {previewSource && <img src={previewSource} height="100rem" />}
-            {props.inputs}
             <AlertP ref={alerRef} />
           </Form>
         </Col>

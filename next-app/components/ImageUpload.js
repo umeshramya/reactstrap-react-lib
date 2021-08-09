@@ -1,7 +1,9 @@
-import React from 'react'
+import React,{useState} from 'react'
 import { ImageUpload } from "reactstrap-react-lib"
+import {FormGroup, Input, Label,} from "reactstrap"
 
 export default function FormUploadCompent() {
+    const [inputObj, setInputObj] = useState({})
     return (
         <ImageUpload
             uri="/api/image-upload"
@@ -19,6 +21,17 @@ export default function FormUploadCompent() {
                 "action": "Upload",
                 "siteKey": "6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"
             }}
+
+            inputs = {
+                <>
+                    <FormGroup>
+                        <Label>
+                            <Input type="text" onChange={(e)=>setInputObj({...inputObj, name: e.target.value})} />
+                        </Label>
+                    </FormGroup>
+                </>
+            }
+            inputsData={inputObj}
 
         />
     )

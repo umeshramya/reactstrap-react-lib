@@ -441,10 +441,12 @@ console.log(curdate.substring(11, 19), "only time")
 # Image Upload
 ```javascript
 // front end code
-import React from 'react'
+import React,{useState} from 'react'
 import { ImageUpload } from "reactstrap-react-lib"
+import {FormGroup, Input, Label,} from "reactstrap"
 
 export default function FormUploadCompent() {
+    const [inputObj, setInputObj] = useState({})
     return (
         <ImageUpload
             uri="/api/image-upload"
@@ -463,6 +465,17 @@ export default function FormUploadCompent() {
                 "siteKey": "6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"
             }}
 
+            inputs = {
+                <>
+                    <FormGroup>
+                        <Label>
+                            <Input type="text" onChange={(e)=>setInputObj({...inputObj, name: e.target.value})} />
+                        </Label>
+                    </FormGroup>
+                </>
+            }
+            inputsData={inputObj}
+
         />
     )
 }
@@ -476,7 +489,7 @@ const cloudanry = require("cloudinary").v2
 export default async(req, res) => {
   try {
     const data = req.body.data
-
+    console.log(req.body)
     cloudanry.config({
       "api_key": process.env.api_key,
       "api_secret": process.env.api_secret,
@@ -501,8 +514,6 @@ export default async(req, res) => {
   }
 
 }
-
-
 
 
 
