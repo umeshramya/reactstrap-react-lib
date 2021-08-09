@@ -28,6 +28,11 @@ export default function FormUpload(props: Props): ReactElement {
   const alerRef = useRef<AlertP>(null);
 
   const onChangeHandler = (e: any) => {
+    const curImage = e.target.files[0];
+    let size = 20 * 1024
+    if (curImage.size > size) {
+      throw new Error().message = `Image size more ${size} bytes`;
+    }
     const fileReader = new FileReader();
     fileReader.readAsDataURL(e.target.files[0]);
     fileReader.onloadend = () => {
