@@ -14,7 +14,7 @@ export default function LinkP({
   return (
     <>
       <Link href={link}>
-        <span style={{ color: "blue", cursor: "pointer" }}>
+        <span style={{ color: "blue", cursor: "pointer", margin: "1rem" }}>
           <FaHandPointRight />
           {` ${value}`}
         </span>
