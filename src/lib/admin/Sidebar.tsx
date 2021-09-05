@@ -78,7 +78,10 @@ const Sidebar = (props: Props) => {
   return (
     <Row>
       <style>
-        {`.menubar{
+        {`
+
+        
+        .menubar{
             // background-color: #060b26;
             // color: #c5c5c5;
             height: 60px;
@@ -93,6 +96,7 @@ const Sidebar = (props: Props) => {
             height: 100vh;
             position: sticky; 
             top: 0px;
+            overflow-y: auto;
         }
         
         .sidebarUl{
@@ -128,6 +132,16 @@ const Sidebar = (props: Props) => {
         .PanalClose:hover{
             cursor: pointer;
         }
+
+
+
+
+        @media only screen and (max-width: 600px) {
+          .sidebar{
+            height: 50vh;
+          }
+        }
+
         // .main{
         //   background-color: #ffff
         // }

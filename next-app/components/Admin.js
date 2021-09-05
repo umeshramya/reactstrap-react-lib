@@ -69,7 +69,9 @@ export default function Admin() {
                         userName="umesh"
                         siderBarLinks={[
                             { name: "Zoho", link: "/admin/Zoho" },
-                            { name: "Employee", panel: { "panelTitle": "Employee", "section": section } }
+                            { name: "Employee", panel: { "panelTitle": "Employee", "section": section } },
+
+
                         ]}
                         pageName="My Page Name"
                         barComponent={<><input type="text" /></>}
