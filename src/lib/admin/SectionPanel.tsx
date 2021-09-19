@@ -74,7 +74,7 @@ export default class SectionPanel extends Component<panelProps, State> {
                 onClick={this.panelClose}
                 style={{ cursor: "pointer" }}
               />
-              <h4> {`${this.props.panelTitle} Panal`}</h4>
+              <h4> {`${this.props.panelTitle} Panel`}</h4>
               <Row>
                 {this.props.section?.map((eachSection, i) => {
                   return (
