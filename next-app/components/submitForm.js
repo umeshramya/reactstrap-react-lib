@@ -1,4 +1,4 @@
-import { ButtonP, FormSubmit, FormDelete } from "reactstrap-react-lib"
+import { ButtonP, FormSubmit, FormDelete, FormClick } from "reactstrap-react-lib"
 import React, { useState } from 'react'
 import { Container, Row, Col, FormGroup, Input, Label } from "reactstrap"
 
@@ -16,6 +16,42 @@ function submitForm(props) {
             {/* FormSubmit */}
             <Row>
                 <Col>
+
+                    <FormClick
+                                            buttonText="Clone click"
+                                            curObj={["POST", obj]}
+                                            curUri="/api/submit-form"
+                    
+                                            successCallBack={(res) => res.data.mes}
+                    
+                                            onSuccess={(res, successCallBack) => {
+                    
+                                                return successCallBack(res);
+                                            }}
+                    
+                                            onError={(err) => {
+                    
+                                                return "error ocuu"
+                                            }
+                                            }
+                    
+                                            validation={() => {
+                                                // return "validation error"
+                    
+                                                return ""
+                                            }}
+                    
+                                            triggerSubmit={submitTrigger}
+                    
+                                            reset={() => setObj(iObj)}
+                                            AxiosRequestConfig={{}}
+                                            showResetButton={true}
+                                            recpthaSetting={{
+                                                "action": "Submit",
+                                                "siteKey": "6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"
+                                            }}
+
+                    />
 
                     <FormSubmit
                         Inputs={
