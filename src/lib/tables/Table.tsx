@@ -115,7 +115,7 @@ export default function TableCompenent({
     let ret: any;
     let value = row[col.accessor];
     if (col.Cell) {
-      ret = col.Cell({ value });
+      ret = col.Cell({ value, row });
     } else {
       ret = value;
     }
