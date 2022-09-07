@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import {Col, Row, Table} from "reactstrap"
 import { getMonth } from './util'
 
@@ -11,7 +11,20 @@ interface Props{
 
 const EventCalendar = (props: Props) => {
     const [monthArray, setMonthArray] = useState(["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"])
-console.table(getMonth(5,2022))
+    const [monthMatrix, setMonthMatrix] = useState<any[][]>(()=>{
+        const monthIndex = monthArray.indexOf(props.month as any)
+        const temTonthMatrix=getMonth(monthIndex, props.year)
+        return temTonthMatrix
+    })
+    
+    // useEffect(() => {
+    //     const monthIndex = monthArray.indexOf(props.month as any)
+    //     const temTonthMatrix=getMonth(monthIndex, props.year)
+    //     // console.table(temTonthMatrix)
+    //     setMonthMatrix(temTonthMatrix)
+    //   return () => {}
+    // }, [])
+    
     
 
 
@@ -46,6 +59,17 @@ console.table(getMonth(5,2022))
                         </tr>
                     </thead>
                     <tbody>
+                        {
+                            monthMatrix.map((el, i)=>{
+                                return(<tr key={i}>
+                                    {
+                                        el.map((dl,ind)=>{
+                                            return<td key={ind}>{dl.getDate()}</td>
+                                        })
+                                    }
+                                </tr>)
+                            })
+                        }
 
                     </tbody>
                 </Table>
