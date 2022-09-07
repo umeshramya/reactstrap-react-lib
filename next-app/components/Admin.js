@@ -4,6 +4,7 @@ import Forms from "../components/submitForm"
 import Table from "../components/table"
 import DateTime from "../components/dateTime"
 import ImageUpload from "../components/ImageUpload"
+import Event from './eventCalender'
 
 
 
@@ -63,11 +64,8 @@ export default function Admin() {
                                 <DateTime />
                                 <Forms />
                                 <ImageUpload/>
-                                <EventCalendar
-                                month={"September"}
-                                year={2022}
-                                
-                                />
+                                <Event/>
+
                                 <Table />
                             </>
                         }

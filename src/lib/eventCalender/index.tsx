@@ -5,17 +5,13 @@ import { getMonth } from './util'
 const months=["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"] as const
 type month= typeof months[number]
 interface Props{
-    month:month
-    year:number
+
 }
 
-const EventCalendar = (props: Props) => {
+export default  function (Wraper:any) {
+
+    return function  (props: Props){
     const [monthArray, setMonthArray] = useState(["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"])
-    // const [monthMatrix, setMonthMatrix] = useState<any[][]>(()=>{
-    //     // const monthIndex = monthArray.indexOf(props.month as any)
-    //     const temTonthMatrix=getMonth(new Date().getMonth(), new Date().getFullYear())
-    //     return temTonthMatrix
-    // })
     const [month, setMonth] = useState<number>(new Date().getMonth())
     const [year, setYear] = useState<number>(new Date().getFullYear())
     const [monthMatrix, setMonthMatrix] = useState<any[][]>([])
@@ -86,7 +82,7 @@ const EventCalendar = (props: Props) => {
                                     {
                                         el.map((dl,ind)=>{
                                             return(<td key={ind}>
-                                                {dl.getDate()}
+                                                <Wraper {...props} date={dl}/>
                                             </td>)
                                         })
                                     }
@@ -102,6 +98,12 @@ const EventCalendar = (props: Props) => {
     </>
     
   )
+
+}
+    
 }
 
-export default EventCalendar
+
+
+
+
