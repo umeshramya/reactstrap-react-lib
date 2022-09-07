@@ -8,18 +8,18 @@ import React, {
 } from "react";
 import { Container, Row, Col, Form } from "reactstrap";
 import { useRouter } from "next/router";
+import ButtonP from "../units/ButtonP";
 import AlertP from "../units/AlertP";
 import ModelP from "../units/ModelP";
 import { propMaster, recpthaSetting } from "../Interfaces/interfaces";
 import queryString from "querystring";
-import ButtonP from "../units/ButtonP";
 
 interface Props extends propMaster {
   /**This is Form input elements. do not add Form elemet thise get rendered inside the form itself */
   Inputs: ReactFragment;
   showResetButton: boolean;
-  buttonText:string
   recpthaSetting?: recpthaSetting;
+  buttonText:string
 }
 
 const FormClick = ({
@@ -44,7 +44,7 @@ const FormClick = ({
   const alerRef = useRef<AlertP>(null);
   const [triggerSubmitCount, setTriggerSubmitCount] = useState(0);
   const [triggerResetCount, setTriggerResetCount] = useState(0);
-  const [submitDisable, setSubmitDisable] = useState(false);
+  const [clickDisable, setClickDisable] = useState(false);
   const [recaptchaToken, setrecaptchaToken] = useState("Unset reCaptcha Token");
 
   const router = useRouter();
@@ -56,7 +56,7 @@ const FormClick = ({
 
   useEffect(() => {
     if (triggerSubmitCount > 0) {
-      clickHandle(curUri, curObj, onSuccess, onError, validation);
+      ClickHandle(curUri, curObj, onSuccess, onError, validation);
     }
     setTriggerSubmitCount(triggerSubmitCount + 1);
     return () => {};
@@ -71,7 +71,7 @@ const FormClick = ({
     return () => {};
   }, [triggerReset]);
 
-  const clickHandle = async (
+  const ClickHandle = async (
     _curUri: string,
     _curObj: typeof curObj,
     _onSuccess: typeof onSuccess,
@@ -83,14 +83,14 @@ const FormClick = ({
     try {
       modRef.current?.close();
       butRef.current?.showSpin();
-      setSubmitDisable(true);
+      setClickDisable(true);
       alerRef.current?.alertLight();
 
       validationErrorMessage = _validation();
       if (validationErrorMessage !== "") {
         alerRef.current?.alertError(validationErrorMessage);
         butRef.current?.hideSpin();
-        setSubmitDisable(false);
+        setClickDisable(false);
         return;
       }
 
@@ -114,7 +114,7 @@ const FormClick = ({
         // code to use router to push the page said
         router.push(`${_curUri}/?${queryString.stringify(_curObj[1])}`);
         butRef.current?.hideSpin();
-        setSubmitDisable(false);
+        setClickDisable(false);
         alerRef.current?.alertSuccess("Successfully completed action");
         return;
       } else {
@@ -127,14 +127,14 @@ const FormClick = ({
       let _successMessage = _onSuccess(res, successCallBack);
 
       butRef.current?.hideSpin();
-      setSubmitDisable(false);
+      setClickDisable(false);
       alerRef.current?.alertSuccess(_successMessage);
     } catch (error) {
       let _errorMessage = _onError(error as AxiosError, errorCallback);
 
       alerRef.current?.alertError(_errorMessage);
       butRef.current?.hideSpin();
-      setSubmitDisable(false);
+      setClickDisable(false);
     }
   };
 
@@ -145,13 +145,15 @@ const FormClick = ({
           <ModelP
             ref={modRef}
             Ok={(e) => {
-              clickHandle(curUri, curObj, onSuccess, onError, validation);
+              ClickHandle(curUri, curObj, onSuccess, onError, validation);
               modRef.current?.close();
             }}
-            modelText="Press Ok to Submit data to server, Press cancel to exit"
-            modelTitle="Do you want to submit Data ?"
+            modelText="Press Ok to  continuer, Press cancel to exit"
+            modelTitle="Do you want to do this action ?"
           />
-          <Form>
+          <Form
+
+          >
             <Row>
               <Col>
                 {/* Form elements go here */}
@@ -160,8 +162,10 @@ const FormClick = ({
             </Row>
             <Row>
               <Col>
-                <ButtonP text={buttonText} ref={butRef} disabled={submitDisable} 
-                onClick={()=>{
+                <ButtonP text={buttonText || "Click"} ref={butRef} disabled={clickDisable}  
+                color={"success"}
+                onClick = {() => {
+                  // e.preventDefault();
                   if (recpthaSetting) {
                     //@ts-ignore
                     let grecaptcha = window.grecaptcha;
@@ -178,9 +182,7 @@ const FormClick = ({
                   } else {
                     modRef.current?.show();
                   }
-                }}
-                
-                />
+                }}/>
               </Col>
               {showResetButton ? (
                 <Col>
@@ -195,8 +197,6 @@ const FormClick = ({
                 ""
               )}
             </Row>
-            <Row>
-            </Row>
           </Form>
           <AlertP ref={alerRef} />
         </Col>
@@ -206,3 +206,4 @@ const FormClick = ({
 };
 
 export default FormClick;
+
