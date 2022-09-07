@@ -64,8 +64,8 @@ export default function Admin() {
                                 <Forms />
                                 <ImageUpload/>
                                 <EventCalendar
-                                month={"January"}
-                                year={1999}
+                                month={"September"}
+                                year={2022}
                                 
                                 />
                                 <Table />
