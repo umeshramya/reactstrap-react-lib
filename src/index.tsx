@@ -17,7 +17,7 @@ import {
 } from "./lib/admin/SectionPanel";
 import DateTime from "./lib/dateTime/Index";
 import TimeZone from "./lib/TimeZone";
-
+import EventCalendar from "./lib/eventCalender";
 export { AlertP, ButtonP, ModelP, LinkP };
 export { FormSubmit };
 export { FormDelete };
@@ -27,6 +27,7 @@ export { Sidebar, SectioPanel };
 export { Table };
 export { DateTime };
 export { TimeZone };
+export{EventCalendar}
 
 /**
  * interfaces

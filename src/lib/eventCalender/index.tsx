@@ -1,5 +1,6 @@
-import React from 'react'
+import React, { useState } from 'react'
 import {Col, Row, Table} from "reactstrap"
+import { getMonth } from './util'
 
 const months=["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"] as const
 type month= typeof months[number]
@@ -9,73 +10,10 @@ interface Props{
 }
 
 const EventCalendar = (props: Props) => {
-    const getweakDayindex=(date:Date):number=>{
-        const curdate=new Date(date).getDay()
-        return curdate
-    }
+    const [monthArray, setMonthArray] = useState(["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"])
+console.table(getMonth(5,2022))
     
-    const getDaysInMonth=():Date[]=> {
-        const month = months.findIndex(props.month as any)
-        const year = props.year
-        var date = new Date(year, month, 1);
-        var days:Date[] = [];
-        while (date.getMonth() === month) {
-          days.push(new Date(date));
-          date.setDate(date.getDate() + 1);
-        }
-        return days;
-      }
 
-      const fillCalendar = ():any=>{
-        let ret:any=""
-        getDaysInMonth().forEach((el, i)=>{
-            const weakday = getweakDayindex(el)
-            if(weakday == 0 || i<=6){
-                // start new week
-                ret=`${ret}<tr>`
-                if(weakday == 0){
-                    ret=`${ret}<td>${el.getDate()}</td>`
-                }else{
-                    ret=`${ret}<td></td>`
-                }
-            }
-            if(weakday == 1){
-                ret=`${ret}<td>${el.getDate()}</td>`
-            }else{
-                ret=`${ret}<td></td>`
-            }
-            if(weakday == 2){
-                ret=`${ret}<td>${el.getDate()}</td>`
-            }else{
-                ret=`${ret}<td></td>`
-            }
-            if(weakday == 3){
-                ret=`${ret}<td>${el.getDate()}</td>`
-            }else{
-                ret=`${ret}<td></td>`
-            }
-            if(weakday == 4){
-                ret=`${ret}<td>${el.getDate()}</td>`
-            }else{
-                ret=`${ret}<td></td>`
-            }
-            if(weakday == 5){
-                ret=`${ret}<td>${el.getDate()}</td>`
-            }else{
-                ret=`${ret}<td></td>`
-            }
-
-            if(weakday == 6 || i == 6){
-                if(weakday == 6){
-                    ret=`${ret}<td>${el.getDate()}</td>`
-                }else{
-                    ret=`${ret}<td></td>`
-                }
-                // end weak
-                ret = `${ret}</tr>`
-            }
-        })
-      }
 
   return (
     <>
@@ -108,9 +46,7 @@ const EventCalendar = (props: Props) => {
                         </tr>
                     </thead>
                     <tbody>
-                        {
-                            fillCalendar()
-                        }
+
                     </tbody>
                 </Table>
             
