@@ -1,14 +1,15 @@
 import React from 'react'
 import {EventCalendar} from "reactstrap-react-lib"
+import {Row, Col} from "reactstrap"
 
 function Event({date, month, year}) {
   return (
 
-    <div>
-      {month == new Date(date).getMonth() ? new Date(date).getDate(): ""}
-      {/* {new Date(date).toDateString()} */}
-      
-    </div>
+    <Row className='text-primary'>
+      <Col role='button' >
+        {new Date(date).getDate()}
+      </Col>
+    </Row>
   )
 }
 

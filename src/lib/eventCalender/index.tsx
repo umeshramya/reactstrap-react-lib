@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import {Col, FormGroup, Input, Row, Table} from "reactstrap"
+import {Button, Col, FormGroup, Input, Row, Table} from "reactstrap"
 import { getMonth } from './util'
 
 const months=["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"] as const
@@ -82,11 +82,15 @@ export default  function (Wraper:any) {
                                     {
                                         el.map((dl,ind)=>{
                                             return(<td key={ind}>
-                                                <Wraper {...props} 
-                                                date={dl}
-                                                month={month}
-                                                year = {year}
-                                                />
+                                                {
+                                                    month == new Date(dl).getMonth() ?
+                                                    <Wraper {...props} 
+                                                    date={dl}
+                                                    month={month}
+                                                    year = {year}
+                                                    /> : 
+                                                    <></>
+                                                }
                                             </td>)
                                         })
                                     }
