@@ -1,6 +1,6 @@
 {
   "name": "reactstrap-react-lib",
-  "version": "5.0.0",
+  "version": "5.0.1",
   "description": "This is a lib for react and next",
   "main": "lib/index.js",
   "types": "lib",

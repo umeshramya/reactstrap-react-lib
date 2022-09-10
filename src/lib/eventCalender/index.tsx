@@ -52,26 +52,26 @@ export default  function (Wraper:any) {
             <Table  responsive bordered>
                     <thead>
                         <tr>
-                            <th>
-                                Sunday
+                            <th className='text-danger'>
+                                Sun
                             </th>
                             <th>
-                                Monday
+                                Mon
                             </th>
                             <th>
-                                Tuesday
+                                Tue
                             </th>
                             <th>
-                            Wednesday
+                            Wed
                             </th>
                             <th>
-                            Thursday
+                            Thu
                             </th>
                             <th>
-                                Friday
+                                Fri
                             </th>
-                            <th>
-                            Saturday
+                            <th className='text-warning'>
+                            Sat
                             </th>
                         </tr>
                     </thead>
@@ -82,7 +82,11 @@ export default  function (Wraper:any) {
                                     {
                                         el.map((dl,ind)=>{
                                             return(<td key={ind}>
-                                                <Wraper {...props} date={dl}/>
+                                                <Wraper {...props} 
+                                                date={dl}
+                                                month={month}
+                                                year = {year}
+                                                />
                                             </td>)
                                         })
                                     }
