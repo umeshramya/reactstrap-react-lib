@@ -11,15 +11,31 @@ interface Props{
 export default  function (Wraper:any) {
 
     return function  (props: Props){
-    const [monthArray, setMonthArray] = useState(["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"])
     const [month, setMonth] = useState<number>(new Date().getMonth())
     const [year, setYear] = useState<number>(new Date().getFullYear())
     const [monthMatrix, setMonthMatrix] = useState<any[][]>([])
+    const [monthArray, setMonthArray] = useState(["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"])
+
+
 
     useEffect(() => {
+
       setMonthMatrix(getMonth(month, year))
       return () => {}
     }, [year, month])
+
+    const getYearOptions = ():number[]=>{
+        const curYear = new Date().getFullYear();
+        const yearrange =new Array(10).fill([]).map((el, i)=>{
+            if(i== 0){
+                return curYear -1
+            }else{
+                return curYear + i-1
+            }
+        })
+
+        return yearrange
+    }
     
     
   return (
@@ -43,7 +59,15 @@ export default  function (Wraper:any) {
             </Col>
             <Col>
                 <FormGroup>
-                    <Input type="number" placeholder='Year' value={year} onChange={(e)=>setYear(parseInt(e.target.value))}/>
+                <Input type="select" value={year} onChange={(e)=>setYear(parseInt(e.target.value))}>
+                        {
+                        getYearOptions().map((el, i)=>{
+                            
+                            return (
+                                <option key={i} value={el}>{el}</option>
+                            )
+                        })}
+                    </Input>
                 </FormGroup>
             </Col>
         </Row>
