@@ -54,11 +54,15 @@ export default function index({
     let value = e.target.value;
     setSearch(value);
     //code here for filter
-    let keys = columns.map((col) => col.accessor);
+
+      const curArray = data as any
+      let keys:string[] = Object.keys(curArray[0])
+  
+
     let tempData = data.filter((o) => {
       let oString = "";
       for (const key of keys) {
-        oString = `${oString},${o[key]}`;
+        oString = `${oString} ${o[key]}`;
       }
       if (
         oString.toLowerCase().search(value.trim().toString().toLowerCase()) >= 0
