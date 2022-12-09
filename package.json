@@ -1,6 +1,6 @@
 {
   "name": "reactstrap-react-lib",
-  "version": "6.0.0",
+  "version": "6.0.1",
   "description": "This is a lib for react and next",
   "main": "lib/index.js",
   "types": "lib",
@@ -22,6 +22,10 @@
     "url": "https://github.com/umeshramya/reactstrap-react-lib/issues"
   },
   "homepage": "https://github.com/umeshramya/reactstrap-react-lib#readme",
+  "peerDependencies": {
+    "react": ">=17.0.2",
+    "reactstrap": ">=8.9.0"
+  },
   "devDependencies": {
     "@types/next": "^9.0.0",
     "@types/react": "^17.0.3",
