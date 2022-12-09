@@ -20,7 +20,7 @@ interface Props {
   /**Page name tobe displayed */
   pageName: string;
   /**horizontal bar component */
-  barComponent?: Component;
+  barComponent?: any;
   /**orgnization name to be displayed above in sidebar */
   orgName?: string;
   /**user name as string */
