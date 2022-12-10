@@ -16,7 +16,7 @@ import queryString from "querystring";
 
 interface Props extends propMaster {
   /**This is Form input elements. do not add Form elemet thise get rendered inside the form itself */
-  Inputs: ReactFragment;
+  Inputs: any;
   showResetButton: boolean;
   recpthaSetting?: recpthaSetting;
 }
