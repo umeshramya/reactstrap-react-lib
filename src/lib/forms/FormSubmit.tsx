@@ -46,7 +46,7 @@ const FormSubmit = ({
   const [alertState, setAlertState] = useState<{text:string; color:string}>({"color" : "light", "text" : ""})
 
   const router = useRouter();
-  const curInputs = useCallback(()=> Inputs, [Inputs])
+
   useEffect(() => {
     setAlertState({"text" : "" , "color" : "light"})
     return () => {};
@@ -175,7 +175,7 @@ const FormSubmit = ({
             <Row>
               <Col>
                 {/* Form elements go here */}
-                {curInputs()}
+                {Inputs}
               </Col>
             </Row>
             <Row>
