@@ -76,15 +76,19 @@ function submitForm(props) {
                         curObj={["POST", obj]}
                         curUri="/api/submit-form"
 
-                        successCallBack={(res) => res.data.mes}
+                        // successCallBack={(res) => res.data.mes}
 
-                        onSuccess={(res, successCallBack) => {
-
-                            return successCallBack(res);
+                        onSuccess={(res) => {
+                            if(obj){
+                                setObj(obj)
+                            }
+                            
+                            return res.data.mes
+                            // return successCallBack(res);
                         }}
 
                         onError={(err) => {
-
+                            
                             return "error ocuu"
                         }
                         }

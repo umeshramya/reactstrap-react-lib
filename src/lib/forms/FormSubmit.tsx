@@ -9,7 +9,7 @@ import React, {
 import { Container, Row, Col, Form } from "reactstrap";
 import { useRouter } from "next/router";
 import ButtonP from "../units/ButtonP";
-import AlertP from "../units/AlertP";
+import AlertForm from "./AlertForm";
 import ModelP from "../units/ModelP";
 import { propMaster, recpthaSetting } from "../Interfaces/interfaces";
 import queryString from "querystring";
@@ -39,16 +39,16 @@ const FormSubmit = ({
 }: Props) => {
   const butRef = useRef<ButtonP>(null);
   const modRef = useRef<ModelP>(null);
-  const alerRef = useRef<AlertP>(null);
   const [triggerSubmitCount, setTriggerSubmitCount] = useState(0);
   const [triggerResetCount, setTriggerResetCount] = useState(0);
   const [submitDisable, setSubmitDisable] = useState(false);
   const [recaptchaToken, setrecaptchaToken] = useState("Unset reCaptcha Token");
+  const [alertState, setAlertState] = useState<{text:string; color:string}>({"color" : "light", "text" : ""})
 
   const router = useRouter();
 
   useEffect(() => {
-    alerRef.current?.alertLight();
+    setAlertState({"text" : "" , "color" : "light"})
     return () => {};
   }, [curObj]);
 
@@ -82,11 +82,12 @@ const FormSubmit = ({
       modRef.current?.close();
       butRef.current?.showSpin();
       setSubmitDisable(true);
-      alerRef.current?.alertLight();
+      setAlertState({"text" : "" , "color" : "light"})
 
       validationErrorMessage = _validation();
       if (validationErrorMessage !== "") {
-        alerRef.current?.alertError(validationErrorMessage);
+        setAlertState({"text" : validationErrorMessage , "color" : "danger"})
+
         butRef.current?.hideSpin();
         setSubmitDisable(false);
         return;
@@ -113,7 +114,7 @@ const FormSubmit = ({
         router.push(`${_curUri}/?${queryString.stringify(_curObj[1])}`);
         butRef.current?.hideSpin();
         setSubmitDisable(false);
-        alerRef.current?.alertSuccess("Successfully completed action");
+        setAlertState({"text" : "Successfully completed action", color : "success"})
         return;
       } else {
         // default method POST
@@ -126,11 +127,12 @@ const FormSubmit = ({
 
       butRef.current?.hideSpin();
       setSubmitDisable(false);
-      alerRef.current?.alertSuccess(_successMessage);
+      setAlertState({"text" : _successMessage, color : "success"})
     } catch (error) {
       let _errorMessage = _onError(error as AxiosError, errorCallback);
 
-      alerRef.current?.alertError(_errorMessage);
+      setAlertState({"text" : _errorMessage, color : "danger"})
+
       butRef.current?.hideSpin();
       setSubmitDisable(false);
     }
@@ -194,7 +196,7 @@ const FormSubmit = ({
               )}
             </Row>
           </Form>
-          <AlertP ref={alerRef} />
+              <AlertForm text={alertState.text} color={alertState.color}/>
         </Col>
       </Row>
     </>
