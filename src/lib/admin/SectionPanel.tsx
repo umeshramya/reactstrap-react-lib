@@ -68,9 +68,7 @@ export default class SectionPanel extends Component<panelProps, State> {
 
         <Col sm={12}>
           <Collapse isOpen={this.state.isOpen}>
-              <Container>
-
-
+              <Container className= "bg-dark text-white rounded-3 p-5 rounded-lg m-3">
               <IoIcons.IoMdClose
                 size={50}
                 onClick={this.panelClose}

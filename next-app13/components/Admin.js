@@ -1,10 +1,11 @@
 import React from 'react'
-import { EventCalendar, Sidebar } from "reactstrap-react-lib"
+import { EventCalendar, Sidebar, SectioPanel } from "reactstrap-react-lib"
 import Forms from "../components/submitForm"
 import Table from "../components/table"
 import DateTime from "../components/dateTime"
 import ImageUpload from "../components/ImageUpload"
 import Event from './eventCalender'
+import { Row, Col } from 'reactstrap'
 
 
 
@@ -44,11 +45,11 @@ export default function Admin() {
 
     return (
         <>
-            {/* <Row>
-                <Col> */}
+            <Row>
+                <Col>
 
 
-                    {/* <SectioPanel
+            <SectioPanel
             panelTitle={"Employee"}
             section = {[
                 {title : "Employee",sectionElements : Employee},
@@ -56,7 +57,7 @@ export default function Admin() {
                 {title : "Roster", sectionElements : Roster},
                 {title : "Onboarding", sectionElements : Onboarding}
             ]}
-        /> */}  
+        /> 
 
 
                      <Sidebar
@@ -82,8 +83,8 @@ export default function Admin() {
                     /> 
 
 
-                {/* </Col>
-            </Row > */}
+                </Col>
+            </Row >
 
         </>
     )
