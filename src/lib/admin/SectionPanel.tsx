@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Row, Col, Jumbotron, Collapse } from "reactstrap";
+import { Row, Col, Collapse, Container } from "reactstrap";
 import * as IoIcons from "react-icons/io";
 import Link from "next/link";
 import ButtonP from "../units/ButtonP";
@@ -68,7 +68,9 @@ export default class SectionPanel extends Component<panelProps, State> {
 
         <Col sm={12}>
           <Collapse isOpen={this.state.isOpen}>
-            <Jumbotron>
+              <Container>
+
+
               <IoIcons.IoMdClose
                 size={50}
                 onClick={this.panelClose}
@@ -97,7 +99,7 @@ export default class SectionPanel extends Component<panelProps, State> {
                   );
                 })}
               </Row>
-            </Jumbotron>
+              </Container>
           </Collapse>
         </Col>
       </Row>
