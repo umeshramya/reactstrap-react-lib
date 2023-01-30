@@ -139,7 +139,7 @@ const Sidebar = (props: Props) => {
         @media only screen and (max-width: 600px) {
           .sidebar{
             height: 50vh;
-            z-index:1;
+            z-index:1000;
           }
         }
 
