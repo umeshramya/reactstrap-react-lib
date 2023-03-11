@@ -127,7 +127,7 @@ export default class TimeZone {
 
 
   
-convertTZ(date:string, tzString:TimeZomes, onlyDate:true ):string {
+convertTZ(date:string, tzString:TimeZomes, onlyDate:boolean ):string {
   if(onlyDate){
     return new Date(date).toLocaleString("en-GB", 
     {
