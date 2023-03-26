@@ -48,7 +48,7 @@ export default function FormUpload(props: Props): ReactElement {
       if (curImage.size > size) {
         const options = {
           maxSizeMB: (size/1024)/1024,
-          maxWidthOrHeight: 1920
+          maxWidthOrHeight: 1920*2
         }
 
         curImage = await imageCompression(curImage, options);
