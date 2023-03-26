@@ -8,10 +8,12 @@ export default function FormUploadCompent() {
         <ImageUpload
             uri="/api/image-upload"
             fileName="image"
-            imageSizeinKB={35}
+            imageSizeinKB={200}
             onSuccess= {(res)=>{
                 return res.data.mes
             }}
+
+            
 
             onError={(err)=>{
                console.log( err.response.data)

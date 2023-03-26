@@ -1,6 +1,6 @@
 import React, { ReactElement, useState, useRef } from "react";
 import { Form, FormGroup, Input, Label, Row, Col } from "reactstrap";
-
+import imageCompression from 'browser-image-compression';
 import axios, { AxiosError, AxiosResponse } from "axios";
 import AlertP from "../units/AlertP";
 import ModelP from "../units/ModelP";
@@ -37,17 +37,27 @@ export default function FormUpload(props: Props): ReactElement {
   const modRef = useRef<ModelP>(null);
   const alerRef = useRef<AlertP>(null);
 
-  const onChangeHandler = (e: any) => {
+  const onChangeHandler = async(e: any) => {
     try {
       alerRef.current?.alertLight();
-      const curImage = e.target.files[0];
+      let curImage = e.target.files[0];
+
+
       let size = props.imageSizeinKB ? props.imageSizeinKB * 1024 : 20 * 1024;
 
       if (curImage.size > size) {
-        throw (new Error().message = `Image size more ${size} bytes`);
+        const options = {
+          maxSizeMB: (size/1024)/1024,
+          maxWidthOrHeight: 1920
+        }
+
+        curImage = await imageCompression(curImage, options);
+
       }
+
+
       const fileReader = new FileReader();
-      fileReader.readAsDataURL(e.target.files[0]);
+      fileReader.readAsDataURL(curImage);
       fileReader.onloadend = () => {
         setPreviewSource(fileReader.result);
       };
@@ -132,8 +142,8 @@ export default function FormUpload(props: Props): ReactElement {
                     type="file"
                     accept={"image/*"}
                     multiple={false}
-                    onChange={(e) => {
-                      onChangeHandler(e);
+                    onChange={async(e) => {
+                      await onChangeHandler(e);
                     }}
                   />
                 </Col>

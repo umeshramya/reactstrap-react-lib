@@ -1,5 +1,5 @@
 {
-  "name": "next-app13",
+  "name": "test",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -10,11 +10,10 @@
   },
   "dependencies": {
     "bootstrap": "^5.2.3",
-    "cloudinary": "^1.26.3",
-    "next": "13.0.6",
+    "cloudinary": "^1.35.0",
+    "next": "13.2.4",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "reactstrap": "^9.1.5",
     "reactstrap-react-lib": "file:.yalc/reactstrap-react-lib"
   }
 }
