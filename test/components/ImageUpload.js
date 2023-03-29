@@ -13,7 +13,7 @@ export default function FormUploadCompent() {
                 return res.data.mes
             }}
 
-            
+            fileInputCount={8}
 
             onError={(err)=>{
                console.log( err.response.data)

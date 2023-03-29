@@ -15,6 +15,7 @@ interface Props {
   imageSizeinKB?: number;
   onSuccess: (res: AxiosResponse) => string;
   onError: (err: AxiosError) => string;
+  fileInputCount:number
 }
 /**
  *
@@ -30,14 +31,16 @@ interface Props {
  *@returns ReactElement
  */
 export default function FormUpload(props: Props): ReactElement {
-  const [previewSource, setPreviewSource] = useState<any>();
+  const [previewSource, setPreviewSource] = useState<any[]>(()=>{
+    return new Array(props.fileInputCount).fill([]).map(el=> "");
+  });
   const [UploadButtonDisable, setUploadButtonDisable] = useState(false);
   const [recaptchaToken, setrecaptchaToken] = useState("Unset reCaptcha Token");
   const butRef = useRef<ButtonP>(null);
   const modRef = useRef<ModelP>(null);
   const alerRef = useRef<AlertP>(null);
 
-  const onChangeHandler = async(e: any) => {
+  const onChangeHandler = async(e: any, index :number) => {
     try {
       alerRef.current?.alertLight();
       let curImage = e.target.files[0];
@@ -59,7 +62,10 @@ export default function FormUpload(props: Props): ReactElement {
       const fileReader = new FileReader();
       fileReader.readAsDataURL(curImage);
       fileReader.onloadend = () => {
-        setPreviewSource(fileReader.result);
+
+        const copyPreviewresource:any[] = Object.assign([], previewSource)
+        copyPreviewresource[index]= fileReader.result
+        setPreviewSource(copyPreviewresource);
       };
     } catch (error) {
       alerRef.current?.alertError(error as string);
@@ -134,24 +140,33 @@ export default function FormUpload(props: Props): ReactElement {
               }
             }}
           >
-            <FormGroup>
-              <Row>
-                <Col sm={12} md={12} lg={6}>
-                  <Label>Choose Image</Label>
-                  <Input
-                    type="file"
-                    accept={"image/*"}
-                    multiple={false}
-                    onChange={async(e) => {
-                      await onChangeHandler(e);
-                    }}
-                  />
-                </Col>
-                <Col sm={12} md={12} lg={6}>
-                  {previewSource && <img src={previewSource} height="100rem" />}
-                </Col>
-              </Row>
-            </FormGroup>
+
+            {
+              previewSource.map((el, i)=>{
+                  return(
+                    <FormGroup key={i}>
+                      <Row >
+                          <Col sm={12} md={12} lg={6}>
+                            <Label>Choose Image</Label>
+                            <Input
+                              type="file"
+                              accept={"image/*"}
+                              multiple={false}
+                              onChange={async(e) => {
+                                await onChangeHandler(e, i);
+                              }}
+                            />
+                          </Col>
+                          <Col sm={12} md={12} lg={6}>
+                            {previewSource && <img src={previewSource[i]} height="100rem" />}
+                          </Col>
+                      </Row>
+                    </FormGroup>
+                  )
+              })
+
+            }
+          
 
             {props.inputs}
             <FormGroup>
