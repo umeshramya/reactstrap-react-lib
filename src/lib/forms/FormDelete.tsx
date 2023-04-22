@@ -124,7 +124,7 @@ function Delete(props: Props) {
             }}
           >
             <ButtonP
-              text={props.buttonText ? props.buttonText : "Delete1" }
+              text={props.buttonText ? props.buttonText : "Delete" }
               color="danger"
               ref={butRef}
               disabled={false}
