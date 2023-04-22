@@ -122,6 +122,7 @@ function submitForm(props) {
                     <FormDelete
 
                         curUri="api/form-delete"
+                        buttonText="umesh"
                         curObj={["PUT", { id: 1 }]}
                         onSuccess={(res) => {
 

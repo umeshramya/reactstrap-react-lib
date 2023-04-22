@@ -10,6 +10,7 @@ type propsMasterwithoutReset = Omit<propMaster, "reset">;
 
 interface Props extends propsMasterwithoutReset {
   recpthaSetting: recpthaSetting;
+  buttonText?:string
 }
 
 function Delete(props: Props) {
@@ -123,7 +124,7 @@ function Delete(props: Props) {
             }}
           >
             <ButtonP
-              text="Delete"
+              text={props.buttonText ? props.buttonText : "Delete1" }
               color="danger"
               ref={butRef}
               disabled={false}
