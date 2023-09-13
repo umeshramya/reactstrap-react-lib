@@ -47,27 +47,28 @@ export default function table() {
             dataType : "string"
 
             
-        },{
-            Header : "gender",
-            accessor : "gender",
-            dataType : "string"
+        }
+        // ,{
+        //     Header : "gender",
+        //     accessor : "gender",
+        //     dataType : "string"
 
             
-        },
-        {
-            Header : "ip_address",
-            accessor : "ip_address",
-            dataType : "string",
-            Cell : ({value, row})=>`${value} and ${row.gender} and ${row.id}`
+        // },
+        // {
+        //     Header : "ip_address",
+        //     accessor : "ip_address",
+        //     dataType : "string",
+        //     Cell : ({value, row})=>`${value} and ${row.gender} and ${row.id}`
 
-        }
-        ,{
-            Header : "Date",
-            accessor : "date",
-            Cell : ({value, row})=> new Date(value).toDateString(),
-            dataType : "Date"
+        // }
+        // ,{
+        //     Header : "Date",
+        //     accessor : "date",
+        //     Cell : ({value, row})=> new Date(value).toDateString(),
+        //     dataType : "Date"
 
-        }
+        // }
     ]
 
     return (

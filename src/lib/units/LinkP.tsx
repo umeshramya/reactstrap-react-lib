@@ -1,6 +1,6 @@
 import React, { ReactElement } from "react";
 import Link from "next/link";
-import { FaHandPointRight } from "react-icons/fa";
+// import { FaHandPointRight } from "react-icons/fa";
 
 interface TableCellLinkProps {
   value: any;
@@ -17,7 +17,7 @@ export default function LinkP({
     <>
       <Link href={link} target={newTab ? "_blank" : undefined}>
         <span style={{ color: "blue", cursor: "pointer", margin: "1rem" }}>
-          <FaHandPointRight />
+          &#128073;
           {` ${value}`}
         </span>
       </Link>

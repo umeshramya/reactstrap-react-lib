@@ -1,12 +1,12 @@
 import next from "next";
 import React, { ReactElement, useState, useEffect } from "react";
-import {
-  GrCaretNext,
-  GrChapterNext,
-  GrCaretPrevious,
-  GrChapterPrevious,
-} from "react-icons/gr";
-import { Col, Input, Row } from "reactstrap";
+// import {
+//   GrCaretNext,
+//   GrChapterNext,
+//   GrCaretPrevious,
+//   GrChapterPrevious,
+// } from "react-icons/gr";
+import { Col, FormGroup, Input, Label, Row } from "reactstrap";
 
 type side = "Server" | "Client";
 
@@ -96,44 +96,49 @@ export function Pagination({
       <Row>
         <Col style={{ display: "flex", justifyContent: "end" }}>
           {pageFrom !== "Server" ? (
-            <GrChapterPrevious
-              size={"35px"}
+            <span
               onClick={(e) => firstPageHandle(firstPage)}
-              style={{ cursor: "pointer" }}
-            />
+              style={{ cursor: "pointer", "fontSize" : "35px" }}
+            >
+              &#10094;
+            </span>
           ) : (
             ""
           )}
         </Col>
         <Col style={{ display: "flex", justifyContent: "end" }}>
-          <GrCaretPrevious
-            size={"35px"}
-            onClick={(e) => previousPageHandle(previousPage)}
-            style={{ cursor: "pointer" }}
-          />
+          <span
+          onClick={(e) => previousPageHandle(previousPage)}
+          style={{ cursor: "pointer", "fontSize" : "35px" }}
+          >
+            &#10096;</span>
         </Col>
         <Col>
-          <Input
-            type="number"
-            value={stPageNo}
-            onChange={(e) => pageNoHandle(e)}
-            width={"23px"}
-          />
+            
+            <FormGroup>
+              <Label
+                type="number"
+                // value={stPageNo}
+                onChange={(e) => pageNoHandle(e)}
+                width={"23px"}
+                style={{"fontSize" : "35px", display: "flex", justifyContent:"center" }}
+              >
+                {stPageNo}
+              </Label>
+            </FormGroup>
         </Col>
         <Col style={{ display: "flex", justifyContent: "start" }}>
-          <GrCaretNext
-            size={"35px"}
-            onClick={(e) => nextPageHandle(nextPage)}
-            style={{ cursor: "pointer" }}
-          />
+          <span
+          onClick={(e) => nextPageHandle(nextPage)}
+          style={{ cursor: "pointer", "fontSize" : "35px" }}
+          >&#10097;</span>
         </Col>
         <Col style={{ display: "flex", justifyContent: "start" }}>
           {pageFrom !== "Server" ? (
-            <GrChapterNext
-              size={"35px"}
-              onClick={(e) => lastPageHandle(lastPage)}
-              style={{ cursor: "pointer" }}
-            />
+            <span
+             onClick={(e) => lastPageHandle(lastPage)}
+             style={{ cursor: "pointer", "fontSize" : "35px" }}
+            >&#10095;</span>
           ) : (
             ""
           )}

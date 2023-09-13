@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Row, Col, Collapse, Container } from "reactstrap";
-import * as IoIcons from "react-icons/io";
+// import * as IoIcons from "react-icons/io";
 import Link from "next/link";
 import ButtonP from "../units/ButtonP";
 
@@ -69,11 +69,12 @@ export default class SectionPanel extends Component<panelProps, State> {
         <Col sm={12}>
           <Collapse isOpen={this.state.isOpen}>
               <Container className= "bg-dark text-white rounded-3 p-5 rounded-lg m-3">
-              <IoIcons.IoMdClose
-                size={50}
-                onClick={this.panelClose}
-                style={{ cursor: "pointer" }}
-              />
+
+            <span style={{"fontSize" : "50px", cursor: "pointer"}}
+            onClick={this.panelClose}
+            >&#10006;
+            
+          </span>
               <h4> {`${this.props.panelTitle} Panel`}</h4>
               <Row>
                 {this.props.section?.map((eachSection, i) => {

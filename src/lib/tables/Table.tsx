@@ -1,7 +1,7 @@
 import React, { ReactElement, useEffect, useState } from "react";
 import { Table, Row, Col, Input } from "reactstrap";
 import { Props, column } from "./index";
-import { FaSort } from "react-icons/fa";
+// import { FaSort } from "react-icons/fa";
 
 export default function TableCompenent({
   columns,
@@ -137,10 +137,12 @@ export default function TableCompenent({
                 <th key={index}>
                   <strong>{col.Header}</strong>
                   {sort == true ? (
-                    <FaSort
-                      style={{ cursor: "pointer" }}
-                      onClick={() => sortHandle(col.accessor, col.dataType)}
-                    />
+
+
+                    <span
+                    style={{ cursor: "pointer" }}
+                    onClick={() => sortHandle(col.accessor, col.dataType)}
+                    >{` `}&#8645;</span>
                   ) : (
                     ""
                   )}
