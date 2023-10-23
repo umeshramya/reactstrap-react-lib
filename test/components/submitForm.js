@@ -75,6 +75,7 @@ function submitForm(props) {
 
                         curObj={["POST", obj]}
                         curUri="/api/submit-form"
+                        // disableOnSubmit={true}
 
                         // successCallBack={(res) => res.data.mes}
 
@@ -137,8 +138,8 @@ function submitForm(props) {
                             "siteKey": "6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"
                         }}
 
-
-
+                        
+                    
                     />
                 </Col>
             </Row>

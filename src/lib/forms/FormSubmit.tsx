@@ -19,6 +19,7 @@ interface Props extends propMaster {
   Inputs: any;
   showResetButton: boolean;
   recpthaSetting?: recpthaSetting;
+  disableOnSubmit?:boolean
 }
 
 const FormSubmit = ({
@@ -36,6 +37,7 @@ const FormSubmit = ({
   triggerSubmit,
   triggerReset,
   showResetButton = false,
+  disableOnSubmit
 }: Props) => {
   const butRef = useRef<ButtonP>(null);
   const modRef = useRef<ModelP>(null);
@@ -113,7 +115,7 @@ const FormSubmit = ({
         // code to use router to push the page said
         router.push(`${_curUri}/?${queryString.stringify(_curObj[1])}`);
         butRef.current?.hideSpin();
-        setSubmitDisable(false);
+        setSubmitDisable(true);
         setAlertState({"text" : "Successfully completed action", color : "success"})
         return;
       } else {
@@ -126,7 +128,12 @@ const FormSubmit = ({
       let _successMessage = _onSuccess(res, successCallBack);
 
       butRef.current?.hideSpin();
-      setSubmitDisable(false);
+      if(disableOnSubmit){
+        setSubmitDisable(true);
+      }else{
+        setSubmitDisable(false);
+      }
+      
       setAlertState({"text" : _successMessage, color : "success"})
     } catch (error) {
       let _errorMessage = _onError(error as AxiosError, errorCallback);
@@ -135,6 +142,8 @@ const FormSubmit = ({
 
       butRef.current?.hideSpin();
       setSubmitDisable(false);
+
+      
     }
   };
 
