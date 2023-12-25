@@ -33,7 +33,7 @@ export interface propMaster {
      * This function is call back on error from server HTTP response 
      * @error error eecived from server
      */
-    onError: (error: AxiosError, errorCallback?: (...arg: any) => any) => string
+    onError: (error: AxiosError, errorCallback?: (...arg: any) => any) => any
     /**
      * This is props as a callback  function to passesed inside onError function
      */

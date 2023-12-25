@@ -115,7 +115,7 @@ const FormSubmit = ({
         // code to use router to push the page said
         router.push(`${_curUri}/?${queryString.stringify(_curObj[1])}`);
         butRef.current?.hideSpin();
-        setSubmitDisable(true);
+        setSubmitDisable(false);
         setAlertState({"text" : "Successfully completed action", color : "success"})
         return;
       } else {

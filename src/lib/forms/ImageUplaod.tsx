@@ -14,7 +14,7 @@ interface Props {
   recpthaSetting?: recpthaSetting;
   imageSizeinKB?: number;
   onSuccess: (res: AxiosResponse) => string;
-  onError: (err: AxiosError) => string;
+  onError: (err: AxiosError) => any;
   fileInputCount:number
 }
 /**
