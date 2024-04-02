@@ -159,6 +159,19 @@ convertTZ(date:string, tzString:TimeZomes, onlyDate:boolean ):string {
 }
 
 
+getNextDayFromDate(IsoDateString: string): string {
+  // Parse the input date string to a Date object
+  const date = new Date(IsoDateString);
+
+  // Calculate the next day by adding 1 to the date's day
+  date.setDate(date.getDate() + 1);
+
+  // Format the next day in YYYY-MM-DD format
+  const nextDay = date.toISOString().split('T')[0];
+  return nextDay;
+}
+
+
 
 }
 
