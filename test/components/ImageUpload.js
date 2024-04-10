@@ -42,7 +42,6 @@ export default function FormUploadCompent() {
         <PdfUpload
             uri="/api/image-upload"
             fileName="image"
-            imageSizeinKB={200}
             onSuccess= {(res)=>{
                 return res.data.mes
             }}
