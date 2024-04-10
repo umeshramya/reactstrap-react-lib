@@ -7,6 +7,7 @@ import FormSubmit from "./lib/forms/FormSubmit";
 import FormClick from "./lib/forms/FormClick";
 import FormDelete from "./lib/forms/FormDelete";
 import ImageUpload from "./lib/forms/ImageUplaod";
+import PdfUpload from "./lib/forms/PdfUpload";
 import Table, { column } from "./lib/tables/";
 import SectioPanel from "./lib/admin/SectionPanel";
 import Sidebar from "./lib/admin/Sidebar";
@@ -23,6 +24,7 @@ export { FormSubmit };
 export { FormDelete };
 export {FormClick}
 export { ImageUpload };
+export {PdfUpload}
 export { Sidebar, SectioPanel };
 export { Table };
 export { DateTime };
