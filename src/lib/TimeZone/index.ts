@@ -66,12 +66,21 @@ export default class TimeZone {
 
 
   /**
-   * This sets the date given or class private _date to system Time zone
-   * @param date date time default class priavte property _date
-   * @returns UTC Date and Time
+   * This Contrsctor UTC date setby .setDate metho to timezone time
+   * if targetTimeZoneOffsetHours && targetTimeZoneOffsetMin both are given then it usethem
+   * if not uses offset from system timezoe
+   * @param date 
+   * @param targetTimeZoneOffsetHours 
+   * @param targetTimeZoneOffsetMin 
+   * @returns 
    */
-  setUTCToSystemTimeZone = (date: Date = this._date): TimeZone => {
+  setUTCToSystemTimeZone = (date: Date = this._date , targetTimeZoneOffsetHours?: number , targetTimeZoneOffsetMin?: number): TimeZone => {
     let offset = date.getTimezoneOffset() * -1;
+    if(targetTimeZoneOffsetHours && targetTimeZoneOffsetMin){
+    let targetOffset = (targetTimeZoneOffsetHours * 3600000) + (targetTimeZoneOffsetMin * 60000);
+    this._date = new Date(date.getTime() + targetOffset);
+    return this
+    }
 
     this._date = new Date(date.getTime() + (offset * 60 * 1000));
     return this
@@ -147,7 +156,7 @@ convertTZ(date:string, tzString:TimeZomes, onlyDate:boolean ):string {
      "year" : "numeric",
      "month" : "short",
      "day" : "numeric",
-     "hour12" : true,
+     "hour12" : false,
      "hour" : "numeric",
      "minute" : "numeric",
      "second" : "numeric",
@@ -169,6 +178,17 @@ getNextDayFromDate(IsoDateString: string): string {
   // Format the next day in YYYY-MM-DD format
   const nextDay = date.toISOString().split('T')[0];
   return nextDay;
+}
+
+
+/**
+ * This method return the class variable date in strig 
+ * it removes Z from end of iso date
+ * rest it returns
+ */
+getDateinStringLocal():string{
+  const dateString= this._date.toISOString();
+  return dateString.substring(0, dateString.length-1)
 }
 
 
