@@ -94,7 +94,7 @@ const Sidebar = (props: Props) => {
             // background-color: #060b26;
             // color: #f5f5f5;
             height: 100vh;
-            position: sticky; 
+            //position: sticky; 
             top: 0px;
             overflow-y: auto;
         }
