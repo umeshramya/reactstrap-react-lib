@@ -29,6 +29,7 @@
 import React, { ReactElement, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { Spinner } from "reactstrap";
 
 interface TableCellLinkProps {
   value: any;
@@ -51,7 +52,7 @@ export default function LinkP({
   
       router
         .push(link)
-        .then(() => setIsRotating(false)) // Stop rotation on success
+        .then(() => setTimeout(() => setIsRotating(false), 5000)) // Stop rotation on success
         .catch(() => setIsRotating(false)); // Stop rotation on error
     } else {
       setIsRotating(true);
@@ -60,16 +61,6 @@ export default function LinkP({
   };
   
 
-  // const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
-  //   if (!newTab) {
-  //     e.preventDefault(); // Prevent default navigation
-  //     setIsRotating(true);
-  //     router.push(link).finally(() => setIsRotating(false)); // Stop rotation when navigation completes
-  //   } else {
-  //     setIsRotating(true);
-  //     setTimeout(() => setIsRotating(false), 1000); // Stop rotation for new tab
-  //   }
-  // };
 
   return (
     <Link
@@ -86,16 +77,17 @@ export default function LinkP({
           alignItems: "center",
         }}
       >
-        <span
-          style={{
-            display: "inline-block", // Ensure the emoji is a block for rotation
-            transition: "transform 0.3s",
-            transform: isRotating ? "rotate(360deg)" : "none",
-          }}
-        >
-          &#128073;
-        </span>
+       &#128073;
+       <Spinner     color="primary"
+          size="sm"
+          type="grow"
+          hidden ={!isRotating}
+          >
+          {""}
+        </Spinner>
+
         {` ${value}`}
+
       </span>
     </Link>
   );
