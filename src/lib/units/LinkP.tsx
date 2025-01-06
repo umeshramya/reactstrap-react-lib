@@ -68,15 +68,7 @@ export default function LinkP({
       target={newTab ? "_blank" : undefined}
       onClick={handleClick}
     >
-      <span
-        style={{
-          color: "blue",
-          cursor: "pointer",
-          margin: "1rem",
-          display: "inline-flex", // Use inline-flex to separate emoji and text
-          alignItems: "center",
-        }}
-      >
+      <span style={{ color: "blue", cursor: "pointer", margin: "1rem" }}>
        &#128073;
        <Spinner     color="primary"
           size="sm"
