@@ -1,5 +1,5 @@
 import React,{useState, useEffect} from 'react'
-import {Row, Col, Container} from "reactstrap"
+import {Row, Col, Container, Button} from "reactstrap"
 import {LinkP, Table} from "reactstrap-react-lib"
 import data from "../MOCK_DATA .json"
 
@@ -31,6 +31,7 @@ export default function table() {
         },
         {
             Header : "first_name",
+            HeaderElement : <><Button>Umesh</Button></>,
             accessor : "first_name",
             dataType : "string"
 

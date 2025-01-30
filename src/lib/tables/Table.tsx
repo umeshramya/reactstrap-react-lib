@@ -157,6 +157,9 @@ export default function TableCompenent({
                   ) : (
                     ""
                   )}
+                  {
+                    col.HeaderElement
+                  }
                 </th>
               );
             })}

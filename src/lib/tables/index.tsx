@@ -11,6 +11,7 @@ export interface column {
    * Column heading
    */
   Header: string;
+  HeaderElement? : ReactElement
   /**
    * key of object of data to be passed to table
    */
