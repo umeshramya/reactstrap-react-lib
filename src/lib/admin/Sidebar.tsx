@@ -29,6 +29,7 @@ interface Props {
   siderBarLinks: sidebarLink[];
   /*background color main area*/
   mainBG?: string;
+
 }
 
 /**
@@ -62,8 +63,12 @@ const Sidebar = (props: Props) => {
             setSection(eachLink.panel.section);
 
             curSectionPanel.current?.panelOpen();
-          } else if (eachLink.link !== undefined) {
+          } else if (eachLink.link !== undefined ) {
+            if(eachLink.link == router.asPath){
+              return
+            }
             // use router to push to new link
+
             setisRotating(true)
             router.push(eachLink.link);
           }
@@ -74,7 +79,7 @@ const Sidebar = (props: Props) => {
       >
 
         {eachLink.name}{" "}
-        <Spinner color="secondary"
+        <Spinner color="success"
           size="sm"
           type="grow"
           hidden ={!isRotating}
