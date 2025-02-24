@@ -64,6 +64,8 @@ const Sidebar = (props: Props) => {
 
             curSectionPanel.current?.panelOpen();
           } else if (eachLink.link !== undefined ) {
+
+
             if(eachLink.link == router.asPath){
               return
             }
