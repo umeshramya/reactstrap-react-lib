@@ -1,6 +1,6 @@
 import React, { Component, useState, useRef, ReactElement } from "react";
 import SectionPanel, { panelProps, sectionEach } from "./SectionPanel";
-import { Row, Col } from "reactstrap";
+import { Row, Col, Spinner } from "reactstrap";
 import { useRouter } from "next/router";
 
 /** These are the items which will displayed insde side bar */
@@ -52,6 +52,7 @@ const Sidebar = (props: Props) => {
   const [section, setSection] = useState(initSection);
 
   const dispalyEachLink: any = (eachLink: sidebarLink, index: number): any => {
+    const [isRotating, setisRotating] = useState(false)
     return (
       <Col
         onClick={() => {
@@ -63,6 +64,7 @@ const Sidebar = (props: Props) => {
             curSectionPanel.current?.panelOpen();
           } else if (eachLink.link !== undefined) {
             // use router to push to new link
+            setisRotating(true)
             router.push(eachLink.link);
           }
         }}
@@ -70,7 +72,15 @@ const Sidebar = (props: Props) => {
         className={`sidebarLi`}
         key={index}
       >
-        {eachLink.name}
+
+        {eachLink.name}{" "}
+        <Spinner color="secondary"
+          size="sm"
+          type="grow"
+          hidden ={!isRotating}
+          >
+          {""}
+        </Spinner>
       </Col>
     );
   };

@@ -74,6 +74,7 @@ export default function Admin() {
                         userName="umesh"
                         siderBarLinks={[
                             { name: "Zoho", link: "/admin/Zoho" },
+                            { name: "Tally", link: "/" },
                             { name: "Employee", panel: { "panelTitle": "Employee", "section": section } },
 
 
