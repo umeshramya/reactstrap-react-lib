@@ -16,6 +16,8 @@ import {
   sectionElements,
   panelProps,
 } from "./lib/admin/SectionPanel";
+
+import Draw from "./lib/canvasDraw";
 import DateTime from "./lib/dateTime/Index";
 import TimeZone from "./lib/TimeZone";
 import EventCalendar from "./lib/eventCalender";
@@ -30,6 +32,7 @@ export { Table };
 export { DateTime };
 export { TimeZone };
 export{EventCalendar}
+export {Draw}
 
 /**
  * interfaces

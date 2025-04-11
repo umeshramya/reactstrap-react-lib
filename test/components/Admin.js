@@ -5,6 +5,7 @@ import Table from "../components/table"
 import DateTime from "../components/dateTime"
 import ImageUpload from "../components/ImageUpload"
 import Event from './eventCalender'
+// import Draw from 'reactstrap-react-lib'
 import { Row, Col } from 'reactstrap'
 
 
@@ -62,6 +63,9 @@ export default function Admin() {
 
                      <Sidebar
                         Main={<>
+                                {/* <Draw
+                                    
+                                /> */}
                                 <DateTime />
                                 <Forms />
                                 <ImageUpload/>
