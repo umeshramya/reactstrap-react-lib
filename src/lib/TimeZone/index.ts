@@ -180,6 +180,17 @@ getNextDayFromDate(IsoDateString: string): string {
   return nextDay;
 }
 
+getUTCOffset(timezone:TimeZomes) {
+  const now = new Date();
+  const dtf = new Intl.DateTimeFormat('en-US', {
+    timeZone: timezone,
+    timeZoneName: "longOffset",
+  });
+  // @ts-ignore
+  const parts = dtf.formatToParts(now) ;
+  const offsetPart = parts.find((part: { type: string; }) => part.type === 'timeZoneName');
+  return offsetPart?.value || null;
+}
 
 /**
  * This method return the class variable date in strig 
