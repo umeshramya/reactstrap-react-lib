@@ -180,6 +180,19 @@ getNextDayFromDate(IsoDateString: string): string {
   return nextDay;
 }
 
+getPreviousDayFromDate(IsoDateString: string): string {
+  // Parse the input date string to a Date object
+  const date = new Date(IsoDateString);
+
+  // Subtract 1 day
+  date.setDate(date.getDate() - 1);
+
+  // Format the previous day in YYYY-MM-DD format
+  const previousDay = date.toISOString().split('T')[0];
+  return previousDay;
+}
+
+
 getUTCOffset(timezone:TimeZomes) {
   const now = new Date();
   const dtf = new Intl.DateTimeFormat('en-US', {
