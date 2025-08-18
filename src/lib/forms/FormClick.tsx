@@ -168,7 +168,7 @@ const FormClick = ({
                   // e.preventDefault();
                   if (recpthaSetting) {
                     //@ts-ignore
-                    let grecaptcha = window.grecaptcha;
+                    let grecaptcha = window.grecaptcha.enterprise || window.grecaptcha;
                     grecaptcha.ready(function () {
                       grecaptcha
                         .execute(recpthaSetting.siteKey, {

@@ -107,7 +107,7 @@ function Delete(props: Props) {
 
               if (props.recpthaSetting) {
                 //@ts-ignore
-                let grecaptcha = window.grecaptcha;
+                let grecaptcha = window.grecaptcha.enterprise || window.grecaptcha;
                 grecaptcha.ready(function () {
                   grecaptcha
                     .execute(props.recpthaSetting.siteKey, {
