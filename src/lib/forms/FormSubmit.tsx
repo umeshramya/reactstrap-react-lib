@@ -165,17 +165,23 @@ const FormSubmit = ({
               e.preventDefault();
               if (recpthaSetting) {
                 //@ts-ignore
-                let grecaptcha = window.grecaptcha.enterprise || window.grecaptcha;
-                grecaptcha.ready(function () {
-                  grecaptcha
-                    .execute(recpthaSetting.siteKey, {
-                      action: recpthaSetting.action,
-                    })
-                    .then(function (token: any) {
-                      setrecaptchaToken(token);
-                      modRef.current?.show();
-                    });
-                });
+                let grecaptcha = window.grecaptcha?.enterprise || window.grecaptcha;
+                grecaptcha.ready(async()=>{
+                  const token = await grecaptcha.execute(recpthaSetting.siteKey, {action : recpthaSetting.action})
+                  setrecaptchaToken(token)
+                  modRef.current?.show();
+
+                })
+                // grecaptcha.ready(function () {
+                //   grecaptcha
+                //     .execute(recpthaSetting.siteKey, {
+                //       action: recpthaSetting.action,
+                //     })
+                //     .then(function (token: any) {
+                //       setrecaptchaToken(token);
+                //       modRef.current?.show();
+                //     });
+                // });
               } else {
                 modRef.current?.show();
               }
