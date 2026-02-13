@@ -23,6 +23,7 @@
   },
   "homepage": "https://github.com/umeshramya/reactstrap-react-lib#readme",
   "devDependencies": {
+    "@types/node": "^24.3.0",
     "@types/react": "^18.0.26",
     "@types/reactstrap": "^8.7.2",
     "@types/styled-jsx": "^2.2.8",
@@ -35,8 +36,7 @@
   },
   "dependencies": {
     "axios": "^1.6.2",
-    "browser-image-compression": "^2.0.2",
-    "querystring": "^0.2.1"
+    "browser-image-compression": "^2.0.2"
   },
   "files": [
     "lib/**/*"

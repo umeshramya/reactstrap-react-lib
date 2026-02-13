@@ -12,7 +12,17 @@ import ButtonP from "../units/ButtonP";
 import AlertForm from "./AlertForm";
 import ModelP from "../units/ModelP";
 import { propMaster, recpthaSetting } from "../Interfaces/interfaces";
-import queryString from "querystring";
+
+function objectToQueryString(obj: any): string {
+  if (!obj || typeof obj !== 'object') return '';
+  const params = new URLSearchParams();
+  Object.entries(obj).forEach(([key, value]) => {
+    if (value !== undefined && value !== null) {
+      params.append(key, String(value));
+    }
+  });
+  return params.toString();
+}
 
 interface Props extends propMaster {
   /**This is Form input elements. do not add Form elemet thise get rendered inside the form itself */
@@ -111,9 +121,9 @@ const FormSubmit = ({
         res = await axios
           .put(_curUri, _curObj[1], AxiosRequestConfig)
           .then((res) => res);
-      } else if (curObj[0] === "ACTION") {
+      } else if (_curObj[0] === "ACTION") {
         // code to use router to push the page said
-        router.push(`${_curUri}/?${queryString.stringify(_curObj[1])}`);
+        router.push(`${_curUri}/?${objectToQueryString(_curObj[1])}`);
         butRef.current?.hideSpin();
         setSubmitDisable(false);
         setAlertState({"text" : "Successfully completed action", color : "success"})
