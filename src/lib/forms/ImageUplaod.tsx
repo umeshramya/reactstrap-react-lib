@@ -122,22 +122,23 @@ export default function FormUpload(props: Props): ReactElement {
           <Form
             onSubmit={(e) => {
               e.preventDefault();
-              if (props.recpthaSetting) {
-                //@ts-ignore
-                let grecaptcha = window.grecaptcha.enterprise || window.grecaptcha;
-                grecaptcha.ready(function () {
-                  grecaptcha
-                    .execute(props.recpthaSetting?.siteKey, {
-                      action: props.recpthaSetting?.action,
-                    })
-                    .then(function (token: any) {
-                      setrecaptchaToken(token);
-                      modRef.current?.show();
-                    });
-                });
-              } else {
-                modRef.current?.show();
-              }
+              modRef.current?.show();
+              // if (props.recpthaSetting) {
+              //   //@ts-ignore
+              //   let grecaptcha = window.grecaptcha.enterprise || window.grecaptcha;
+              //   grecaptcha.ready(function () {
+              //     grecaptcha
+              //       .execute(props.recpthaSetting?.siteKey, {
+              //         action: props.recpthaSetting?.action,
+              //       })
+              //       .then(function (token: any) {
+              //         setrecaptchaToken(token);
+              //         modRef.current?.show();
+              //       });
+              //   });
+              // } else {
+              //   modRef.current?.show();
+              // }
             }}
           >
 

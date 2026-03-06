@@ -110,4 +110,7 @@ yalc.lock
 next-app/yalc.lock
 
 #lib
-lib/
+/lib/
+
+# Claude Code settings
+.claude/
