@@ -166,22 +166,24 @@ const FormClick = ({
                 color={"success"}
                 onClick = {() => {
                   // e.preventDefault();
-                  if (recpthaSetting) {
-                    //@ts-ignore
-                    let grecaptcha = window.grecaptcha.enterprise || window.grecaptcha;
-                    grecaptcha.ready(function () {
-                      grecaptcha
-                        .execute(recpthaSetting.siteKey, {
-                          action: recpthaSetting.action,
-                        })
-                        .then(function (token: any) {
-                          setrecaptchaToken(token);
-                          modRef.current?.show();
-                        });
-                    });
-                  } else {
-                    modRef.current?.show();
-                  }
+                  modRef.current?.show();
+
+                  // if (recpthaSetting) {
+                  //   //@ts-ignore
+                  //   let grecaptcha = window.grecaptcha.enterprise || window.grecaptcha;
+                  //   grecaptcha.ready(function () {
+                  //     grecaptcha
+                  //       .execute(recpthaSetting.siteKey, {
+                  //         action: recpthaSetting.action,
+                  //       })
+                  //       .then(function (token: any) {
+                  //         setrecaptchaToken(token);
+                  //         modRef.current?.show();
+                  //       });
+                  //   });
+                  // } else {
+                  //   modRef.current?.show();
+                  // }
                 }}/>
               </Col>
               {showResetButton ? (

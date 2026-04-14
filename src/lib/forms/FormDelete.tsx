@@ -104,23 +104,24 @@ function Delete(props: Props) {
           <Form
             onSubmit={(e) => {
               e.preventDefault();
+              modRef.current?.show();
 
-              if (props.recpthaSetting) {
-                //@ts-ignore
-                let grecaptcha = window.grecaptcha.enterprise || window.grecaptcha;
-                grecaptcha.ready(function () {
-                  grecaptcha
-                    .execute(props.recpthaSetting.siteKey, {
-                      action: props.recpthaSetting.action,
-                    })
-                    .then(function (token: any) {
-                      setrecaptchaToken(token);
-                      modRef.current?.show();
-                    });
-                });
-              } else {
-                modRef.current?.show();
-              }
+              // if (props.recpthaSetting) {
+              //   //@ts-ignore
+              //   let grecaptcha = window.grecaptcha.enterprise || window.grecaptcha;
+              //   grecaptcha.ready(function () {
+              //     grecaptcha
+              //       .execute(props.recpthaSetting.siteKey, {
+              //         action: props.recpthaSetting.action,
+              //       })
+              //       .then(function (token: any) {
+              //         setrecaptchaToken(token);
+              //         modRef.current?.show();
+              //       });
+              //   });
+              // } else {
+              //   modRef.current?.show();
+              // }
             }}
           >
             <ButtonP
