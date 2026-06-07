@@ -1,16 +1,14 @@
 import React, { Component } from "react";
-import { Row, Col, Collapse, Container } from "reactstrap";
-// import * as IoIcons from "react-icons/io";
+import { Row, Col, Collapse } from "reactstrap";
 import Link from "next/link";
-import ButtonP from "../units/ButtonP";
 
 /**
- * section element in each ectionEach of sectionPanel of sidebar or admin
+ * section element in each sectionEach of sectionPanel of sidebar or admin
  */
 export interface sectionElements {
-  /**name o each elements */
+  /** name of each elements */
   name: string;
-  /**link to go after clicking */
+  /** link to go after clicking */
   link: string;
 }
 
@@ -18,27 +16,24 @@ export interface sectionElements {
  * Each section of section panel of sidebar or admin
  */
 export interface sectionEach {
-  /**title of section */
+  /** title of section */
   title: string;
-  /** elements arracy each section contains */
+  /** elements array each section contains */
   sectionElements: {
-    /**name o each elements */
+    /** name of each elements */
     name: string;
-    /**link to go after clicking */
+    /** link to go after clicking */
     link: string;
   }[];
 }
+
 /**
  * props in section panel of sidebar or admin
  */
 export interface panelProps {
-  /** Title is panel title*/
+  /** Title is panel title */
   panelTitle: string;
-  /*
-   * Contain array of section elements
-   * Each section elememt is array of name and element
-   *
-   */
+  /** Contain array of section elements. Each section element is array of name and element */
   section: sectionEach[];
 }
 
@@ -47,9 +42,7 @@ interface State {
 }
 
 /**
- * @panelTitle  This is panel title prop
- * @Section  This props is array of section elements each  section eleemnts is array of name and link property. name is name to dispolyed over the link
- *
+ * SectionPanel — modern popup with light card style, scale+fade animation
  */
 export default class SectionPanel extends Component<panelProps, State> {
   state = {
@@ -64,41 +57,46 @@ export default class SectionPanel extends Component<panelProps, State> {
   render() {
     return (
       <Row>
-        {/* <ButtonP onClick={close} text="click" /> */}
-
         <Col sm={12}>
           <Collapse isOpen={this.state.isOpen}>
-              <Container className= "bg-dark text-white rounded-3 p-5 rounded-lg m-3">
-
-            <span style={{"fontSize" : "50px", cursor: "pointer"}}
-            onClick={this.panelClose}
-            >&#10006;
-            
-          </span>
-              <h4> {`${this.props.panelTitle} Panel`}</h4>
-              <Row>
+            <div className="sb-panel-overlay">
+              <div className="sb-panel-header">
+                <h4 className="sb-panel-title">
+                  {this.props.panelTitle} Panel
+                </h4>
+                <button
+                  className="sb-panel-close"
+                  onClick={this.panelClose}
+                  aria-label="Close panel"
+                >
+                  &#10005;
+                </button>
+              </div>
+              <div className="sb-panel-grid">
                 {this.props.section?.map((eachSection, i) => {
                   return (
-                    <Col sm={12} md={6} lg={3} key={i}>
-                      <h5>{eachSection.title}</h5>
+                    <div key={i}>
+                      <h5 className="sb-panel-section-title">
+                        {eachSection.title}
+                      </h5>
                       {eachSection.sectionElements.map(
                         (eachSectionElment, j) => {
                           return (
-                            <Row key={j}>
-                              <Col sm={12}>
-                                <Link href={eachSectionElment.link}>
-                                  {eachSectionElment.name}
-                                </Link>
-                              </Col>
-                            </Row>
+                            <Link
+                              key={j}
+                              href={eachSectionElment.link}
+                              className="sb-panel-link"
+                            >
+                              {eachSectionElment.name}
+                            </Link>
                           );
                         }
                       )}
-                    </Col>
+                    </div>
                   );
                 })}
-              </Row>
-              </Container>
+              </div>
+            </div>
           </Collapse>
         </Col>
       </Row>
