@@ -1,31 +1,3 @@
-// import React, { ReactElement } from "react";
-// import Link from "next/link";
-// // import { FaHandPointRight } from "react-icons/fa";
-
-// interface TableCellLinkProps {
-//   value: any;
-//   link: string;
-//   newTab?:boolean
-// }
-
-// export default function LinkP({
-//   value,
-//   link,
-//   newTab
-// }: TableCellLinkProps): ReactElement {
-//   return (
-//     <>
-//       <Link href={link} target={newTab ? "_blank" : undefined}>
-//         <span style={{ color: "blue", cursor: "pointer", margin: "1rem" }}>
-//           &#128073;
-//           {` ${value}`}
-//         </span>
-//       </Link>
-//     </>
-//   );
-// }
-
-
 import React, { ReactElement, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -37,6 +9,15 @@ interface TableCellLinkProps {
   newTab?: boolean;
 }
 
+const linkStyle: React.CSSProperties = {
+  color: "inherit",
+  cursor: "pointer",
+  textDecoration: "none",
+  display: "inline-flex",
+  alignItems: "center",
+  gap: "6px",
+};
+
 export default function LinkP({
   value,
   link,
@@ -47,41 +28,35 @@ export default function LinkP({
 
   const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
     if (!newTab) {
-      e.preventDefault(); // Prevent default navigation
+      e.preventDefault();
       setIsRotating(true);
-  
+
       router
         .push(link)
-        .then(() => setTimeout(() => setIsRotating(false), 5000)) // Stop rotation on success
-        .catch(() => setIsRotating(false)); // Stop rotation on error
+        .then(() => setTimeout(() => setIsRotating(false), 5000))
+        .catch(() => setIsRotating(false));
     } else {
       setIsRotating(true);
-      setTimeout(() => setIsRotating(false), 1000); // Stop rotation for new tab
+      setTimeout(() => setIsRotating(false), 1000);
     }
   };
-  
-
 
   return (
     <Link
       href={link}
       target={newTab ? "_blank" : undefined}
       onClick={handleClick}
+      style={linkStyle}
     >
-      <span style={{ color: "blue", cursor: "pointer", margin: "1rem" }}>
-       &#128073;
-       <Spinner     color="primary"
-          size="sm"
-          type="grow"
-          hidden ={!isRotating}
-          >
-          {""}
-        </Spinner>
-
-        {` ${value}`}
-
-      </span>
+      <Spinner
+        color="primary"
+        size="sm"
+        type="grow"
+        hidden={!isRotating}
+      >
+        {""}
+      </Spinner>
+      {value}
     </Link>
   );
 }
-
