@@ -426,7 +426,7 @@ const Sidebar = (props: Props) => {
 
   return (
     <>
-      <style>{sidebarCSS}</style>
+      <style dangerouslySetInnerHTML={{ __html: sidebarCSS }} />
 
       <div
         className={`sb-backdrop ${sidebarOpen ? "sb-backdrop-open" : ""}`}
