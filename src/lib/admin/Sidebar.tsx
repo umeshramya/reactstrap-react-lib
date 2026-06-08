@@ -3,6 +3,16 @@ import SectionPanel, { panelProps } from "./SectionPanel";
 import { Row, Col, Spinner } from "reactstrap";
 import { useRouter } from "next/router";
 
+const COLLAPSED_KEY = "sb-collapsed";
+const getInitialCollapsed = (): boolean => {
+  if (typeof window === "undefined") return false;
+  try {
+    return localStorage.getItem(COLLAPSED_KEY) === "true";
+  } catch {
+    return false;
+  }
+};
+
 interface sidebarLink {
   name: string;
   icon?: any;
@@ -99,6 +109,7 @@ const sidebarCSS = `
   font-family: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
   z-index: 101;
   flex-shrink: 0;
+  transition: width 0.28s cubic-bezier(0.4,0,0.2,1);
 }
 .sb-sidebar-header {
   padding: 20px 18px 14px;
@@ -276,8 +287,61 @@ const sidebarCSS = `
   from { opacity: 0; transform: translateY(-8px) scale(0.97); }
   to   { opacity: 1; transform: translateY(0) scale(1); }
 }
+/* Collapse toggle bar */
+.sb-collapse-toggle {
+  height: 44px;
+  border-top: 1px solid #e2e8f0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.15s;
+  flex-shrink: 0;
+}
+.sb-collapse-toggle:hover {
+  background: rgba(13,148,136,0.08);
+}
+.sb-collapse-chevron {
+  font-size: 1.4rem;
+  color: #64748b;
+  transition: transform 0.28s cubic-bezier(0.4,0,0.2,1), color 0.15s;
+  line-height: 1;
+}
+.sb-collapse-toggle:hover .sb-collapse-chevron {
+  color: #0d9488;
+}
+/* Collapsed sidebar overrides */
+.sb-sidebar-collapsed {
+  width: 64px !important;
+}
+.sb-sidebar-collapsed .sb-nav-item {
+  justify-content: center;
+  padding: 0;
+  gap: 0;
+}
+.sb-sidebar-collapsed .sb-nav-label {
+  opacity: 0;
+  width: 0;
+  overflow: hidden;
+  flex: 0;
+}
+.sb-sidebar-collapsed .sb-nav-icon {
+  margin: 0 auto;
+}
+.sb-sidebar-collapsed .sb-sidebar-header {
+  padding: 16px 0 12px;
+  align-items: center;
+}
+.sb-sidebar-collapsed .sb-org-name,
+.sb-sidebar-collapsed .sb-user-name {
+  display: none;
+}
+.sb-sidebar-collapsed .sb-user-row {
+  justify-content: center;
+}
 @media (max-width: 767px) {
   .sb-hamburger { display: flex; }
+  .sb-collapse-toggle { display: none; }
   .sb-sidebar {
     position: fixed;
     left: -270px;
@@ -300,6 +364,15 @@ const Sidebar = (props: Props) => {
   const [section, setSection] = useState<any[]>([]);
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [navigatingIdx, setNavigatingIdx] = useState<number | null>(null);
+  const [collapsed, setCollapsed] = useState(getInitialCollapsed);
+
+  const toggleCollapsed = useCallback(() => {
+    setCollapsed((prev: boolean) => {
+      const next = !prev;
+      localStorage.setItem(COLLAPSED_KEY, String(next));
+      return next;
+    });
+  }, []);
 
   useEffect(() => { setSidebarOpen(false); }, [router.asPath]);
 
@@ -364,14 +437,14 @@ const Sidebar = (props: Props) => {
         <Col
           xs={12}
           lg="auto"
-          className={`sb-sidebar ${sidebarOpen ? "sb-sidebar-open" : ""}`}
+          className={`sb-sidebar ${sidebarOpen ? "sb-sidebar-open" : ""} ${collapsed ? "sb-sidebar-collapsed" : ""}`}
         >
           <div className="sb-sidebar-header">
-            {props.orgName && <h5 className="sb-org-name">{props.orgName}</h5>}
+            {!collapsed && props.orgName && <h5 className="sb-org-name">{props.orgName}</h5>}
             {props.userName && (
               <div className="sb-user-row">
                 <div className="sb-avatar">{getInitials(props.userName)}</div>
-                <h6 className="sb-user-name">{props.userName}</h6>
+                {!collapsed && <h6 className="sb-user-name">{props.userName}</h6>}
               </div>
             )}
           </div>
@@ -388,6 +461,7 @@ const Sidebar = (props: Props) => {
                       key={index}
                       role="button"
                       tabIndex={0}
+                      title={eachLink.name}
                       onKeyDown={(e) => {
                         if (e.key === "Enter") handleLinkClick(eachLink, index);
                       }}
@@ -406,6 +480,20 @@ const Sidebar = (props: Props) => {
                 })
               : null}
           </nav>
+
+          <div
+            className="sb-collapse-toggle"
+            onClick={toggleCollapsed}
+            role="button"
+            tabIndex={0}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") toggleCollapsed();
+            }}
+          >
+            <span className="sb-collapse-chevron">
+              {collapsed ? "›" : "‹"}
+            </span>
+          </div>
         </Col>
 
         <Col xs={12} lg={true} className="sb-main">
