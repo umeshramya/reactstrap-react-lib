@@ -206,12 +206,12 @@ const sidebarCSS = `
 }
 .sb-main {
   flex: 1;
-  min-width: 0;
   background: #f8fafc;
   min-height: 100vh;
 }
 .sb-main-pad {
   padding: 24px;
+  overflow-x: auto;
 }
 /* Panel popup */
 .sb-panel-overlay {
