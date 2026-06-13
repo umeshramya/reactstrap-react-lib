@@ -19,7 +19,8 @@ interface Props extends propMaster {
   Inputs: any;
   showResetButton: boolean;
   recpthaSetting?: recpthaSetting;
-  buttonText:string
+  buttonText:string;
+  icon?: React.ReactElement;
 }
 
 const FormClick = ({
@@ -37,7 +38,8 @@ const FormClick = ({
   triggerSubmit,
   triggerReset,
   showResetButton = false,
-  buttonText
+  buttonText,
+  icon
 }: Props) => {
   const butRef = useRef<ButtonP>(null);
   const modRef = useRef<ModelP>(null);
@@ -162,8 +164,9 @@ const FormClick = ({
             </Row>
             <Row>
               <Col>
-                <ButtonP text={buttonText || "Click"} ref={butRef} disabled={clickDisable}  
+                <ButtonP text={buttonText || "Click"} ref={butRef} disabled={clickDisable}
                 color={"success"}
+                icon={icon}
                 onClick = {() => {
                   // e.preventDefault();
                   modRef.current?.show();

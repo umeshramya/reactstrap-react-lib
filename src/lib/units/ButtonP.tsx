@@ -8,7 +8,7 @@ interface Props {
   onClick?: () => void;
   color?: string;
   disabled: boolean;
-
+  icon?: React.ReactElement;
 }
 interface State {
   toggelSpin: boolean;
@@ -35,6 +35,7 @@ export default class ButtonP extends Component<Props, State> {
         onClick={this.props.onClick}
         disabled={this.props.disabled}
       >
+        {this.props.icon || null}
         {`${this.props.text}  `}
         {this.state.toggelSpin ? <Spinner /> : ""}
       </Button>
