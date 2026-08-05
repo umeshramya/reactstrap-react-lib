@@ -4,14 +4,6 @@ import { Row, Col, Spinner } from "reactstrap";
 import { useRouter } from "next/router";
 
 const COLLAPSED_KEY = "sb-collapsed";
-const getInitialCollapsed = (): boolean => {
-  if (typeof window === "undefined") return false;
-  try {
-    return localStorage.getItem(COLLAPSED_KEY) === "true";
-  } catch {
-    return false;
-  }
-};
 
 interface sidebarLink {
   name: string;
@@ -364,7 +356,14 @@ const Sidebar = (props: Props) => {
   const [section, setSection] = useState<any[]>([]);
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [navigatingIdx, setNavigatingIdx] = useState<number | null>(null);
-  const [collapsed, setCollapsed] = useState(getInitialCollapsed);
+  const [collapsed, setCollapsed] = useState(false);
+
+  useEffect(() => {
+    try {
+      const saved = localStorage.getItem(COLLAPSED_KEY);
+      if (saved === "true") setCollapsed(true);
+    } catch {}
+  }, []);
 
   const toggleCollapsed = useCallback(() => {
     setCollapsed((prev: boolean) => {
