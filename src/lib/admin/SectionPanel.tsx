@@ -45,6 +45,8 @@ interface State {
  * SectionPanel — modern popup with light card style, scale+fade animation
  */
 export default class SectionPanel extends Component<panelProps, State> {
+  private rootRef = React.createRef<HTMLDivElement>();
+
   state = {
     isOpen: false,
   };
@@ -52,14 +54,30 @@ export default class SectionPanel extends Component<panelProps, State> {
   panelToggel = (): void =>
     this.setState({ ...this.state, isOpen: !this.state.isOpen });
   panelClose = (): void => this.setState({ ...this.state, isOpen: false });
-  panelOpen = (): void => this.setState({ ...this.state, isOpen: true });
+  panelOpen = (): void =>
+    this.setState({ ...this.state, isOpen: true }, this.scrollIntoView);
+
+  /**
+   * The panel renders in normal flow at the top of the content column, so if the
+   * user has scrolled down, opening it inserts the card above the viewport and it
+   * goes unseen. Bring it back into view, offset for the sticky topbar (~56px).
+   */
+  private scrollIntoView = (): void => {
+    if (typeof window === "undefined") return;
+    requestAnimationFrame(() => {
+      const el = this.rootRef.current;
+      if (!el) return;
+      const top = el.getBoundingClientRect().top + window.scrollY - 70;
+      window.scrollTo({ top, behavior: "smooth" });
+    });
+  };
 
   render() {
     return (
       <Row>
         <Col sm={12}>
           <Collapse isOpen={this.state.isOpen}>
-            <div className="sb-panel-overlay">
+            <div className="sb-panel-overlay" ref={this.rootRef}>
               <div className="sb-panel-header">
                 <h4 className="sb-panel-title">
                   {this.props.panelTitle} Panel
